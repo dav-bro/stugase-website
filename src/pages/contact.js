@@ -16,10 +16,6 @@ class ContactClass extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state={
-            loading: true
-        }
-
     }
 
     render() {
@@ -59,52 +55,12 @@ class ContactClass extends React.Component {
                                 </Row>
                             </Panel>
                             <Panel header={t('contact.consultings.title')} key={2}>
-
+                                {/*every week on <strong>thursday</strong> */}
                             </Panel>
                         </Collapse>
 
                     </Col>
                 </Row>
-
-           {/*  <Row>
-                 <Col >
-                        <Card>
-                            <Card.Body>
-                                {this.state.loading ? (
-                                    <Spinner style={{top: '50%'}} animation="border"/>) : null}
-                                <Iframe
-                                    className="find-us-site"
-                                    url="https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0"
-                                    width="100%"
-                                    allowFullScreen={true}
-                                    // height="100%"
-                                    onLoad={() => this.loadingFinished()}
-                                />
-                                <Card.Title>{t('contact.find-us.title')}</Card.Title>
-                                <Card.Text>
-                                    {t('contact.find-us.detail')}
-                                </Card.Text>
-                                <LinkButton link={floorPlanLink}/>
-                            </Card.Body>
-
-                        </Card>
-                 </Col>
-                 <Col>
-                     <h1>Text</h1>
-                 </Col>
-                 <Col>
-                     <Card>
-                        <Card.Body>
-                            <SimpleMap/>
-                            <Card.Title>{t('contact.find-us.title')}</Card.Title>
-                            <Card.Text>
-                                {t('contact.find-us.detail')}
-                            </Card.Text>
-                            <LinkButton link={campusPlanLink}/>
-                        </Card.Body>
-                     </Card>
-                 </Col>
-             </Row>*/}
             </div>
         )
 
@@ -116,46 +72,7 @@ class ContactClass extends React.Component {
         });
     }
 }
-/*
-class SimpleMap extends React.Component {
-    static defaultProps = {
-        center: {
-            lat: 53.107452,
-            lng: 8.855522
-        },
-        zoom: 17
-    };
 
-    render() {
-        return (
-            // Important! Always set the container height explicitly
-            <div style={{ height: '50vh', width: '100%' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key:" }}
-                    defaultCenter={this.props.center}
-                    defaultZoom={this.props.zoom}
-                >
-                 <PointerClass lng={this.props.center.lng} lat={this.props.center.lat}/>
-
-                </GoogleMapReact>
-            </div>
-        );
-    }
-}
-
-class PointerClass extends React.Component {
-
-    render() {
-        return (
-            <div>
-            <Popover>
-            </Popover>
-            </div>
-        );
-    }
-
-}
-*/
 function LinkButton(props) {
     const { t } = useTranslation();
    return(<Button type="primary" icon="link" onClick={() => window.open(props.link)}>{t('contact.find-us.link-button')}</Button>);

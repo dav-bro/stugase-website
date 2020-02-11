@@ -18,7 +18,6 @@ i18n
     .init({
         resources,
         lng: "de",
-
         interpolation: {
             escapeValue: false, // react already safes from xss
             format: function(value, format, lng){

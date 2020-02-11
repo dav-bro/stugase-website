@@ -5,6 +5,9 @@ import logo from "../static/images/SE_Logo_Text.png"
 import '../static/css/styles.css'
 import 'antd/dist/antd.css';
 
+import './i18n';
+
+
 const content = [
     {
         id: "about",
@@ -90,7 +93,7 @@ class TabBarClass extends React.Component {
             <div id="tab-bar" className="tab-bar">
                 <img alt="das ist ein Bild" className="logo" src={logo}/>
                 {<div className="language-div">
-                    <button className="tab-btn tab-btn-lang-sel" onClick={() => this.selectLanguage()}>{(i18n.language ? i18n.language : languages.default).toUpperCase()} </button>
+                    <button className="tab-btn tab-btn-lang-sel" onClick={() => this.selectLanguage()}>{i18n.language.toUpperCase()} </button>
                     {this.state.languagesel}
                 </div>}
                 {buttons}
@@ -101,7 +104,6 @@ class TabBarClass extends React.Component {
     }
 
     selectLanguage() {
-        // eslint-disable-next-line array-callback-return
         let langBtns = Object.keys(languages).map((lang, index) => {
             if (index > 0) {
                 return (<button className="btn-lang-sel tab-btn-lang-sel tab-btn" onClick={() => this.handleLangSel(languages[lang])}>{languages[lang].toUpperCase()}</button>)
