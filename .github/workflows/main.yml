@@ -11,5 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run a multi-line script
       run: |
+        git config --global user.email "dav_bro@uni-bremen.de"
+        git config --global user.name "David Brodbeck"
         npm install
         npm run deploy --if-present
