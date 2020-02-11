@@ -28,7 +28,7 @@ class ContactClass extends React.Component {
             <div className="content">
             <Header siteIndex="contact"/>
             <Title title={t('contact.header.title')} text={t('contact.header.text')}/>
-                <Row style={{marginTop: "30px"}} gutter={16}>
+                <Row style={{marginTop: "30px"}}>
                     <Col span={14} offset={5}>
 
                         <Collapse>
