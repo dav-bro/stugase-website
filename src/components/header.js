@@ -78,7 +78,6 @@ class TabBarClass extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         const { i18n } = this.props;
 
         let buttons = [];
@@ -86,13 +85,12 @@ class TabBarClass extends React.Component {
         for(let i = 0; i < content.length; i++){
             buttons.push( <TabButton language={this.props.language} id={content[i].id} title={content[i].title} disabled={content[i].id === this.props.siteIndex} />);
         }
-        console.log("T", i18n);
 
         return (
             <div id="tab-bar" className="tab-bar">
                 <img alt="das ist ein Bild" className="logo" src={logo}/>
                 {<div className="language-div">
-                    <button className="tab-btn tab-btn-lang-sel" onClick={() => this.selectLanguage()}>{i18n.language.toUpperCase()} </button>
+                    <button className="tab-btn tab-btn-lang-sel" onClick={() => this.selectLanguage()}>{(i18n.language ? i18n.language : languages.default).toUpperCase()} </button>
                     {this.state.languagesel}
                 </div>}
                 {buttons}
