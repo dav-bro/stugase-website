@@ -4,13 +4,15 @@ on: [push]
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Run a multi-line script
-      run: |
+      run: |      
+        git config --global user.name "Travis CI"
+        git config --global user.email "user@example.com"
         npm install
         npm run build --if-present
         npm run deploy --if-present
