@@ -1,6 +1,6 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Title from "../components/title";
 import {Row, Col, Collapse, Card, Button} from "antd";
 

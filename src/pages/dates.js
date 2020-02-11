@@ -1,7 +1,7 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
 import {Col, Icon, Row} from "antd";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Title from "../components/title";
 
 class DatesClass extends React.Component {
