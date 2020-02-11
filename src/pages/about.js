@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Col, Row} from 'antd'
 import {withTranslation} from "react-i18next";
 import '../static/css/styles.css'
-import logo from "../static/images/FB4_Systems-Engineering_Logo_RZ.png"
+import logo from "../static/images/SE_Logo_Text.png"
 import Header from "../components/header";
 import '../components/i18n';
 import Title from "../components/title";

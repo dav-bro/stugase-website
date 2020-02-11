@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "gatsby";
 import {useTranslation, withTranslation} from "react-i18next";
-import logo from "../static/images/FB4_Systems-Engineering_Logo_RZ.png"
+import logo from "../static/images/SE_Logo_Text.png"
 import '../static/css/styles.css'
 import 'antd/dist/antd.css';
 
@@ -79,8 +79,7 @@ class TabBarClass extends React.Component {
 
     render() {
         console.log(this.state);
-        // eslint-disable-next-line no-unused-vars
-        const { t, i18n } = this.props;
+        const { i18n } = this.props;
 
         let buttons = [];
 
