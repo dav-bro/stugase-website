@@ -19,7 +19,7 @@ class AboutClass extends React.Component {
                     <Col>
                         <Card
                             title={t('about.what.title')} style={{width: "650px"}}
-                            cover={ <img alt="das ist ein Bild" src={logo} style={{width: '600px'}}/>}
+                            cover={ <img alt="Systems Engineering" src={logo} style={{width: '600px'}}/>}
                         >
                             {t('about.what.text')}
                         </Card>
