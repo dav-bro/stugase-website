@@ -1,0 +1,46 @@
+{
+    "about": {
+      "short": "about",
+      "title": "about us"
+    },
+
+    "info": {
+      "short": "info",
+      "title": "information"
+    },
+
+    "members": {
+      "short": "members",
+      "title": "members"
+    },
+
+    "dates": {
+      "short": "dates",
+      "title": "dates"
+    },
+    "consultings": {
+      "short": "consultings",
+      "title": "consulting times"
+    },
+    "o-week": {
+      "short": "o-week",
+      "title": "o-week"
+    },
+    "important": {
+      "short": "important sites",
+      "title": "important websites"
+    },
+    "contact": {
+      "short": "contact",
+      "title": "contact",
+      "find-us": {
+        "title": "find us here",
+        "detail": "@todo :D",
+        "link-button": "open in new tab"
+      }
+    },
+  "inProgress": "in progress...",
+  "general": {
+    "room": "room"
+  }
+}
