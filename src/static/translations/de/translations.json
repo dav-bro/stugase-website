@@ -64,6 +64,9 @@
     },
     "consultings": {
       "title": "Sprechzeiten"
+    },
+    "formula":{
+      "title": "Kontaktformular"
     }
   },
   "in-progress": "in Arbeit...",
