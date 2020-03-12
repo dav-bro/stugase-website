@@ -2,7 +2,10 @@ import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
 import Header from "../components/header";
 import Title from "../components/title";
-import {Row, Col, Collapse, Card, Button, Form, Input, Icon} from "antd";
+import { LinkOutlined, LoginOutlined, MailOutlined, QuestionOutlined, UserOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Collapse, Card, Button, Input } from "antd";
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
@@ -120,7 +123,7 @@ class ContactFormClass extends React.Component {
             <Form onSubmit={this.handleSubmit}>
                 <Form.Item>
                     <Input
-                        prefix={<Icon type="user" className="form-icon" />}
+                        prefix={<UserOutlined className="form-icon" />}
                         placeholder="Name"
                     />
                 </Form.Item>
@@ -129,7 +132,7 @@ class ContactFormClass extends React.Component {
                         rules: [{ required: true, message: 'Bitte gib eine gültige Mail Adresse ein!' }],
                     })(
                     <Input
-                        prefix={<Icon type="mail" className="form-icon"/>}
+                        prefix={<MailOutlined className="form-icon" />}
                         placeholder="E-Mail"
                     />
                     )}
@@ -139,7 +142,7 @@ class ContactFormClass extends React.Component {
                         rules: [{ required: true, message: 'Bitte gib einen Betreff ein!' }],
                     })(
                     <Input
-                        prefix={<Icon type="question" className="form-icon"/>}
+                        prefix={<QuestionOutlined className="form-icon" />}
                         placeholder="Betreff"
                     />)}
                 </Form.Item>
@@ -153,7 +156,7 @@ class ContactFormClass extends React.Component {
                     />)}
                 </Form.Item>
                 <Form.Item>
-                    <Button icon="login" type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button icon={<LoginOutlined />} type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
                         Absenden
                     </Button>
                 </Form.Item>
@@ -164,7 +167,7 @@ class ContactFormClass extends React.Component {
                     />
                 </Form.Item>
             </Form>
-        )
+        );
     }
 
 
@@ -188,7 +191,7 @@ const ContactForm = withTranslation()(WrappedContactForm);
 
 function LinkButton(props) {
     const { t } = useTranslation();
-   return(<Button type="primary" icon="link" onClick={() => window.open(props.link)}>{t('contact.find-us.link-button')}</Button>);
+   return <Button type="primary" icon={<LinkOutlined />} onClick={() => window.open(props.link)}>{t('contact.find-us.link-button')}</Button>;
 }
 
 const Contact = withTranslation()(ContactClass);

@@ -1,6 +1,7 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-import {Col, Icon, Row} from "antd";
+import { CalendarOutlined, TeamOutlined } from '@ant-design/icons';
+import { Col, Row } from "antd";
 import Header from "../components/header";
 import Title from "../components/title";
 
@@ -30,10 +31,10 @@ class DateRowClass extends React.Component {
 
     render(){
         // const { t } = this.props;
-        return(
+        return (
             <Row className="date-row" align="top">
                 <Col span={1}>
-                    <Icon type="team" className="date-icon is-left"/>
+                    <TeamOutlined className="date-icon is-left" />
                 </Col>
                 <Col span={10} offset={1} className="date-text is-left">
                     {this.props.type}
@@ -42,10 +43,10 @@ class DateRowClass extends React.Component {
                     {this.props.date}, {this.props.time}
                 </Col>
                 <Col span={1} offset={1} >
-                    <Icon type="calendar" className="date-icon is-right"/>
+                    <CalendarOutlined className="date-icon is-right" />
                 </Col>
             </Row>
-        )
+        );
     }
 
 
