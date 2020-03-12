@@ -3,9 +3,8 @@ import {Trans, useTranslation, withTranslation} from "react-i18next";
 import Header from "../components/header";
 import Title from "../components/title";
 import { LinkOutlined, LoginOutlined, MailOutlined, QuestionOutlined, UserOutlined } from '@ant-design/icons';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Row, Col, Collapse, Card, Button, Input } from "antd";
+import { Row, Col, Collapse, Card, Button, Input, Form } from "antd";
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
@@ -72,7 +71,7 @@ class ContactClass extends React.Component {
                             <Panel header={t('contact.formula.title')} key={3}>
                                 <Row>
                                 <Col span={12}>
-                                <WrappedContactForm/>
+                                <ContactForm/>
                                 </Col>
                                 </Row>
                             </Panel>
@@ -95,9 +94,6 @@ class ContactClass extends React.Component {
 
 }
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
 
 class ContactFormClass extends React.Component {
 
@@ -107,86 +103,94 @@ class ContactFormClass extends React.Component {
     }
 
     componentDidMount() {
-        this.props.form.validateFields();
+
     }
 
 
     render() {
 
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        const { t } = this.props;
+        const transPrefix = "contact.formula.validation-messages.";
 
-        const mailError = isFieldTouched('mail') && getFieldError('mail');
-        const topicError = isFieldTouched('topic') && getFieldError('topic');
-        const messageError = isFieldTouched('message') && getFieldError('message');
+        const layout = {
+            labelCol: { span: 8 },
+            wrapperCol: { span: 16 },
+        };
+
+        const validateMessages = {
+            required: {
+                types: {
+                    name: 't(transPrefix + "name")',
+                    email: t(transPrefix + "email"),
+                    topic: t(transPrefix + "topic"),
+                    message: t(transPrefix + "message"),
+                }
+            },
+
+        };
 
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Item>
+            <Form {...layout} name="contact-form" onFinish={this.handleSubmit} validateMessages={validateMessages}>
+                <Form.Item name={['user', 'name']} label="Name" rules={[{required: true, type: 'name'}]}>
                     <Input
                         prefix={<UserOutlined className="form-icon" />}
                         placeholder="Name"
                     />
                 </Form.Item>
-                <Form.Item required={true} validateStatus={mailError ? 'error' : ''} help={mailError || ''}>
-                    {getFieldDecorator('mail', {
-                        rules: [{ required: true, message: 'Bitte gib eine gültige Mail Adresse ein!' }],
-                    })(
+                <Form.Item name={['user', 'email']} label="E-Mail" rules={[{ type: 'email' }]} >
                     <Input
                         prefix={<MailOutlined className="form-icon" />}
                         placeholder="E-Mail"
                     />
                     )}
                 </Form.Item>
-                <Form.Item validateStatus={topicError ? 'warning' : ''} help={topicError || ''}>
+                <Form.Item name={['user', 'topic']} label="Betreff" rules={[{ required: true, type: 'topic' }]} >
+                    {/*validateStatus={topicError ? 'warning' : ''} help={topicError || ''}>
                     {getFieldDecorator('topic', {
                         rules: [{ required: true, message: 'Bitte gib einen Betreff ein!' }],
-                    })(
+                    })(*/}
                     <Input
                         prefix={<QuestionOutlined className="form-icon" />}
                         placeholder="Betreff"
                     />)}
                 </Form.Item>
-                <Form.Item validateStatus={messageError ? 'error' : ''} help={messageError || ''}>
+                <Form.Item name={['user', 'message']} label="Nachricht" rules={[{ required: true, type: 'message' }]} >
+                    {/*validateStatus={messageError ? 'error' : ''} help={messageError || ''}>
                     {getFieldDecorator('message', {
                         rules: [{ required: true, message: 'Bitte gib eine Nachricht ein!' }],
-                    })(
+                    })(*/}
                     <TextArea
                         placeholder="Deine Nachricht"
                         rows={4}
                     />)}
                 </Form.Item>
-                <Form.Item>
-                    <Button icon={<LoginOutlined />} type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                    <Button icon={<LoginOutlined />} type="primary" htmlType="submit">
                         Absenden
                     </Button>
                 </Form.Item>
-                <Form.Item>
+              {/*  <Form.Item>
                     <ReCAPTCHA
                         sitekey="6LfdyeAUAAAAAKMaiwzy-V0alf1Cszr2vFUdIXzo"
                         onChange={() => console.log("captcha completed")}
                     />
-                </Form.Item>
+                </Form.Item>*/}
             </Form>
         );
     }
 
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        });
+    handleSubmit(values) {
+        console.log(values);
+
     }
 
 }
 
 
 
-const WrappedContactForm = Form.create({ name: 'contact' })(ContactFormClass);
 
-const ContactForm = withTranslation()(WrappedContactForm);
+const ContactForm = withTranslation()(ContactFormClass);
 
 
 function LinkButton(props) {

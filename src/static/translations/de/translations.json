@@ -66,7 +66,14 @@
       "title": "Sprechzeiten"
     },
     "formula":{
-      "title": "Kontaktformular"
+      "title": "Kontaktformular",
+      "validation-messages": {
+        "required": "Bitte fülle dieses Feld aus!",
+        "email": "Ungültige E-Mail Adresse",
+        "name": "Bitte deinen Namen eingeben",
+        "topic": "Bitte Betreff angeben",
+        "message": "Bitte gib deine Nachricht an uns an!"
+      }
     }
   },
   "in-progress": "in Arbeit...",
