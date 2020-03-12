@@ -7,6 +7,7 @@ import {Row, Col, Collapse, Card, Button, Form, Input, Icon} from "antd";
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
 import {Link} from "gatsby";
+import {ReCAPTCHA} from "react-google-recaptcha";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -155,6 +156,12 @@ class ContactFormClass extends React.Component {
                     <Button icon="login" type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
                         Absenden
                     </Button>
+                </Form.Item>
+                <Form.Item>
+                    <ReCAPTCHA
+                        sitekey="6LfdyeAUAAAAAKMaiwzy-V0alf1Cszr2vFUdIXzo"
+                        onChange={() => console.log("captcha completed")}
+                    />
                 </Form.Item>
             </Form>
         )

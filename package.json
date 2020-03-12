@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "David Brodbeck",
   "dependencies": {
-    "antd": "^3.26.9",
+    "antd": "^4.0.2",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -18,12 +18,14 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-google-recaptcha": "^2.0.1",
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.3.1"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "@ant-design/icons": "latest"
   },
   "keywords": [
     "gatsby"
