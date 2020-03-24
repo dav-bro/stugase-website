@@ -1,6 +1,6 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import Header from "../components/header";
+import Header_old from "../components/header_old";
 import Title from "../components/title";
 import { LinkOutlined, LoginOutlined, MailOutlined, QuestionOutlined, UserOutlined } from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
@@ -10,6 +10,8 @@ import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
 import {Link} from "gatsby";
 import {ReCAPTCHA} from "react-google-recaptcha";
+import Header from "../components/header";
+import Layout from "../components/Layout";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -27,60 +29,66 @@ class ContactClass extends React.Component {
 
     render() {
         const { t } = this.props;
+
+        let mainContent = (
+            <Collapse defaultActiveKey={['1']} >
+                <Panel header={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"} key={1}>
+                    <Trans i18nKey="contact.office.detail">
+                        you can find us in the <strong>IW 1+2</strong>.
+                    </Trans>
+                    <Row style={{marginTop: "30px", marginRight: 0}}>
+                        <Col span={12}>
+                            <Card
+                                title={t('contact.find-us.room.title')}
+                                style={{width: "300px"}}
+                                cover={ <img alt="unser StugA Raum im IW 1+2" src={roomPlan} />}
+                            >
+                                <LinkButton link={floorPlanLink}/>
+                            </Card>
+                        </Col>
+
+                        <Col span={12}>
+                            <Card
+                                title={t('contact.find-us.campus.title')}
+                                style={{width: "400px", float: "right"}}
+                                cover={ <img alt="unser StugA Raum auf dem Campus" src={campusPlan} />}
+                            >
+                                <LinkButton link={campusPlanLink}/>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Panel>
+                <Panel header={t('contact.consultings.title')} key={2}>
+                    <Trans i18nKey="contact.consultings.text">
+                        Jede zweite, ungerade Woche <strong>Donnerstags</strong> bieten wir von <strong> 13:00-15:00 Uhr </strong>
+                        eine Sprechstunde an. In dieser Zeit könnt ihr uns Fragen rund ums Studium stellen.
+                        Die genauen Termine findet ihr natürlich auch bei <Link to="dates">Termine</Link>
+                    </Trans>
+                </Panel>
+                <Panel header={t('contact.formula.title')} key={3}>
+                    <Row>
+                        <Col span={12}>
+                            <ContactForm/>
+                        </Col>
+                    </Row>
+                </Panel>
+
+            </Collapse>
+        );
+
         return(
-            <div className="content">
+            <Layout mainContent={mainContent} siteIndex="contact" title={t('contact.header.title')} text={t('contact.header.text')}/>
+            /*<div className="content">
             <Header siteIndex="contact"/>
             <Title title={t('contact.header.title')} text={t('contact.header.text')}/>
                 <Row style={{marginTop: "30px"}}>
                     <Col span={14} offset={5}>
 
-                        <Collapse defaultActiveKey={['1']} >
-                            <Panel header={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"} key={1}>
-                                <Trans i18nKey="contact.office.detail">
-                                    you can find us in the <strong>IW 1+2</strong>.
-                                </Trans>
-                                <Row style={{marginTop: "30px", marginRight: 0}}>
-                                    <Col span={12}>
-                                    <Card
-                                        title={t('contact.find-us.room.title')}
-                                        style={{width: "300px"}}
-                                        cover={ <img alt="unser StugA Raum im IW 1+2" src={roomPlan} />}
-                                    >
-                                    <LinkButton link={floorPlanLink}/>
-                                    </Card>
-                                    </Col>
 
-                                    <Col span={12}>
-                                    <Card
-                                        title={t('contact.find-us.campus.title')}
-                                        style={{width: "400px", float: "right"}}
-                                        cover={ <img alt="unser StugA Raum auf dem Campus" src={campusPlan} />}
-                                    >
-                                        <LinkButton link={campusPlanLink}/>
-                                    </Card>
-                                    </Col>
-                                </Row>
-                            </Panel>
-                            <Panel header={t('contact.consultings.title')} key={2}>
-                                <Trans i18nKey="contact.consultings.text">
-                                    Jede zweite, ungerade Woche <strong>Donnerstags</strong> bieten wir von <strong> 13:00-15:00 Uhr </strong>
-                                    eine Sprechstunde an. In dieser Zeit könnt ihr uns Fragen rund ums Studium stellen.
-                                    Die genauen Termine findet ihr natürlich auch bei <Link to="dates">Termine</Link>
-                                </Trans>
-                            </Panel>
-                            <Panel header={t('contact.formula.title')} key={3}>
-                                <Row>
-                                <Col span={12}>
-                                <ContactForm/>
-                                </Col>
-                                </Row>
-                            </Panel>
-
-                        </Collapse>
 
                     </Col>
                 </Row>
-            </div>
+            </div>*/
         )
 
     }

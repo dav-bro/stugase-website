@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
+import {Menu, Layout, Row, Col} from "antd";
+import {i18n as i18next} from "i18next";
+import {withTranslation} from "react-i18next";
 import {Link} from "gatsby";
-import {useTranslation, withTranslation} from "react-i18next";
-import logo from "../static/images/SE_Logo_Text.png"
-import '../static/css/styles.css'
-import 'antd/dist/antd.css';
+import logo from "../static/images/SE_Logo_Text.png";
+import {SettingFilled} from "@ant-design/icons";
 
-import './i18n';
-
+const AntHeader = Layout.Header;
 
 const content = [
     {
@@ -40,129 +40,68 @@ const content = [
 ];
 
 
-const languages = {
-    default: "de",
-    german: "de",
-    english: "en",
-};
+
+class Header_Class extends React.Component{
 
 
-function TabButton(props) {
-    const { t } = useTranslation();
-
-    return (
-        <button className="tab-btn" disabled={props.disabled}>
-            <Link to={"/" + props.id}
-                  style={{
-                      color: `white`,
-                      textDecoration: `none`,
-                  }}>
-                {t(props.title)}
-            </Link>
-        </button>
-    )
-}
 
 
-class TabBarClass extends React.Component {
 
-    constructor(props){
-        super(props);
-        let buttons = [];
-        for (let i = 0; i < content.length; i++){
-            buttons.push({title: content[i].title});
-        }
-        this.state = {
-            buttons: buttons,
-            languagesel: null,
-            language: languages.default
-        }
+    state = {
+        current: 'about',
+    };
 
-    }
+    handleClick = e => {
+        console.log('click ', e);
+        this.setState({
+            current: e.key,
+        });
+    };
+
 
     render() {
-        const { i18n } = this.props;
 
-        let buttons = [];
+        const { t } = this.props;
 
-        for(let i = 0; i < content.length; i++){
-            buttons.push( <TabButton language={this.props.language} id={content[i].id} title={content[i].title} disabled={content[i].id === this.props.siteIndex} />);
-        }
-
-        return (
-            <div id="tab-bar" className="tab-bar">
-                <img alt="das ist ein Bild" className="logo" src={logo}/>
-                {<div className="language-div">
-                    <button className="tab-btn tab-btn-lang-sel" onClick={() => this.selectLanguage()}>{i18n.language.toUpperCase()} </button>
-                    {this.state.languagesel}
-                </div>}
-                {buttons}
-            </div>
-        )
-
-
-    }
-
-    selectLanguage() {
-        let langBtns = Object.keys(languages).map((lang, index) => {
-            if (index > 0) {
-                return (<button className="btn-lang-sel tab-btn-lang-sel tab-btn" onClick={() => this.handleLangSel(languages[lang])}>{languages[lang].toUpperCase()}</button>)
-            }
+        const menuItems = content.map(x => {
+            const id = x.id;
+            return(
+                <Menu.Item key={id}>
+                    <Link to={"/" + id}
+                          style={{
+                              textDecoration: `none`,
+                          }}>
+                        {t(x.title)}
+                    </Link>
+                </Menu.Item>
+            )
         });
 
-        let divLanguageSel = (
-            <div className="div-disabled" id="disable" onClick={() => this.enable()}>
-                <div className="language-div language-sel-div" onClick={() => this.enable()}>
-                    {langBtns}
-                </div>
-            </div>
-        );
 
-        this.setState(prevState => ({
-            buttons: prevState.buttons,
-            languagesel: divLanguageSel
-        }));
-
-    }
-    enable() {
-        const languagesel = null;
-        this.setState(prevState => ({
-            buttons: prevState.buttons,
-            languagesel: languagesel
-        }));
+        return (
+            <Row className="header">
+                <Col span={5} className="light-background">
+                    <div className="logo">
+                        <img alt="das ist ein Bild" className="logo" src={logo}/>
+                    </div>
+                </Col>
+                <Col span={14}>
+                    <Menu onClick={this.handleClick} theme="light" selectedKeys={this.props.siteIndex} mode="horizontal">
+                        {menuItems}
+                    </Menu>
+                </Col>
+                <Col span={5} className="light-background">
+                    <SettingFilled />
+                </Col>
+            </Row>
+        )
     }
 
-    handleLangSel(lang) {
-        this.setState(prevState =>
-            ({
-                siteIndex: prevState.siteIndex,
-                content: prevState.content,
-                language: lang
-            }));
-        return this.props.handleLangSel(lang);
-    }
+
 
 }
 
+const Header = withTranslation()(Header_Class);
 
-const TabBar = withTranslation()(TabBarClass);
-
-
-
-
-function Header(props) {
-
-    const { i18n } = useTranslation();
-
-    function handleLangSel(lang) {
-        console.log("changing Language to: " + lang);
-        i18n.changeLanguage(lang);
-    }
-
-    return (
-            <TabBar siteIndex={props.siteIndex} handleLangSel={(lang) => handleLangSel(lang)}/>
-    );
-
-}
 
 export default Header;

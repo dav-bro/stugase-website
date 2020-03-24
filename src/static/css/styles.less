@@ -1,13 +1,18 @@
+@import '~antd/dist/antd.less';
+
+@background-color: #fff;
+@background-accent: #fafafa;
+
 .App {
     height: 100vh;
 }
 
 .content{
-    align-content: center;
-    position: absolute;
+    height: 1000px;
+    /*position: absolute;*/
     left: 0;
     width: 100%;
-    top: 50px;
+    /*top: 50px;*/
     /*height: 100%;*/
     /*height: 100vh;*/
     /*width: 100%;*/
@@ -85,17 +90,24 @@
 
 
 .page-head {
+    margin-top: 45px;
     width: 100%;
-    background: lightgray;
+    background: @background-accent;
+    padding-bottom: 10px;
 }
 
 .logo {
     height: 45px;
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
+    /*position: absolute;*/
+    float: left;
+}
+
+.site-layout-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 280px;
 }
 
 .info-card {
@@ -145,6 +157,34 @@
 .is-right {
     float: right;
     text-align: right;
+}
+
+.main-content {
+    border-right: solid thin @border-color-base;
+    border-left: solid thin @border-color-base;
+    box-shadow: @shadow-2;
+}
+
+.left-content {
+}
+
+.right-content {
+}
+
+.header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+}
+.light-background {
+    background: @white;
+}
+.title {
+    margin-top: 45px;
+    margin-bottom: 0;
+    width: 100%;
+    background: @background-color;
 }
 
 @keyframes slideExpandVertical {
