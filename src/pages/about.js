@@ -21,8 +21,8 @@ class AboutClass extends React.Component {
                 </div>
                 <div key="main-content" style={{textAlign: "-webkit-center"}}>
                     <Card
-                        title={t('about.what.title')} style={{width: "450px"}}
-                        cover={ <img alt="Systems Engineering" src={logo} style={{width: '400px'}}/>}
+                        title={t('about.what.title')} style={{width: "70%"}}
+                        cover={ <img alt="Systems Engineering" src={logo} style={{width: '100%'}}/>}
                     >
                         {t('about.what.text')}
                     </Card>
