@@ -80,7 +80,8 @@ class Layout extends React.Component{
 
 function LayoutWithHook(Component) {
     return function WrappedComponent(props) {
-        const { breakpoint } = useWindowDimensions();
+        const windowDimensions = useWindowDimensions();
+        const breakpoint = windowDimensions ? windowDimensions.breakpoint : "xxl";
         return <Component {...props} breakpoint={breakpoint} />;
     }
 }
