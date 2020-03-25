@@ -5,7 +5,7 @@ import logo from "../static/images/SE_Logo_Text.png"
 import '../static/css/styles.less'
 import 'antd/dist/antd.css';
 
-import './i18n';
+import '../hooks/i18n';
 
 
 const content = [

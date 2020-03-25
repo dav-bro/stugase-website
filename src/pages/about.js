@@ -5,7 +5,7 @@ import '../static/css/styles.less'
 import logo from "../static/images/SE_Logo_Text.png"
 import Header_old from "../components/header_old";
 import Header from "../components/header";
-import '../components/i18n';
+import '../hooks/i18n';
 import Title from "../components/title";
 import Layout from "../components/Layout";
 
@@ -16,7 +16,15 @@ class AboutClass extends React.Component {
         const { t } = this.props;
         return(
             <Layout siteIndex="about" title="Moin" text={t('about.header.text')}>
-
+                <div key="left-content">
+                    Left
+                </div>
+                <div key="main-content">
+                    <h1>Main</h1>
+                </div>
+                <div key="right-content">
+                    Right
+                </div>
             </Layout>
 
         )
