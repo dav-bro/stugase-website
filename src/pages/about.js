@@ -17,13 +17,18 @@ class AboutClass extends React.Component {
         return(
             <Layout siteIndex="about" title="Moin" text={t('about.header.text')}>
                 <div key="left-content">
-                    Left
+
                 </div>
-                <div key="main-content">
-                    <h1>Main</h1>
+                <div key="main-content" style={{textAlign: "-webkit-center"}}>
+                    <Card
+                        title={t('about.what.title')} style={{width: "450px"}}
+                        cover={ <img alt="Systems Engineering" src={logo} style={{width: '400px'}}/>}
+                    >
+                        {t('about.what.text')}
+                    </Card>
                 </div>
                 <div key="right-content">
-                    Right
+
                 </div>
             </Layout>
 
