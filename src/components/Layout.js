@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import Header from "./header";
-import {Divider, Row} from "antd";
+import {Row} from "antd";
 import Col from "antd/es/grid/col";
 import Title from "./title";
 import useWindowDimensions from "../hooks/useWindowDimensions";
@@ -18,7 +18,7 @@ class Layout extends React.Component{
 
 
         let leftContent = null;
-        let mainContent = [];
+        let mainContent = this.props.children;
         let rightContent = null;
 
         React.Children.map(this.props.children, child => {
@@ -42,7 +42,7 @@ class Layout extends React.Component{
 
         return(
             <div>
-                <Header siteIndex={this.props.siteIndex}/>
+                <Header siteIndex={this.props.uri}/>
 
                <Title title={this.props.title} text={this.props.text}/>
 

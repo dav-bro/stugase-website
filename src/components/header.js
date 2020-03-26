@@ -1,12 +1,15 @@
 import React from "react";
-import {Menu, Layout, Row, Col} from "antd";
-import {i18n as i18next} from "i18next";
+import {Col, Layout, Menu, Row} from "antd";
 import {withTranslation} from "react-i18next";
 import {Link} from "gatsby";
 import logo from "../static/images/SE_Logo_Text.png";
 import {SettingFilled} from "@ant-design/icons";
+import "../static/styles/import"
 
-const AntHeader = Layout.Header;
+const themes = [
+    "light",
+    "dark"
+]
 
 const content = [
     {
@@ -46,9 +49,9 @@ class Header_Class extends React.Component{
 
 
 
-
     state = {
         current: 'about',
+        theme: 'light'
     };
 
     handleClick = e => {
@@ -57,7 +60,6 @@ class Header_Class extends React.Component{
             current: e.key,
         });
     };
-
 
     render() {
 
@@ -77,26 +79,36 @@ class Header_Class extends React.Component{
             )
         });
 
+        const { theme } = this.state;
+
 
         return (
-            <Row className="header">
-                <Col span={5} className="light-background">
-                    <div className="logo">
-                        <img alt="das ist ein Bild" className="logo" src={logo}/>
+            <Row >
+                <Col span={5} className={"header-" + theme}>
+                    <div className={"logo-" + theme}>
+                        <img alt="das ist ein Bild" className={"logo-" + theme} src={logo}/>
                     </div>
                 </Col>
-                <Col span={14}>
-                    <Menu onClick={this.handleClick} theme="light" selectedKeys={this.props.siteIndex} mode="horizontal">
+                <Col span={14} >
+                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.siteIndex} mode="horizontal">
                         {menuItems}
                     </Menu>
                 </Col>
-                <Col span={5} className="light-background">
-                    <SettingFilled />
+                <Col span={5} className={"header-" + theme}>
+                    <SettingFilled onClick={() => this.handleThemeChange()}/>
                 </Col>
             </Row>
         )
     }
 
+    handleThemeChange(newTheme) {
+        if (!newTheme) {
+            const ind = themes.indexOf(this.state.theme);
+            newTheme = (ind === themes.length - 1) ? themes[0] : themes[ind + 1];
+        }
+        console.log(newTheme);
+        this.setState({theme: newTheme})
+    }
 
 
 }

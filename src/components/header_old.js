@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "gatsby";
 import {useTranslation, withTranslation} from "react-i18next";
 import logo from "../static/images/SE_Logo_Text.png"
-import '../static/css/styles.less'
+import '../static/styles/styles.less'
 import 'antd/dist/antd.css';
 
 import '../hooks/i18n';

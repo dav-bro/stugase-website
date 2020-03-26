@@ -1,12 +1,9 @@
 import React from 'react';
-import {Card, Col, Row} from 'antd'
+import {Card} from 'antd'
 import {withTranslation} from "react-i18next";
-import '../static/css/styles.less'
+import '../static/styles/styles.less'
 import logo from "../static/images/SE_Logo_Text.png"
-import Header_old from "../components/header_old";
-import Header from "../components/header";
 import '../hooks/i18n';
-import Title from "../components/title";
 import Layout from "../components/Layout";
 
 
@@ -15,7 +12,7 @@ class AboutClass extends React.Component {
     render() {
         const { t } = this.props;
         return(
-            <Layout siteIndex="about" title="Moin" text={t('about.header.text')}>
+            <Layout title="Moin" text={t('about.header.text')}>
                 <div key="left-content">
 
                 </div>
