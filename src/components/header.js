@@ -1,15 +1,11 @@
 import React from "react";
-import {Col, Layout, Menu, Row} from "antd";
+import {Col, Menu, Row} from "antd";
 import {withTranslation} from "react-i18next";
 import {Link} from "gatsby";
 import logo from "../static/images/SE_Logo_Text.png";
-import {SettingFilled} from "@ant-design/icons";
 import "../static/styles/import"
-
-const themes = [
-    "light",
-    "dark"
-]
+import ContextConsumer from "./Context";
+import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
 
 const content = [
     {
@@ -41,6 +37,8 @@ const content = [
         title: "important.short"
     }
 ];
+
+const blockThemeChange = ["/contact", "/dates"];
 
 
 
@@ -79,36 +77,31 @@ class Header_Class extends React.Component{
             )
         });
 
-        const { theme } = this.state;
-
+        let { theme } = this.props;
 
         return (
-            <Row >
-                <Col span={5} className={"header-" + theme}>
+            <Row className={"header-" + theme}>
+                <Col span={5} >
                     <div className={"logo-" + theme}>
                         <img alt="das ist ein Bild" className={"logo-" + theme} src={logo}/>
                     </div>
                 </Col>
                 <Col span={14} >
-                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.siteIndex} mode="horizontal">
+                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.uri} mode="horizontal">
                         {menuItems}
                     </Menu>
                 </Col>
-                <Col span={5} className={"header-" + theme}>
-                    <SettingFilled onClick={() => this.handleThemeChange()}/>
+                <Col span={5} >
+                    { blockThemeChange.some(x => x === this.props.uri) ? null : (<ContextConsumer>
+                        {({setTheme}) => (
+                            <BulbTwoTone style={{paddingTop: 10, paddingRight: 50}} twoToneColor={theme === "dark" ? "white" : "black"} className="float-right text-2xl " onClick={() => setTheme()}/>
+                        )}
+                    </ContextConsumer>)}
                 </Col>
             </Row>
         )
     }
 
-    handleThemeChange(newTheme) {
-        if (!newTheme) {
-            const ind = themes.indexOf(this.state.theme);
-            newTheme = (ind === themes.length - 1) ? themes[0] : themes[ind + 1];
-        }
-        console.log(newTheme);
-        this.setState({theme: newTheme})
-    }
 
 
 }

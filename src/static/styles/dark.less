@@ -1,5 +1,27 @@
 @import "~antd/lib/style/themes/dark";
 
+@background-accent: #434343;
+
+
+.border-top-dark {
+  border-top: solid thin @border-color-base;
+}
+
+.card-dark {
+  background: @component-background !important;
+  color: @text-color !important;
+  border: solid thin @border-color-base !important;
+}
+
+.content-dark {
+  background: @body-background;
+  color: @text-color;
+}
+
+.heading-dark {
+  color: @text-color;
+}
+
 .header-dark {
   background: @component-background;
   color: @text-color;
@@ -7,4 +29,26 @@
 
 .logo-dark {
   background: @primary-6;
+}
+
+
+.main-content-dark {
+  border-right: solid thin @border-color-base;
+  border-left: solid thin @border-color-base;
+  box-shadow: @shadow-2;
+}
+
+
+.page-head-dark {
+  background: @background-accent;
+  color: @text-color;
+}
+
+.panel-dark {
+  background: @component-background;
+  color: @text-color !important;
+}
+
+.text-dark {
+  color: @text-color;
 }

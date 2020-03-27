@@ -1,25 +1,25 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-import { CalendarOutlined, TeamOutlined } from '@ant-design/icons';
-import { Col, Row } from "antd";
-import Header_old from "../components/header_old";
-import Title from "../components/title";
-import Header from "../components/header";
+import {CalendarOutlined, TeamOutlined} from '@ant-design/icons';
+import {Col, Row} from "antd";
+import LayoutContent from "../components/LayoutContent";
+import ContextConsumer from "../components/Context";
 
 class DatesClass extends React.Component {
 
     render() {
         const { t } = this.props;
         return (
-            <div className="dates content">
-                <Header siteIndex="dates"/>
-                <Title title={t('dates.header.title')} text={t('dates.header.text')}/>
-                <Row style={{marginTop: "30px"}}>
-                    <Col span={14} offset={5}>
-                        <DateRow type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
-                    </Col>
-                </Row>
-            </div>
+            <ContextConsumer>
+                {({ data }) => (
+                    <LayoutContent theme={data.theme} title={t('dates.header.title')} text={t('dates.header.text')}>
+                        <div key="main-content">
+                                    <DateRow type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
+                        </div>
+                    </LayoutContent>
+                )}
+            </ContextConsumer>
+
         )
     }
 }

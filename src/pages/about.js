@@ -1,10 +1,12 @@
 import React from 'react';
-import {Card} from 'antd'
 import {withTranslation} from "react-i18next";
 import '../static/styles/styles.less'
 import logo from "../static/images/SE_Logo_Text.png"
 import '../hooks/i18n';
-import Layout from "../components/Layout";
+import LayoutContent from "../components/LayoutContent";
+import "../static/styles/import"
+import ContextConsumer from "../components/Context";
+import "../static/styles/tailwind.css"
 
 
 class AboutClass extends React.Component {
@@ -12,22 +14,41 @@ class AboutClass extends React.Component {
     render() {
         const { t } = this.props;
         return(
-            <Layout title="Moin" text={t('about.header.text')}>
-                <div key="left-content">
+            <ContextConsumer>
+                {({ data }) => (
+                    <LayoutContent theme={data.theme} title="Moin" text={t('about.header.text')}>
 
-                </div>
-                <div key="main-content" style={{textAlign: "-webkit-center"}}>
-                    <Card
-                        title={t('about.what.title')} style={{width: "450px"}}
-                        cover={ <img alt="Systems Engineering" src={logo} style={{width: '400px'}}/>}
-                    >
-                        {t('about.what.text')}
-                    </Card>
-                </div>
-                <div key="right-content">
+                        <div key="left-content" >
+                        </div>
+                        <div key="main-content" style={{textAlign: "-webkit-center"}}>
 
-                </div>
-            </Layout>
+                            <div className={"max-w-sm overflow-hidden shadow-lg mt-3 card-" + data.theme} >
+                                <img className="w-full" src={logo} alt="Sunset in the mountains" />
+                                    <div className={"px-6 py-4 border-t border-top-" + data.theme}>
+                                        <div className="font-bold text-xl mb-2"> {t('about.what.title')} </div>
+                                        <p className={" text-base text-" + data.theme} >
+                                            {t('about.what.text')}
+                                        </p>
+                                    </div>
+
+                            </div>
+
+                          {/*   <Card
+                               className={"card-" + data.theme}
+
+                                title={<h1 className={"headings-" + data.theme}>{t('about.what.title')}</h1>} style={{width: "40%"}}
+                                cover={ <img alt="Systems Engineering" src={logo} style={{width: '90%'}} />}
+                            >
+                                {t('about.what.text')}
+                            </Card>*/}
+                        </div>
+                        <div key="right-content">
+
+                        </div>
+                    </LayoutContent>
+                )}
+
+            </ContextConsumer>
 
         )
     }
@@ -37,28 +58,3 @@ class AboutClass extends React.Component {
 const About = withTranslation()(AboutClass);
 
 export default About;
-
-/*
-
-
-
-<div className="about content">
-                <Header siteIndex="about"/>
-                <Title title="Moin" text={t('about.header.text')}/>
-                <Row type="flex" align="top" justify="center" style={{marginTop: "25px"}}>
-                    <Col>
-                        <Card
-                            title={t('about.what.title')} style={{width: "650px"}}
-                            cover={ <img alt="Systems Engineering" src={logo} style={{width: '600px'}}/>}
-                        >
-                            {t('about.what.text')}
-                        </Card>
-                    </Col>
-                    <Col>
-
-                    </Col>
-                </Row>
-            </div>
-
-
- */
