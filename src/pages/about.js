@@ -7,6 +7,7 @@ import LayoutContent from "../components/LayoutContent";
 import "../static/styles/import"
 import ContextConsumer from "../components/Context";
 import "../static/styles/tailwind.css"
+import Card from "../components/Card";
 
 
 class AboutClass extends React.Component {
@@ -16,31 +17,23 @@ class AboutClass extends React.Component {
         return(
             <ContextConsumer>
                 {({ data }) => (
-                    <LayoutContent theme={data.theme} title="Moin" text={t('about.header.text')}>
+                    <LayoutContent title="Moin" text={t('about.header.text')}>
 
                         <div key="left-content" >
                         </div>
                         <div key="main-content" style={{textAlign: "-webkit-center"}}>
 
-                            <div className={"max-w-sm overflow-hidden shadow-lg mt-3 card-" + data.theme} >
-                                <img className="w-full" src={logo} alt="Sunset in the mountains" />
-                                    <div className={"px-6 py-4 border-t border-top-" + data.theme}>
-                                        <div className="font-bold text-xl mb-2"> {t('about.what.title')} </div>
-                                        <p className={" text-base text-" + data.theme} >
+                            <Card
+                                theme={data.theme}
+                                header={t('about.what.title')}
+                                footer={<p className={" text-base text-" + data.theme} >
                                             {t('about.what.text')}
-                                        </p>
-                                    </div>
-
-                            </div>
-
-                          {/*   <Card
-                               className={"card-" + data.theme}
-
-                                title={<h1 className={"headings-" + data.theme}>{t('about.what.title')}</h1>} style={{width: "40%"}}
-                                cover={ <img alt="Systems Engineering" src={logo} style={{width: '90%'}} />}
+                                        </p>}
                             >
-                                {t('about.what.text')}
-                            </Card>*/}
+                                <img className="w-full" src={logo} alt="Sunset in the mountains" />
+                            </Card>
+
+
                         </div>
                         <div key="right-content">
 

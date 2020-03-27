@@ -38,7 +38,7 @@ const content = [
     }
 ];
 
-const blockThemeChange = ["/contact", "/dates"];
+const blockThemeChange = [];
 
 
 
