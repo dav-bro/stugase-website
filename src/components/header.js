@@ -1,12 +1,11 @@
 import React from "react";
-import {Menu, Layout, Row, Col} from "antd";
-import {i18n as i18next} from "i18next";
+import {Col, Menu, Row} from "antd";
 import {withTranslation} from "react-i18next";
 import {Link} from "gatsby";
 import logo from "../static/images/SE_Logo_Text.png";
-import {SettingFilled} from "@ant-design/icons";
-
-const AntHeader = Layout.Header;
+import "../static/styles/import"
+import ContextConsumer from "./Context";
+import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
 
 const content = [
     {
@@ -39,6 +38,8 @@ const content = [
     }
 ];
 
+const blockThemeChange = ["/contact", "/dates"];
+
 
 
 class Header_Class extends React.Component{
@@ -46,9 +47,9 @@ class Header_Class extends React.Component{
 
 
 
-
     state = {
         current: 'about',
+        theme: 'light'
     };
 
     handleClick = e => {
@@ -57,7 +58,6 @@ class Header_Class extends React.Component{
             current: e.key,
         });
     };
-
 
     render() {
 
@@ -77,21 +77,26 @@ class Header_Class extends React.Component{
             )
         });
 
+        let { theme } = this.props;
 
         return (
-            <Row className="header">
-                <Col span={5} className="light-background">
-                    <div className="logo">
-                        <img alt="das ist ein Bild" className="logo" src={logo}/>
+            <Row className={"header-" + theme}>
+                <Col span={5} >
+                    <div className={"logo-" + theme}>
+                        <img alt="das ist ein Bild" className={"logo-" + theme} src={logo}/>
                     </div>
                 </Col>
-                <Col span={14}>
-                    <Menu onClick={this.handleClick} theme="light" selectedKeys={this.props.siteIndex} mode="horizontal">
+                <Col span={14} >
+                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.uri} mode="horizontal">
                         {menuItems}
                     </Menu>
                 </Col>
-                <Col span={5} className="light-background">
-                    <SettingFilled />
+                <Col span={5} >
+                    { blockThemeChange.some(x => x === this.props.uri) ? null : (<ContextConsumer>
+                        {({setTheme}) => (
+                            <BulbTwoTone style={{paddingTop: 10, paddingRight: 50}} twoToneColor={theme === "dark" ? "white" : "black"} className="float-right text-2xl " onClick={() => setTheme()}/>
+                        )}
+                    </ContextConsumer>)}
                 </Col>
             </Row>
         )

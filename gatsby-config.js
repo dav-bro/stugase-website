@@ -11,7 +11,14 @@ module.exports = {
         javascriptEnabled: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve('./src/components/Layout')
+      }
+    },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
