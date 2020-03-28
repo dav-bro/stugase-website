@@ -2,11 +2,24 @@ import React from "react";
 import {Col, Menu, Row} from "antd";
 import {withTranslation} from "react-i18next";
 import {Link} from "gatsby";
-import logo from "../static/images/SE_Logo_Text.png";
 import "../static/styles/import"
 import ContextConsumer from "./Context";
 import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
 import i18next from "i18next";
+
+
+import SELogo from "../static/images/SE_Logo.png";
+import SEText from "../static/images/SE_Text.png";
+import UniLogo from "../static/images/Uni_Logo.png";
+import UniText from "../static/images/Uni_Text.png";
+
+
+import SETextDark from "../static/images/SE_Text-dark.png";
+
+import UniTextDark from "../static/images/Uni_Text-dark.png";
+
+
+
 
 const Constants = require("../static/constants");
 
@@ -15,26 +28,27 @@ const content = [
         id: "about",
         title: "about.short"
     },
-    {
+   /* {
         id: "info",
         title: "info.short"
-    },
-    {
-        id: "dates",
-        title: "dates.short"
-    },
+    },*/
     {
         id: "contact",
         title: "contact.short"
     },
     {
+        id: "dates",
+        title: "dates.short"
+    },
+
+    {
         id: "members",
         title: "members.short"
     },
-    {
+  /*  {
         id: "o-week",
         title: "o-week.short"
-    },
+    },*/
     {
         id: "important-sites",
         title: "important.short"
@@ -87,8 +101,11 @@ class Header_Class extends React.Component{
         return (
             <Row className={"header-" + theme}>
                 <Col span={5} >
-                    <div className={"logo-" + theme}>
-                        <img alt="das ist ein Bild" className={"logo-" + theme} src={logo}/>
+                    <div className="flex flex-row items-center">
+                        <img alt="das ist ein Bild" className={"logo-se-" + theme} src={SELogo}/>
+                        <img alt="das ist ein Bild" className={"hidden md:flex logo-se-" + theme} src={theme === "dark" ? SETextDark : SEText }/>
+                        <img alt="das ist ein Bild" className={"ml-4 logo-uni-" + theme} src={UniLogo}/>
+                        <img alt="das ist ein Bild" className={"hidden xl:flex ml-2 logo-uni-" + theme} src={theme === "dark" ? UniTextDark : UniText }/>
                     </div>
                 </Col>
                 <Col span={14} >
@@ -102,7 +119,7 @@ class Header_Class extends React.Component{
                             <div className="flex flex-row justify-end items-center h-full">
                                 <div className={"tooltip-left-" + theme}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
                                 <span className={"tooltip-left-text-" + theme }>
-                                    {theme === "dark" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
+                                    {theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
                                 </span>
                                 </div>
                                 <div className={"mr-2 cursor-pointer tooltip-left-" + theme } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
