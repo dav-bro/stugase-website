@@ -104,7 +104,7 @@ class Header_Class extends React.Component{
                     <div className="flex flex-row items-center">
                         <img alt="das ist ein Bild" className={"logo-se-" + theme} src={SELogo}/>
                         <img alt="das ist ein Bild" className={"hidden md:flex logo-se-" + theme} src={theme === "dark" ? SETextDark : SEText }/>
-                        <img alt="das ist ein Bild" className={"ml-4 logo-uni-" + theme} src={UniLogo}/>
+                        <img alt="das ist ein Bild" className={"ml-1 sm:ml-4 xl:ml-2 logo-uni-" + theme} src={UniLogo}/>
                         <img alt="das ist ein Bild" className={"hidden xl:flex ml-2 logo-uni-" + theme} src={theme === "dark" ? UniTextDark : UniText }/>
                     </div>
                 </Col>
