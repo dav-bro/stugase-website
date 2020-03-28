@@ -46,7 +46,7 @@ class ContactClass extends React.Component {
                                     <div className="flex flex-col items-center sm:flex-row sm:justify-between">
 
                                         <Card
-                                            header={t('contact.find-us.room.title')}
+                                            header={<p className="ml-2 ">{t('contact.find-us.room.title')}</p>}
                                             footer={<LinkButton link={floorPlanLink}/>}
                                         >
                                             <img alt="unser StugA Raum im IW 1+2" src={roomPlan}/>
@@ -155,9 +155,9 @@ class Collapse extends React.Component {
                     </span>
 
 
-                    <div className="text-wrapper ml-6 w-full">
-                        <p className="text-sm sm:text-lg text-center-vertical float-left"> {title} </p>
-                        <p className={"text-sm sm:text-lg float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
+                    <div className="text-sm sm:text-lg text-wrapper ml-6 w-full">
+                        <p className=" text-center-vertical float-left"> {title} </p>
+                        <p className={" float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
                     </div>
 
                 </div>
@@ -275,7 +275,7 @@ class ContactFormClass extends React.Component {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-    return <button className="bg-blue-300 p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
+    return <button className="bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
                {<LinkOutlined />}
                 <p className="ml-2">{t('contact.find-us.link-button')}</p>
            </button>;

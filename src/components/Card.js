@@ -11,7 +11,7 @@ export default ({ children, header, footer}) => {
 
             <div className={"max-w-sm overflow-hidden border shadow-lg mt-3 card-" + data.theme} >
 
-                <div className={"font-bold text-xl mb-2 border-b border-bottom-" + data.theme} >
+                <div className={"text-sm sm:text-lg font-bold mb-2 border-b border-bottom-" + data.theme} >
                     {header}
                 </div>
                 <div>
