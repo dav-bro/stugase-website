@@ -2,8 +2,7 @@ import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
 import {LinkOutlined} from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
-import {Button} from "antd";
-import _Card from "../components/Card"
+import Card from "../components/Card"
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
@@ -34,7 +33,7 @@ class ContactClass extends React.Component {
                     <LayoutContent theme={theme} title={t('contact.header.title')} text={t('contact.header.text')}>
                         <div key="main-content" className="inherit">
 
-                            <Collapse_
+                            <Collapse
                                 title={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"}
                                 defaultCollapsed={true}
                             >
@@ -46,25 +45,25 @@ class ContactClass extends React.Component {
 
                                     <div className="flex flex-col items-center sm:flex-row sm:justify-between">
 
-                                        <_Card
+                                        <Card
                                             header={t('contact.find-us.room.title')}
                                             footer={<LinkButton link={floorPlanLink}/>}
                                         >
                                             <img alt="unser StugA Raum im IW 1+2" src={roomPlan}/>
-                                        </_Card>
-                                        <_Card
+                                        </Card>
+                                        <Card
                                             header={t('contact.find-us.campus.title')}
                                             footer={<LinkButton link={campusPlanLink}/>}
                                         >
                                             <img alt="unser StugA Raum auf dem Campus" src={campusPlan}/>
-                                        </_Card>
+                                        </Card>
                                     </div>
 
 
                                 </div>
-                            </Collapse_>
+                            </Collapse>
 
-                            <Collapse_
+                            <Collapse
                                 title={t('contact.consultings.title')}
                             >
                                 <div className="m-5">
@@ -77,7 +76,7 @@ class ContactClass extends React.Component {
                                             to="dates">Termine</Link>
                                 </Trans></div>
 
-                            </Collapse_>
+                            </Collapse>
 
 
                           {/*  <Collapse defaultActiveKey={['1']} className={"panel-" + theme} >
@@ -136,7 +135,7 @@ class ContactClass extends React.Component {
 
 }
 
-class Collapse_ extends React.Component {
+class Collapse extends React.Component {
 
 
     state = {
@@ -276,9 +275,9 @@ class ContactFormClass extends React.Component {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-    return <button className="bg-blue-300 p-2 -ml-3 rounded-sm" onClick={() => window.open(props.link)}>
+    return <button className="bg-blue-300 p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
                {<LinkOutlined />}
-               {t('contact.find-us.link-button')}
+                <p className="ml-2">{t('contact.find-us.link-button')}</p>
            </button>;
 }
 

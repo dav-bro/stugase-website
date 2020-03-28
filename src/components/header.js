@@ -66,6 +66,8 @@ class Header_Class extends React.Component{
 
         const { t } = this.props;
 
+        console.log(this.props.path);
+
         const menuItems = content.map(x => {
             const id = x.id;
             return(
@@ -90,12 +92,12 @@ class Header_Class extends React.Component{
                     </div>
                 </Col>
                 <Col span={14} >
-                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.uri.length > 1 ? this.props.uri : Constants.defaultPage} mode="horizontal">
+                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.path.length > 1 ? this.props.path : Constants.defaultPage} mode="horizontal">
                         {menuItems}
                     </Menu>
                 </Col>
                 <Col span={5} >
-                    { blockThemeChange.some(x => x === this.props.uri) ? null : (<ContextConsumer>
+                    { blockThemeChange.some(x => x === this.props.path) ? null : (<ContextConsumer>
                         {({setTheme}) => (
                             <div className="flex flex-row justify-end items-center h-full">
                                 <div className={"tooltip-left-" + theme}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
