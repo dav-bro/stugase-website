@@ -276,7 +276,10 @@ class ContactFormClass extends React.Component {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-   return <Button type="primary" icon={<LinkOutlined />} onClick={() => window.open(props.link)}>{t('contact.find-us.link-button')}</Button>;
+    return <button className="bg-blue-300 p-2 -ml-3 rounded-sm" onClick={() => window.open(props.link)}>
+               {<LinkOutlined />}
+               {t('contact.find-us.link-button')}
+           </button>;
 }
 
 const Contact = withTranslation()(ContactClass);
