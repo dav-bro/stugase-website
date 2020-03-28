@@ -1,23 +1,26 @@
 // Context.js
 import React from "react"
+import "../utils/i18n"
 
 
+const locales = ["de", "en"];
 
 const defaultContextValue = {
     data: {
         // set your initial data shape here
-        theme: "light"
+        theme: "light",
+        locale: locales[0]
     },
     set: () => {},
     setTheme: () => {},
-}
+};
 
-const { Provider, Consumer } = React.createContext(defaultContextValue)
+const { Provider, Consumer } = React.createContext(defaultContextValue);
 
 const themes = [
     "light",
     "dark"
-]
+];
 
 class ContextProviderComponent extends React.Component {
     constructor() {
@@ -30,6 +33,11 @@ class ContextProviderComponent extends React.Component {
             set: this.setData,
             setTheme: this.setTheme,
         }
+    }
+
+
+    componentDidMount() {
+        // i18next.init();
     }
 
     setData(newData) {
@@ -52,7 +60,7 @@ class ContextProviderComponent extends React.Component {
                 ...state.data,
                 theme: newTheme
             },
-        }))
+        }));
         console.log(this.state)
     }
 

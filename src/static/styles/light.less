@@ -16,3 +16,12 @@
 .page-head-light {
   background: @background-accent;
 }
+
+.tooltip-left-light .tooltip-left-text-light {
+  background-color: @tooltip-bg;
+  color: white;
+}
+
+.tooltip-left-light .tooltip-left-text-light::after {
+  border-color: transparent transparent transparent @tooltip-bg;
+}

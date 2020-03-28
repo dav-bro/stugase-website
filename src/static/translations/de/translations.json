@@ -79,5 +79,10 @@
   "in-progress": "in Arbeit...",
   "general": {
     "room": "Raum"
+  },
+  "tooltip": {
+    "dark-mode": "Dark Mode aktivieren",
+    "light-mode": "Normalen Modus aktivieren",
+    "language": "Sprache ändern"
   }
 }

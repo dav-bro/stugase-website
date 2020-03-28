@@ -2,7 +2,6 @@ import React from 'react';
 import {withTranslation} from "react-i18next";
 import '../static/styles/styles.less'
 import logo from "../static/images/SE_Logo_Text.png"
-import '../hooks/i18n';
 import LayoutContent from "../components/LayoutContent";
 import "../static/styles/import"
 import ContextConsumer from "../components/Context";
@@ -17,7 +16,7 @@ class AboutClass extends React.Component {
         return(
             <ContextConsumer>
                 {({ data }) => (
-                    <LayoutContent title="Moin" text={t('about.header.text')}>
+                    <LayoutContent title="Moin" text={t('about.header.text')} uri={"/about"}>
 
                         <div key="left-content" >
                         </div>

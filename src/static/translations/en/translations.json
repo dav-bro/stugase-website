@@ -42,5 +42,10 @@
   "inProgress": "in progress...",
   "general": {
     "room": "room"
+  },
+  "tooltip": {
+    "dark-mode": "switch to Dark Mode",
+    "light-mode": "switch to Normal Mode",
+    "language": "change language"
   }
 }

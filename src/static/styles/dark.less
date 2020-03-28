@@ -63,3 +63,12 @@
 .text-dark {
   color: @text-color;
 }
+
+.tooltip-left-dark .tooltip-left-text-dark {
+  background-color: @tooltip-bg;
+}
+
+.tooltip-left-dark .tooltip-left-text-dark::after {
+
+  border-color: transparent transparent transparent @tooltip-bg;
+}

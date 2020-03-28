@@ -6,6 +6,9 @@ import logo from "../static/images/SE_Logo_Text.png";
 import "../static/styles/import"
 import ContextConsumer from "./Context";
 import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
+import i18next from "i18next";
+
+const Constants = require("../static/constants");
 
 const content = [
     {
@@ -87,14 +90,26 @@ class Header_Class extends React.Component{
                     </div>
                 </Col>
                 <Col span={14} >
-                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.uri} mode="horizontal">
+                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.uri.length > 1 ? this.props.uri : Constants.defaultPage} mode="horizontal">
                         {menuItems}
                     </Menu>
                 </Col>
                 <Col span={5} >
                     { blockThemeChange.some(x => x === this.props.uri) ? null : (<ContextConsumer>
                         {({setTheme}) => (
-                            <BulbTwoTone style={{paddingTop: 10, paddingRight: 50}} twoToneColor={theme === "dark" ? "white" : "black"} className="float-right text-2xl " onClick={() => setTheme()}/>
+                            <div className="flex flex-row justify-end items-center h-full">
+                                <div className={"tooltip-left-" + theme}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                <span className={"tooltip-left-text-" + theme }>
+                                    {theme === "dark" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
+                                </span>
+                                </div>
+                                <div className={"mr-2 cursor-pointer tooltip-left-" + theme } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
+                                    {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
+                                    <span className={"tooltip-left-text-" + theme }>
+                                    {t('tooltip.language')}
+                                </span>
+                                </div>
+                            </div>
                         )}
                     </ContextConsumer>)}
                 </Col>

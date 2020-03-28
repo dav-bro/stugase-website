@@ -155,9 +155,10 @@ class Collapse_ extends React.Component {
                         <RightOutlined   rotate={this.state.collapsed ? 0 : 90} className="image-center-vertical"/>
                     </span>
 
+
                     <div className="text-wrapper ml-6 w-full">
-                        <p className="text-lg text-center-vertical float-left"> {title} </p>
-                        <p className={"float-right text-lg text-center-vertical mr-6"}> {extra} </p>
+                        <p className="text-sm sm:text-lg text-center-vertical float-left"> {title} </p>
+                        <p className={"text-sm sm:text-lg float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
                     </div>
 
                 </div>
