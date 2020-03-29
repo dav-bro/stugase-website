@@ -70,3 +70,5 @@ yarn-error.log
 
 #custom folders
 old_sources/
+
+useWindowDimensions.js
