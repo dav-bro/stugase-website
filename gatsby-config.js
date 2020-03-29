@@ -18,6 +18,7 @@ module.exports = {
       }
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-source-filesystem`,

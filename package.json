@@ -33,10 +33,11 @@
   "devDependencies": {
     "@ant-design/compatible": "^1.0.0",
     "@ant-design/icons": "4.0.0",
+    "gatsby-plugin-remove-trailing-slashes": "^2.2.1",
     "gh-pages": "^2.2.0",
     "less-loader": "^5.0.0",
-    "tailwindcss": "^1.2.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "tailwindcss": "^1.2.0"
   },
   "keywords": [
     "gatsby"

@@ -1,7 +1,6 @@
 import React from "react";
-import {Col, Menu, Row} from "antd";
+import {Col, Row} from "antd";
 import {withTranslation} from "react-i18next";
-import {Link} from "gatsby";
 import "../static/styles/import"
 import ContextConsumer from "./Context";
 import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
@@ -17,6 +16,7 @@ import UniText from "../static/images/Uni_Text.png";
 import SETextDark from "../static/images/SE_Text-dark.png";
 
 import UniTextDark from "../static/images/Uni_Text-dark.png";
+import Menu from "./Menu";
 
 
 
@@ -65,8 +65,7 @@ class Header_Class extends React.Component{
 
 
     state = {
-        current: 'about',
-        theme: 'light'
+        current: 'about'
     };
 
     handleClick = e => {
@@ -79,27 +78,14 @@ class Header_Class extends React.Component{
     render() {
 
         const { t } = this.props;
+        let { theme } = this.props;
 
         console.log(this.props.path);
 
-        const menuItems = content.map(x => {
-            const id = x.id;
-            return(
-                <Menu.Item key={id}>
-                    <Link to={"/" + id}
-                          style={{
-                              textDecoration: `none`,
-                          }}>
-                        {t(x.title)}
-                    </Link>
-                </Menu.Item>
-            )
-        });
 
-        let { theme } = this.props;
 
         return (
-            <Row className={"header-" + theme}>
+            <Row className={"border-b shadow-md header-" + theme}>
                 <Col span={5} >
                     <div className="flex flex-row items-center">
                         <img alt="das ist ein Bild" className={"logo-se-" + theme} src={SELogo}/>
@@ -109,8 +95,8 @@ class Header_Class extends React.Component{
                     </div>
                 </Col>
                 <Col span={14} >
-                    <Menu onClick={this.handleClick} theme={theme} selectedKeys={this.props.path.length > 1 ? this.props.path : Constants.defaultPage} mode="horizontal">
-                        {menuItems}
+                    <Menu onClick={this.handleClick} theme={theme} selectedKey={this.props.path.length > 1 ? this.props.path : Constants.defaultPage} mode="horizontal">
+                        {content}
                     </Menu>
                 </Col>
                 <Col span={5} >
