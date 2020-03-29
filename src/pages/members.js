@@ -9,6 +9,10 @@ class MembersClass extends React.Component {
         return (
            <LayoutContent title={t('members.title')}>
 
+               <div key="main-content">
+
+               </div>
+
            </LayoutContent>
         )
     }
