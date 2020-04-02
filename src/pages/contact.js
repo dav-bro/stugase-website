@@ -78,6 +78,13 @@ class ContactClass extends React.Component {
 
                             </Collapse>
 
+                            <Collapse
+                            title={t('contact.formula.title')}>
+
+                                <Form/>
+
+                            </Collapse>
+
 
                           {/*  <Collapse defaultActiveKey={['1']} className={"panel-" + theme} >
                                 <Panel header={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"} key={1} className={"panel-" + theme}>
@@ -134,6 +141,44 @@ class ContactClass extends React.Component {
     }
 
 }
+
+
+
+class Form extends React.Component {
+
+
+
+    render() {
+        return(
+            <div className="w-1/2">
+                <form className="m-4 ">
+                    <div className="flex w-full ">
+                        <div className="flex items-center w-full"> {/*NAME*/}
+
+                            <div className="w-1/3 block text-right pr-4 font-bold">
+                                <label htmlFor="username">Test</label>
+                            </div>
+                            <div className="w-2/3">
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="username" type="text" placeholder="Username"/>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+            </div>
+        );
+    }
+
+
+}
+
 
 class Collapse extends React.Component {
 
