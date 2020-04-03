@@ -290,4 +290,4 @@ function LinkButton(props) {
 
 const Contact = withTranslation()(ContactClass);
 
-export default Contac
+export default Contact;
