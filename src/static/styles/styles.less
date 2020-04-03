@@ -64,6 +64,23 @@
     //background: inherit;
 }
 
+.input-light,
+.input-dark {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    appearance: none;
+    border-width: 1px;
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+
+}
+
+.input:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
 .logo-se-dark,
 .logo-se-light {
     height: 2.5rem;
@@ -81,11 +98,8 @@
 
 .main-content-dark,
 .main-content-light {
-    border-right-style: solid;
-    border-right-width: thin;
-
-    border-left-style: solid;
-    border-left-width: thin;
+    border-right: thin solid;
+    border-left: thin solid;
 }
 
 

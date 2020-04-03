@@ -41,7 +41,7 @@ export default function useWindowDimensions() {
         }, []);
 
         return windowDimensions;
- /*   } else {
+    /*} else {
         return {
             breakpoint: null
         }

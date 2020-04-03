@@ -1,6 +1,6 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import {LinkOutlined} from '@ant-design/icons';
+import LinkOutlined from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
 import Card from "../components/Card"
 
@@ -10,10 +10,36 @@ import {Link} from "gatsby";
 import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
+import {ReCAPTCHA} from "react-google-recaptcha";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
 
+
+const form = [
+
+    {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+        placeholder: 'name'
+    },
+    {
+        type: 'text',
+        name: 'mail',
+        label: 'E-Mail',
+        placeholder: 'mail'
+    },
+    {
+        type: 'text',
+        name: 'betreff',
+        label: 'Betreff',
+        placeholder: 'Betreff'
+    },
+
+
+
+];
 
 
 class ContactClass extends React.Component {
@@ -81,7 +107,11 @@ class ContactClass extends React.Component {
                             <Collapse
                             title={t('contact.formula.title')}>
 
-                                <Form/>
+                                <Form
+                                    theme={theme}
+                                >
+                                    {form}
+                                </Form>
 
                             </Collapse>
 
@@ -129,6 +159,12 @@ class ContactClass extends React.Component {
                                 </Panel>
 
                             </Collapse>*/}
+
+                            <ReCAPTCHA
+                                sitekey="6LfdyeAUAAAAAKMaiwzy-V0alf1Cszr2vFUdIXzo"
+
+                                onChange={() => console.log("captcha completed")}
+                            />
                         </div>
                     </LayoutContent>
                 )}}
@@ -149,23 +185,48 @@ class Form extends React.Component {
 
 
     render() {
-        return(
-            <div className="w-1/2">
-                <form className="m-4 ">
-                    <div className="flex w-full ">
-                        <div className="flex items-center w-full"> {/*NAME*/}
 
-                            <div className="w-1/3 block text-right pr-4 font-bold">
-                                <label htmlFor="username">Test</label>
-                            </div>
-                            <div className="w-2/3">
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="username" type="text" placeholder="Username"/>
-                            </div>
+        const { children, theme } = this.props;
 
 
+        let formChildren =  children.map(child => {
+
+            if (child.type && child.type === 'password') {
+                return (
+                    <div className="flex items-center w-full mb-3">
+                        <div className="w-1/3 block text-right pr-4 font-bold">
+                            <label htmlFor={"password-" + child.name}>{child.label}</label>
                         </div>
+                        <div className="w-2/3">
+                            <input
+                                className={"input-" + theme}
+                                id={"password-" + child.name} type="password" placeholder={child.placeholder}/>
+                        </div>
+                    </div>
+                )
+            } else {
+                return(
+                    <div className="flex items-center w-full mb-3">
+                        <div className="w-1/3 block sm:text-right pr-4 font-bold">
+                            <label htmlFor={child.type + "-" + child.name}>{child.label}</label>
+                        </div>
+                        <div className="w-2/3">
+                            <input
+                                className={"input-" + theme}
+                                id={child.type + "-" + child.name} type="text" placeholder={child.placeholder}/>
+                        </div>
+                    </div>
+                )
+            }
+
+        });
+
+        return(
+            <div className="w-full sm:w-1/2 ">
+                <form className="m-4 ">
+                    <div className="flex flex-col w-full ">
+
+                            {formChildren}
 
 
                     </div>
@@ -217,105 +278,6 @@ class Collapse extends React.Component {
 
 }
 
-/*
-
-class ContactFormClass extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-
-    }
-
-
-    render() {
-
-        const { t } = this.props;
-        const transPrefix = "contact.formula.validation-messages.";
-
-        const layout = {
-            labelCol: { span: 8 },
-            wrapperCol: { span: 16 },
-        };
-
-        const validateMessages = {
-            required: {
-                types: {
-                    name: 't(transPrefix + "name")',
-                    email: t(transPrefix + "email"),
-                    topic: t(transPrefix + "topic"),
-                    message: t(transPrefix + "message"),
-                }
-            },
-
-        };
-
-        return (
-            <Form {...layout} name="contact-form" onFinish={this.handleSubmit} validateMessages={validateMessages}>
-                <Form.Item name={['user', 'name']} label="Name" rules={[{required: true, type: 'name'}]}>
-                    <Input
-                        prefix={<UserOutlined className="form-icon" />}
-                        placeholder="Name"
-                    />
-                </Form.Item>
-                <Form.Item name={['user', 'email']} label="E-Mail" rules={[{ type: 'email' }]} >
-                    <Input
-                        prefix={<MailOutlined className="form-icon" />}
-                        placeholder="E-Mail"
-                    />
-                    )}
-                </Form.Item>
-                <Form.Item name={['user', 'topic']} label="Betreff" rules={[{ required: true, type: 'topic' }]} >
-                    {/!*validateStatus={topicError ? 'warning' : ''} help={topicError || ''}>
-                    {getFieldDecorator('topic', {
-                        rules: [{ required: true, message: 'Bitte gib einen Betreff ein!' }],
-                    })(*!/}
-                    <Input
-                        prefix={<QuestionOutlined className="form-icon" />}
-                        placeholder="Betreff"
-                    />)}
-                </Form.Item>
-                <Form.Item name={['user', 'message']} label="Nachricht" rules={[{ required: true, type: 'message' }]} >
-                    {/!*validateStatus={messageError ? 'error' : ''} help={messageError || ''}>
-                    {getFieldDecorator('message', {
-                        rules: [{ required: true, message: 'Bitte gib eine Nachricht ein!' }],
-                    })(*!/}
-                    <TextArea
-                        placeholder="Deine Nachricht"
-                        rows={4}
-                    />)}
-                </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button icon={<LoginOutlined />} type="primary" htmlType="submit">
-                        Absenden
-                    </Button>
-                </Form.Item>
-              {/!*  <Form.Item>
-                    <ReCAPTCHA
-                        sitekey="6LfdyeAUAAAAAKMaiwzy-V0alf1Cszr2vFUdIXzo"
-                        onChange={() => console.log("captcha completed")}
-                    />
-                </Form.Item>*!/}
-            </Form>
-        );
-    }
-
-
-    handleSubmit(values) {
-        console.log(values);
-
-    }
-
-}
-
-
-*/
-
-
-// const ContactForm = withTranslation()(ContactFormClass);
 
 
 function LinkButton(props) {
@@ -328,4 +290,4 @@ function LinkButton(props) {
 
 const Contact = withTranslation()(ContactClass);
 
-export default Contact;
+export default Contac
