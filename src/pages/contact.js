@@ -1,6 +1,6 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import LinkOutlined from '@ant-design/icons';
+import {LinkOutlined} from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
 import Card from "../components/Card"
 
@@ -33,8 +33,19 @@ const form = [
     {
         type: 'text',
         name: 'betreff',
-        label: 'Betreff',
+        label: 'betreff',
         placeholder: 'Betreff'
+    },
+    {
+        type: 'textarea',
+        name: 'nachricht',
+        label: 'Nachricht',
+        placeholder: 'Bitte gib eine Nachricht ein'
+    },
+    {
+        type: 'submit',
+        name: 'senden',
+
     },
 
 
@@ -61,7 +72,7 @@ class ContactClass extends React.Component {
 
                             <Collapse
                                 title={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"}
-                                defaultCollapsed={true}
+
                             >
                                 <div className="m-5">
                                     <Trans i18nKey="contact.office.detail">
@@ -105,7 +116,8 @@ class ContactClass extends React.Component {
                             </Collapse>
 
                             <Collapse
-                            title={t('contact.formula.title')}>
+                            title={t('contact.formula.title')}
+                            defaultCollapsed={true}>
 
                                 <Form
                                     theme={theme}
@@ -115,50 +127,6 @@ class ContactClass extends React.Component {
 
                             </Collapse>
 
-
-                          {/*  <Collapse defaultActiveKey={['1']} className={"panel-" + theme} >
-                                <Panel header={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"} key={1} className={"panel-" + theme}>
-                                    <Trans i18nKey="contact.office.detail" >
-                                        you can find us in the <strong>IW 1+2</strong>.
-                                    </Trans>
-                                    <Row style={{marginTop: "30px", marginRight: 0}}>
-                                        <Col span={12}>
-                                            <Card
-                                                title={t('contact.find-us.room.title')}
-                                                style={{width: "300px"}}
-                                                cover={<img alt="unser StugA Raum im IW 1+2" src={roomPlan}/>}
-                                            >
-                                                <LinkButton link={floorPlanLink}/>
-                                            </Card>
-                                        </Col>
-
-                                        <Col span={12}>
-                                            <Card
-                                                title={t('contact.find-us.campus.title')}
-                                                style={{width: "400px", float: "right"}}
-                                                cover={<img alt="unser StugA Raum auf dem Campus" src={campusPlan}/>}
-                                            >
-                                                <LinkButton link={campusPlanLink}/>
-                                            </Card>
-                                        </Col>
-                                    </Row>
-                                </Panel>
-                                <Panel header={t('contact.consultings.title')} key={2}>
-                                    <Trans i18nKey="contact.consultings.text">
-                                        Jede zweite, ungerade Woche <strong>Donnerstags</strong> bieten wir von <strong> 13:00-15:00 Uhr </strong>
-                                        eine Sprechstunde an. In dieser Zeit könnt ihr uns Fragen rund ums Studium stellen.
-                                        Die genauen Termine findet ihr natürlich auch bei <Link to="dates">Termine</Link>
-                                    </Trans>
-                                </Panel>
-                                <Panel header={t('contact.formula.title')} key={3}>
-                                    <Row>
-                                        <Col span={12}>
-                                            <ContactForm/>
-                                        </Col>
-                                    </Row>
-                                </Panel>
-
-                            </Collapse>*/}
 
                             <ReCAPTCHA
                                 sitekey="6LfdyeAUAAAAAKMaiwzy-V0alf1Cszr2vFUdIXzo"
@@ -186,38 +154,60 @@ class Form extends React.Component {
 
     render() {
 
+
         const { children, theme } = this.props;
 
 
         let formChildren =  children.map(child => {
 
-            if (child.type && child.type === 'password') {
-                return (
-                    <div className="flex items-center w-full mb-3">
-                        <div className="w-1/3 block text-right pr-4 font-bold">
-                            <label htmlFor={"password-" + child.name}>{child.label}</label>
-                        </div>
-                        <div className="w-2/3">
-                            <input
-                                className={"input-" + theme}
-                                id={"password-" + child.name} type="password" placeholder={child.placeholder}/>
-                        </div>
-                    </div>
-                )
-            } else {
-                return(
-                    <div className="flex items-center w-full mb-3">
-                        <div className="w-1/3 block sm:text-right pr-4 font-bold">
-                            <label htmlFor={child.type + "-" + child.name}>{child.label}</label>
-                        </div>
-                        <div className="w-2/3">
-                            <input
-                                className={"input-" + theme}
-                                id={child.type + "-" + child.name} type="text" placeholder={child.placeholder}/>
-                        </div>
-                    </div>
-                )
+
+            let input;
+            let type = child.type;
+            let name = child.name;
+            let labelText = child.label;
+            let placeholder = child.placeholder;
+            let id = type + "-" + name;
+
+            let label = child.label ?  <label htmlFor={id}>{labelText}</label> : null;
+
+
+            switch (type) {
+                case "password":
+                case "text":
+                    input = (
+                        <input
+                            className={"input-" + theme}
+                            id={id}
+                            type={type}
+                            placeholder={placeholder}/>
+                    );
+                    break;
+                case "textarea":
+                    input = (
+                        <textarea
+                            className={"h-48 input-" + theme}
+                            id={id}
+                            type={type}
+                            placeholder={placeholder}/>
+                    );
+                    break;
+                case "submit":
+                    input = (
+                        <input type={type} value={name} className="float-right bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center pl-4 pr-4"/>
+                    )
+
             }
+
+            return (
+                <div className="flex w-full mb-3">
+                    <div className="w-1/3 block text-right pt-2 pr-4 font-bold">
+                        {label}
+                    </div>
+                    <div className="w-2/3">
+                        {input}
+                    </div>
+                </div>
+            )
 
         });
 
@@ -283,7 +273,7 @@ class Collapse extends React.Component {
 function LinkButton(props) {
     const { t } = useTranslation();
     return <button className="bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
-               {<LinkOutlined />}
+               <LinkOutlined />
                 <p className="ml-2">{t('contact.find-us.link-button')}</p>
            </button>;
 }
