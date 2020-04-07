@@ -74,7 +74,7 @@ class MenuList extends React.Component {
 
         return(
             <div>
-                {expanded ? <div className="disable-app"/> : null}
+                {expanded ? <div className="disable-app" onClick={() => this.setState({expanded: !expanded})}/> : null}
                 <div className="flex flex-col items-center justify-center" onClick={() => this.setState({expanded: !expanded})}>
                             <ul className={" border rounded text-center whitespace-no-wrap z-50 menu-list-" + theme}>
                                 {children}

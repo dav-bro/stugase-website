@@ -187,7 +187,6 @@ class Form extends React.Component {
                         <textarea
                             className={"h-48 input-" + theme}
                             id={id}
-                            type={type}
                             placeholder={placeholder}/>
                     );
                     break;
@@ -200,10 +199,10 @@ class Form extends React.Component {
 
             return (
                 <div className="flex w-full mb-3">
-                    <div className="w-1/3 block text-right pt-2 pr-4 font-bold">
+                    <div className="w-0 sm:w-1/3 invisible sm:visible text-right pt-2 pr-4 font-bold">
                         {label}
                     </div>
-                    <div className="w-2/3">
+                    <div className="w-full pr-2 sm:w-2/3">
                         {input}
                     </div>
                 </div>
