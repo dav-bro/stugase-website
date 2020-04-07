@@ -83,7 +83,7 @@ class Header_Class extends React.Component{
 
 
         return (
-            <div className="flex flex-row border-b shadow-md bg-primary border-primary header">
+            <div className="flex flex-row border-b shadow-md bg-menu-primary border-primary header">
 
 
                 <div className="w-11/24 lg:w-4/24 xl:w-5/24">
@@ -96,7 +96,7 @@ class Header_Class extends React.Component{
                 </div>
 
 
-                <div className="w-2/24 lg:w-16/24 xl:w-14/24">
+                <div className="w-2/24 lg:w-16/24 xl:w-14/24 bg-menu-secondary">
                     <Menu onClick={this.handleClick} theme={theme} content={content} current={this.props.path.length > 1 ? this.props.path : Constants.defaultPage} mode="horizontal"/>
                 </div>
 

@@ -4,6 +4,17 @@
 .theme-dark {
     /*bg-colors*/
     --color-bg-primary: black;
+    --color-bg-header: theme('colors.gray.800');
+    --color-bg-btn-primary: theme('colors.blue.600');
+    --color-bg-menu-primary: theme('colors.blue.800');
+    --color-bg-menu-secondary: theme('colors.blue.900');
 
+    /*border-colors*/
+    --color-border-primary: theme('colors.gray.600');
 
+    /*menu-colors*/
+    --color-menu-active-border: theme('colors.blue.500');
+
+    color: theme('colors.gray.100');
+    background: black;
 }

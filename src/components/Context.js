@@ -56,9 +56,20 @@ class ContextProviderComponent extends React.Component {
             const ind = themes.indexOf(this.state.data.theme);
             newTheme = (ind === themes.length - 1) ? themes[0] : themes[ind + 1];
         }
-        console.log(newTheme);
         let d = document.documentElement;
-        d.classList.add("theme-light");
+
+
+        console.log("removing: ", "theme-" + this.state.data.theme);
+
+        let classNames = d.classList;
+
+        d.classList.remove(("theme-" + this.state.data.theme));
+
+        d.classList.add("theme-" + newTheme);
+
+
+
+        // d.classList.add("theme-light");
         this.setState(state => ({
             data: {
                 ...state.data,
