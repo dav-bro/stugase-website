@@ -2,7 +2,7 @@ import React from "react";
 import {ContextProviderComponent} from "./Context";
 import ContextConsumer from "./Context";
 import Header from "./header";
-import "../static/styles/import"
+import "../static/styles/main.css"
 
 export default ({ children, ...props }) => (
     <ContextProviderComponent>

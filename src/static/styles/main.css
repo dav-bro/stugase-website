@@ -1,0 +1,69 @@
+@import "~tailwindcss/base.css";
+
+@import "~tailwindcss/components.css";
+
+@import "~tailwindcss/utilities.css";
+
+@import "theme-dark.css";
+@import "theme-light.css";
+
+
+.header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 3.25rem;
+    top: 0;
+}
+
+.image-center-vertical {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+
+.image-wrapper {
+    position: relative;
+    margin-left: 1.25rem;
+
+}
+
+.logo-se {
+    height: 2.5rem;
+    padding: 0;
+    float: left;
+}
+.logo-uni {
+    height: 1.8rem;
+    padding: 0;
+    float: left;
+}
+
+.menu-item:hover,
+.menu-item-active {
+    border-bottom: solid 0.125rem;
+    border-color: var(--color-menu-active-border);
+    /*color: @primary-6;*/
+}
+
+.page-head {
+    margin-top: 45px;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.text-center-vertical {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+

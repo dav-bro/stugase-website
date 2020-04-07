@@ -1,7 +1,5 @@
 import React from "react";
-import {Col, Row} from "antd";
 import {withTranslation} from "react-i18next";
-import "../static/styles/import"
 import ContextConsumer from "./Context";
 import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
 import i18next from "i18next";
@@ -85,38 +83,46 @@ class Header_Class extends React.Component{
 
 
         return (
-            <Row className={"border-b shadow-md header-" + theme}>
-                <Col xs={{span: 11}} lg={{span: 4}} xl={{span: 5}} xxl={{span: 5}} >
+            <div className="flex flex-row border-b shadow-md bg-primary border-primary header">
+
+
+                <div className="w-11/24 lg:w-4/24 xl:w-5/24">
                     <div className="flex flex-row items-center">
-                        <img alt="das ist ein Bild" className={"logo-se-" + theme} src={SELogo}/>
-                        <img alt="das ist ein Bild" className={"hidden sm:flex logo-se-" + theme} src={theme === "dark" ? SETextDark : SEText }/>
-                        <img alt="das ist ein Bild" className={"ml-1 sm:ml-4 xl:ml-2 logo-uni-" + theme} src={UniLogo}/>
-                        <img alt="das ist ein Bild" className={"hidden md:hidden xl:flex ml-2 logo-uni-" + theme} src={theme === "dark" ? UniTextDark : UniText }/>
+                        <img alt="das ist ein Bild" className="logo-se" src={SELogo}/>
+                        <img alt="das ist ein Bild" className="hidden sm:flex logo-se" src={theme === "dark" ? SETextDark : SEText }/>
+                        <img alt="das ist ein Bild" className="ml-1 sm:ml-4 xl:ml-2 logo-uni" src={UniLogo}/>
+                        <img alt="das ist ein Bild" className="hidden md:hidden xl:flex ml-2 logo-uni" src={theme === "dark" ? UniTextDark : UniText }/>
                     </div>
-                </Col>
-                <Col  xs={{span: 2}} lg={{span: 16}} xl={{span: 14}} xxl={{span: 14}} >
+                </div>
+
+
+                <div className="w-2/24 lg:w-16/24 xl:w-14/24">
                     <Menu onClick={this.handleClick} theme={theme} content={content} current={this.props.path.length > 1 ? this.props.path : Constants.defaultPage} mode="horizontal"/>
-                </Col>
-                <Col xs={{span: 11}} lg={{span: 4}} xl={{span: 5}} xxl={{span: 5}} >
+                </div>
+
+                <div className="w-11/24 lg:w-4/24 xl:w-5/24">
                     { blockThemeChange.some(x => x === this.props.path) ? null : (<ContextConsumer>
                         {({setTheme}) => (
                             <div className="flex flex-row justify-end items-center h-full">
-                                <div className={"tooltip-left-" + theme}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
-                                <span className={"hidden sm:block tooltip-left-text-" + theme }>
+                                <div className={"tooltip-left"}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                    <span className={"hidden sm:block tooltip-left-text" }>
                                     {theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
                                 </span>
                                 </div>
-                                <div className={"mr-2 cursor-pointer tooltip-left-" + theme } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
+                                <div className={"mr-2 cursor-pointer tooltip-left" } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
                                     {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
-                                    <span className={"hidden sm:block tooltip-left-text-" + theme }>
+                                    <span className={"hidden sm:block tooltip-left-text" }>
                                     {t('tooltip.language')}
                                 </span>
                                 </div>
                             </div>
                         )}
                     </ContextConsumer>)}
-                </Col>
-            </Row>
+                </div>
+
+
+            </div>
+
         )
     }
 

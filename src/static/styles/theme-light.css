@@ -1,0 +1,17 @@
+
+.theme-light {
+    /*bg-colors*/
+    --color-bg-primary: white;
+    --color-bg-header: theme('colors.gray.300');
+    --color-bg-btn-primary: theme('colors.blue.600');
+
+    /*border-colors*/
+    --color-border-primary: theme('colors.gray.500');
+
+    /*menu-colors*/
+    --color-menu-active-border: theme('colors.blue.500');
+
+    color: theme('colors.gray.700');
+
+}
+

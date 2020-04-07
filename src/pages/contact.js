@@ -1,7 +1,6 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
 import {LinkOutlined} from '@ant-design/icons';
-import '@ant-design/compatible/assets/index.css';
 import Card from "../components/Card"
 
 import roomPlan from '../static/images/room.jpg';
@@ -11,6 +10,7 @@ import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 import {ReCAPTCHA} from "react-google-recaptcha";
+import "../static/styles/main.css"
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -68,7 +68,7 @@ class ContactClass extends React.Component {
                     let theme = data.theme;
                     return (
                     <LayoutContent theme={theme} title={t('contact.header.title')} text={t('contact.header.text')}>
-                        <div key="main-content" className="inherit">
+                        <div key="main-content" className="">
 
                             <Collapse
                                 title={t('contact.office.title')} extra={"IW 1+2, " + t('general.room') + " 1310"}
@@ -176,7 +176,7 @@ class Form extends React.Component {
                 case "text":
                     input = (
                         <input
-                            className={"input-" + theme}
+                            className="shadow appearance-none border radius"
                             id={id}
                             type={type}
                             placeholder={placeholder}/>
@@ -185,7 +185,7 @@ class Form extends React.Component {
                 case "textarea":
                     input = (
                         <textarea
-                            className={"h-48 input-" + theme}
+                            className={"h-48 input"}
                             id={id}
                             placeholder={placeholder}/>
                     );
@@ -242,15 +242,15 @@ class Collapse extends React.Component {
         const { title, extra, children } = this.props;
 
         return (
-            <div className="border-collapse inherit">
-                <div className=" w-full border-b flex h-10 collapse-header inherit" onClick={() => this.setState(s => ({collapsed: !s.collapsed}))}>
+            <div className="border-collapse">
+                <div className=" w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => this.setState(s => ({collapsed: !s.collapsed}))}>
 
                     <span className={"image-wrapper"}>
                         <RightOutlined   rotate={this.state.collapsed ? 0 : 90} className="image-center-vertical"/>
                     </span>
 
 
-                    <div className="text-sm sm:text-lg text-wrapper ml-6 w-full">
+                    <div className="text-sm sm:text-lg relative ml-6 w-full">
                         <p className=" text-center-vertical float-left"> {title} </p>
                         <p className={" float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
                     </div>
@@ -258,7 +258,7 @@ class Collapse extends React.Component {
                 </div>
 
 
-                <div className="w-full border-b collapse-content inherit" style={{display: this.state.collapsed ? "none" : "flex"}}>
+                <div className="w-full border-b border-primary collapse-content" style={{display: this.state.collapsed ? "none" : "flex"}}>
                     {children}
                 </div>
             </div>
@@ -271,7 +271,7 @@ class Collapse extends React.Component {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-    return <button className="bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
+    return <button className="bg-btn-primary text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
                <LinkOutlined />
                 <p className="ml-2">{t('contact.find-us.link-button')}</p>
            </button>;

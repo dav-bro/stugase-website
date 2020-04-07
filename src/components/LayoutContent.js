@@ -1,11 +1,9 @@
 import React from "react";
-import {Row} from "antd";
-import Col from "antd/es/grid/col";
 import Title from "./title";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import ContextConsumer from "./Context";
 
-const justMiddleContent = ["xs", "sm", "md" ];
+const justMiddleContent = [ "sm", "md" ];
 
 
 class LayoutContent extends React.Component{
@@ -48,26 +46,27 @@ class LayoutContent extends React.Component{
                     <Title theme={data.theme} title={this.props.title} text={this.props.text}/>
 
                     <div >
-                        <Row className={"content-" + data.theme}>
 
-                            <Col xs={{span: 0}} lg={{span: 4}} xl={{span: 5}} xxl={{span: 5}} className="left-content">
+                        <div className="flex flex-row ">
 
+                            <div className="w-0 lg:w-6/24 xl:w-5/24 ">
                                 {leftContent}
+                            </div>
 
-                            </Col>
-                            <Col xs={{span: 24}} lg={{span: 16}} xl={{span: 14}} xxl={{span: 14}} className={"main-content-" + data.theme}>
 
+                            <div className="w-24/24 lg:w-12/24 xl:w-14/24 border-l border-primary border-r shadow h-screen">
                                 {mainContent}
+                            </div>
 
-                            </Col>
 
-                            <Col xs={{span: 0}} lg={{span: 4}} xl={{span: 5}} xxl={{span: 5}} className="right-content">
-
+                            <div className="w-0 lg:w-6/24 xl:w-5/24 ">
                                 {rightContent}
+                            </div>
 
-                            </Col>
 
-                        </Row>
+                        </div>
+
+
                     </div>
 
                 </div>

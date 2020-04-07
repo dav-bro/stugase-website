@@ -18,7 +18,7 @@ export default ({ theme, content, current}) => {
                   style={{
                       textDecoration: `none`,
                   }}
-                  className={"block p-3 pl-4 pr-4 text-base menu-item-" + breakpoint + (active ? "-active-" : "-") + theme}
+                  className={"block p-3 pl-4 pr-4 text-base menu-item" + (active ? "-active" : "")}
             >
                 {t(x.title)}
             </Link>
@@ -32,7 +32,7 @@ export default ({ theme, content, current}) => {
         case "xl":
         case "lg":
             menu = (
-                <div className={"h-full  md:flex md:flex-row menu-" + theme}>
+                <div className={"h-full  md:flex md:flex-row menu"}>
                     {menuItems}
                 </div>
                 );
@@ -76,7 +76,7 @@ class MenuList extends React.Component {
             <div>
                 {expanded ? <div className="disable-app" onClick={() => this.setState({expanded: !expanded})}/> : null}
                 <div className="flex flex-col items-center justify-center" onClick={() => this.setState({expanded: !expanded})}>
-                            <ul className={" border rounded text-center whitespace-no-wrap z-50 menu-list-" + theme}>
+                            <ul className={" border rounded text-center whitespace-no-wrap z-50 menu-list"}>
                                 {children}
                             </ul>
                 </div>

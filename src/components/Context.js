@@ -38,6 +38,8 @@ class ContextProviderComponent extends React.Component {
 
     componentDidMount() {
         // i18next.init();
+        let d = document.documentElement;
+        d.classList.add("theme-light");
     }
 
     setData(newData) {
@@ -55,6 +57,8 @@ class ContextProviderComponent extends React.Component {
             newTheme = (ind === themes.length - 1) ? themes[0] : themes[ind + 1];
         }
         console.log(newTheme);
+        let d = document.documentElement;
+        d.classList.add("theme-light");
         this.setState(state => ({
             data: {
                 ...state.data,
