@@ -63,7 +63,7 @@ class MenuList extends React.Component {
 
     render() {
         const { expanded } = this.state;
-        let { children, theme, current } = this.props;
+        let { children, current } = this.props;
 
         if (!expanded) {
             children = (<div className="pr-4 flex flex-row items-center justify-center">

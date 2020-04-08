@@ -8,6 +8,32 @@
 @import "theme-light.css";
 
 
+.between-line {
+    width: 100%;
+    padding-left: 5rem;
+    border-bottom: 1px solid var(--color-text-primary);
+    line-height: 0.1rem;
+    margin: 20px 0 20px;
+    background: var(--color-bg-primary);
+}
+
+.between-line-span {
+    background: inherit;
+    padding:0 10px;
+}
+
+.bg-disabled {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /*overflow: auto; !* Enable scroll if needed *!*/
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
 .header {
     position: fixed;
     z-index: 1;
@@ -53,6 +79,12 @@
     /*color: @primary-6;*/
 }
 
+.modal-content {
+    margin: 20% auto;
+    height: 30%;
+    background: white;
+}
+
 .page-head {
     margin-top: 45px;
     width: 100%;
@@ -67,3 +99,39 @@
     transform: translateY(-50%);
 }
 
+
+.tooltip-left {
+    position: relative;
+    display: inline-block;
+}
+
+
+.tooltip-left .tooltip-left-text {
+    visibility: hidden;
+    width: 150px;
+    text-align: center;
+    border-radius: 2px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+    background-color: var(--color-bg-tooltip);
+    color: var(--color-text-tooltip);
+}
+
+
+.tooltip-left .tooltip-left-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border: 5px solid;
+    border-color: transparent transparent transparent var(--color-bg-tooltip);
+
+}
+
+.tooltip-left:hover .tooltip-left-text {
+    visibility: visible;
+}

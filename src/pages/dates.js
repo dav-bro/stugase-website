@@ -1,6 +1,6 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-import {CalendarOutlined, TeamOutlined} from '@ant-design/icons';
+// import {CalendarOutlined, TeamOutlined} from '@ant-design/icons';
 import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
 import LeftOutlined from "@ant-design/icons/es/icons/LeftOutlined";
@@ -14,7 +14,7 @@ class DatesClass extends React.Component {
             <ContextConsumer>
                 {({ data }) => (
                     <LayoutContent theme={data.theme} title={t('dates.header.title')} text={t('dates.header.text')}>
-                        <div key="main-content">
+                        <div key="main-content" className="">
 
                             <h2 className="text-xl border-1 between-line"><span className="between-line-span">April</span></h2>
 

@@ -104,14 +104,14 @@ class Header_Class extends React.Component{
                     { blockThemeChange.some(x => x === this.props.path) ? null : (<ContextConsumer>
                         {({setTheme}) => (
                             <div className="flex flex-row justify-end items-center h-full">
-                                <div className={"tooltip-left"}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                <div className={"mr-2 tooltip-left"}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
                                     <span className={"hidden sm:block tooltip-left-text" }>
                                     {theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
                                 </span>
                                 </div>
-                                <div className={"mr-2 cursor-pointer tooltip-left" } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
+                                <div className={"mr-4 cursor-pointer tooltip-left" } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
                                     {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
-                                    <span className={"hidden sm:block tooltip-left-text" }>
+                                    <span className={"mr-2 hidden sm:block tooltip-left-text" }>
                                     {t('tooltip.language')}
                                 </span>
                                 </div>

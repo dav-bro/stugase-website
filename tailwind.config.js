@@ -4,6 +4,7 @@ module.exports = {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
         header: 'var(--color-bg-header)',
+        input: 'var(--color-bg-input)',
         'btn-primary': 'var(--color-bg-btn-primary)',
         'menu-primary': 'var(--color-bg-menu-primary)',
         'menu-secondary': 'var(--color-bg-menu-secondary)',

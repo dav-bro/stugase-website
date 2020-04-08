@@ -155,7 +155,7 @@ class Form extends React.Component {
     render() {
 
 
-        const { children, theme } = this.props;
+        const { children } = this.props;
 
 
         let formChildren =  children.map(child => {
@@ -172,20 +172,10 @@ class Form extends React.Component {
 
 
             switch (type) {
-                case "password":
-                case "text":
-                    input = (
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
-                            id={id}
-                            type={type}
-                            placeholder={placeholder}/>
-                    );
-                    break;
                 case "textarea":
                     input = (
                         <textarea
-                            className={"h-48 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"}
+                            className={"h-48 shadow appearance-none border border-primary rounded w-full py-2 px-3 bg-input leading-tight"}
                             id={id}
                             placeholder={placeholder}/>
                     );
@@ -193,7 +183,19 @@ class Form extends React.Component {
                 case "submit":
                     input = (
                         <input type={type} value={name} className="float-right bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center pl-4 pr-4"/>
-                    )
+                    );
+                    break;
+                default:
+                case "password":
+                case "text":
+                    input = (
+                        <input
+                            className="bg-input border-primary shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
+                            id={id}
+                            type={type}
+                            placeholder={placeholder}/>
+                    );
+                    break;
 
             }
 

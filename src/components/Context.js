@@ -61,7 +61,6 @@ class ContextProviderComponent extends React.Component {
 
         console.log("removing: ", "theme-" + this.state.data.theme);
 
-        let classNames = d.classList;
 
         d.classList.remove(("theme-" + this.state.data.theme));
 
