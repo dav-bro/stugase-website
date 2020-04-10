@@ -20,6 +20,7 @@
 
     /*menu-colors*/
     --color-menu-active-border: theme('colors.blue.500');
+    --color-menu-active: var(--color-menu-active-border);
 
     color: var(--color-text-primary);
     background: black;

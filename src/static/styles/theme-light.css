@@ -18,6 +18,7 @@
 
     /*menu-colors*/
     --color-menu-active-border: theme('colors.blue.500');
+    --color-menu-active: transparent;
 
     color: var(--color-text-primary);
 

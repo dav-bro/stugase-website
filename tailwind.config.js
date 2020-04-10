@@ -1,3 +1,7 @@
+const plugin = require('tailwindcss/plugin')
+
+
+
 module.exports = {
   theme: {
     extend: {
@@ -8,9 +12,14 @@ module.exports = {
         'btn-primary': 'var(--color-bg-btn-primary)',
         'menu-primary': 'var(--color-bg-menu-primary)',
         'menu-secondary': 'var(--color-bg-menu-secondary)',
+        'menu-active': 'var(--color-menu-active)',
       },
       borderColor: {
-        primary: 'var(--color-border-primary)'
+        primary: 'var(--color-border-primary)',
+        'menu-active': 'var(--color-menu-active-border)',
+      },
+      borderWidth: {
+        '3': '3px',
       },
       width: {
         '1/24': '4.1666667%',
@@ -40,6 +49,16 @@ module.exports = {
       }
     },
   },
-  variants: {},
-  plugins: [],
-}
+  variants: ['responsive', 'hover', 'active', 'dark'],
+
+  plugins: [
+      plugin(function({addVariant, theme, e}) {
+          const darkSelector = theme('darkSelector', '.theme-dark');
+          addVariant('dark', ({modifySelectors, separator}) => {
+              modifySelectors(({className}) => {
+                  return `${darkSelector} .${e(`dark${separator}${className}`)}`;
+              });
+          })
+      })
+  ],
+};
