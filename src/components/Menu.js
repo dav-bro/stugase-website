@@ -13,12 +13,14 @@ export default ({ theme, content, current}) => {
     const menuItems = content.map(x => {
         const id = "/" + x.id;
         const active = current === id;
+        const classNameActive = " lg:border-b-3 lg:dark:bg-menu-active border-menu-active";
+        const className = "lg:hover:border-b-3 hover:bg-menu-active hover:border-menu-active block p-3 pl-4 pr-4";
         return(
             <Link to={id}
                   style={{
                       textDecoration: `none`,
                   }}
-                  className={"block p-3 pl-4 pr-4 text-base menu-item-" + breakpoint + (active ? "-active-" : "-") + theme}
+                  className={className + (active ? classNameActive : "")}
             >
                 {t(x.title)}
             </Link>
@@ -28,11 +30,10 @@ export default ({ theme, content, current}) => {
     let menu;
 
     switch (breakpoint) {
-        case "xxl":
         case "xl":
         case "lg":
             menu = (
-                <div className={"h-full  md:flex md:flex-row menu-" + theme}>
+                <div className={"h-full  md:flex md:flex-row menu"}>
                     {menuItems}
                 </div>
                 );
@@ -63,10 +64,10 @@ class MenuList extends React.Component {
 
     render() {
         const { expanded } = this.state;
-        let { children, theme, current } = this.props;
+        let { children, current } = this.props;
 
         if (!expanded) {
-            children = (<div className="pr-4 flex flex-row items-center justify-center">
+            children = (<div className="pr-4 flex flex-row items-center justify-center border-primary">
                             {children.find(x => x.props.to === current)}
                             <MenuOutlined className="text-xl" />
                         </div>)
@@ -74,9 +75,9 @@ class MenuList extends React.Component {
 
         return(
             <div>
-                {expanded ? <div className="disable-app"/> : null}
+                {expanded ? <div className="bg-disabled" onClick={() => this.setState({expanded: !expanded})}/> : null}
                 <div className="flex flex-col items-center justify-center" onClick={() => this.setState({expanded: !expanded})}>
-                            <ul className={" border rounded text-center whitespace-no-wrap z-50 menu-list-" + theme}>
+                            <ul className={" border rounded text-center whitespace-no-wrap z-50 bg-primary border-primary"}>
                                 {children}
                             </ul>
                 </div>

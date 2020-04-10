@@ -1,0 +1,26 @@
+
+.theme-light {
+    /*bg-colors*/
+    --color-bg-primary: white;
+    --color-bg-header: theme('colors.gray.300');
+    --color-bg-btn-primary: theme('colors.blue.600');
+    --color-bg-menu-primary: white;
+    --color-bg-menu-secondary: theme('colors.gray.100');
+    --color-bg-tooltip: theme('colors.gray.800');
+    --color-bg-input: white;
+
+    /*text-colors*/
+    --color-text-tooltip: white;
+    --color-text-primary: theme('colors.gray.700');
+
+    /*border-colors*/
+    --color-border-primary: theme('colors.gray.500');
+
+    /*menu-colors*/
+    --color-menu-active-border: theme('colors.blue.500');
+    --color-menu-active: transparent;
+
+    color: var(--color-text-primary);
+
+}
+

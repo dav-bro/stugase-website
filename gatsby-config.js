@@ -6,12 +6,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-less`,
-      options: {
-        javascriptEnabled: true,
-      },
-    },
-    {
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve('./src/components/Layout')

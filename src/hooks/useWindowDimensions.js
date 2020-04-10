@@ -4,20 +4,14 @@ import { useState, useEffect } from 'react';
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
-    let breakpoint = "xs";
+    let breakpoint = "sm";
 
-    if (width >= 1600) {
-        breakpoint = "xxl";
-    } else if ( width >= 1200) {
+    if (width >= 1280) {
         breakpoint = "xl";
-    } else if ( width >= 992) {
+    } else if ( width >= 1024) {
         breakpoint = "lg";
     } else if ( width >= 768) {
         breakpoint = "md";
-    } else if ( width >= 576) {
-        breakpoint = "sm";
-    } else if ( width < 576) {
-        breakpoint = "xs";
     }
 
     return {
