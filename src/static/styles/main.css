@@ -34,6 +34,22 @@
     background-color: rgba(0,0,0, 0.7); /* Black w/ opacity */
 }
 
+.fade-right {
+
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #ffffff 90%);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fade-left {
+
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #ffffff 90%);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .header {
     position: fixed;
     z-index: 1;
@@ -80,8 +96,8 @@
 }
 
 .modal-content {
-    margin: 20% auto;
-    background: white;
+    margin: 12% auto;
+    /*background: white;*/
 }
 
 .page-head {

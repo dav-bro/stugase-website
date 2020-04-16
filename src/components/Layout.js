@@ -4,7 +4,7 @@ import ContextConsumer from "./Context";
 import Header from "./header";
 import "../static/styles/main.css"
 
-export default ({ children, ...props }) => (
+const Layout = ({ children, ...props }) => (
     <ContextProviderComponent>
         <ContextConsumer>
             {({ data }) => (
@@ -14,3 +14,6 @@ export default ({ children, ...props }) => (
         {children}
     </ContextProviderComponent>
 )
+
+
+export default Layout;

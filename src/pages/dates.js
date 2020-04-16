@@ -8,6 +8,8 @@ import RightOutlined from "@ant-design/icons/es/icons/RightOutlined";
 import TeamOutlined from "@ant-design/icons/es/icons/TeamOutlined";
 import CalendarOutlined from "@ant-design/icons/es/icons/CalendarOutlined";
 import PlusCircleOutlined from "@ant-design/icons/es/icons/PlusCircleOutlined";
+import CloseCircleOutlined from "@ant-design/icons/es/icons/CloseCircleOutlined";
+import {isLoggedIn} from "../services/auth";
 
 class DatesClass extends React.Component {
 
@@ -22,8 +24,8 @@ class DatesClass extends React.Component {
                             <h2 className="text-xl border-1 between-line"><span className="between-line-span">April</span></h2>
 
 
-                                    <DateRow type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
-                                    <DateRow type="add" />
+                                    <DateRowClass type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
+                            {isLoggedIn() ? <DateRowClass type="add" /> : null }
 
 
                             {/*<PlusCircleOutlined className="fixed bottom-0 right-0 mr-4 mb-4 shadow-all  rounded-full text-4xl" />*/}
@@ -64,64 +66,76 @@ class DateRowClass extends React.Component {
         let text = null;
         let rightText = null;
 
-        let onAdd = null;
+        // let onAdd = null;
         let classNamePrefix = "";
+        let handleClick = null;
 
 
         switch (type) {
             case 'add':
                 leftIcon = <PlusCircleOutlined className="focus:outline-none text-3xl" />;
                 text = "Neuer Termin";
-                onAdd = this.handleClick;
-                classNamePrefix = " bg-btn-primary text-white";
+                handleClick = () => this.handleClick();
+                classNamePrefix = " bg-btn-primary text-white cursor-pointer";
                 break;
             default:
                 leftIcon = (<TeamOutlined className="text-3xl" />);
                 rightIcon = (<CalendarOutlined className="text-3xl float-right " />);
                 text = type;
-                rightText = this.props.date + ", " + this.props.time;
+                rightText = date + ", " + time;
 
         }
 
 
 
         return (
-            <div className={"ml-1 mr-1 p-2 flex flex-row border items-center mb-3 cursor-pointer" + classNamePrefix} align="top" onClick={(event) => this.handleClick(event)}>
-                <div className="flex w-2/24">
-                    {leftIcon}
-                </div>
-                <div className="w-10/24 is-left">
-                    {text}
-                </div>
-                <div className="w-10/24 text-right">
-                    {rightText}
-                </div>
-                <div className="w-2/24" >
-                    {rightIcon}
-                </div>
+            <>
+           <DateRow
 
-                {true ?
+               leftIcon={leftIcon}
+               rightIcon={rightIcon}
+               rightText={rightText}
+               text={text}
+               classNamePrefix={classNamePrefix}
+               handleClick={handleClick}
+           />
+                {datepicker ?
                     <div className="bg-disabled cursor-default">
+                        <div className="text-transparent text-center  hover:text-gray-100 opacity-25 fixed left-0 h-48 top-0 w-full">
+                            <CloseCircleOutlined className="focus:outline-none mt-6 text-5xl cursor-pointer" onClick={() => this.handleClick()}/>
+                        </div>
                         <DatePicker />
                     </div>
                     :
                     null
                 }
-
-
-
-            </div>
+                </>
         );
     }
 
     handleClick(e) {
-        console.log(e.target);
+        // console.log(e.target);
         this.setState({datepicker: !this.state.datepicker});
     }
 
 }
 
-const DateRow = withTranslation()(DateRowClass);
+const DateRow = ({leftIcon, rightIcon, rightText, text, classNamePrefix, handleClick}) => (
+    <div className={"ml-1 mr-1 p-2 flex flex-row border items-center mb-3 " + classNamePrefix} align="top" onClick={handleClick}>
+        <div className="flex w-2/24">
+            {leftIcon}
+        </div>
+        <div className="w-10/24 is-left">
+            {text}
+        </div>
+        <div className="w-10/24 text-right">
+            {rightText}
+        </div>
+        <div className="w-2/24" >
+            {rightIcon}
+        </div>
+    </div>
+);
 
 
 class DatePicker extends React.Component {
@@ -142,21 +156,30 @@ class DatePicker extends React.Component {
         "Dezember"
     ];
 
-    year = 2020;
 
     state={
-        month: 1
+        month: 1,
+        year: 2020,
+        day: 5
     };
 
 
+    componentDidMount() {
+        var date = new Date();
+        this.setState({
+            month: date.getMonth(),
+            year: date.getFullYear(),
+            day: date.getDate()
+        })
+    }
+
     render() {
 
-        // const { visible } = this.props;
-        const { month } = this.state;
+        const { visible } = this.props;
+        const { month, year, day } = this.state;
 
-        let visible = true;
-        let y = parseInt((((month) < 3 ? this.year - 1 : this.year) + "").substr(2, 4));
-        let c = parseInt((((month) < 3 ? this.year - 1 : this.year) + "").substr(0, 2));
+        let y = parseInt((((month) < 3 ? year - 1 : year) + "").substr(2, 4));
+        let c = parseInt((((month) < 3 ? year - 1 : year) + "").substr(0, 2));
 
 
         function gauss(number) {
@@ -211,9 +234,9 @@ class DatePicker extends React.Component {
             month = (month === 0) ? 12 : month;
 
             if (month === 2) {
-                if (this.year % 4 === 0) {
-                    if (this.year % 100 === 0) {
-                        if (this.year % 400 !== 0) {
+                if (year % 4 === 0) {
+                    if (year % 100 === 0) {
+                        if (year % 400 !== 0) {
                             return 28;
                         }
                     }
@@ -251,8 +274,11 @@ class DatePicker extends React.Component {
                     week[k] =  (<p className="  w-1/7 ml-2 mr-2 mb-2 text-gray-500 text-center">{preMonthDays + i}</p>);
 
                 } else {
-
-                    week[k] =  (<p className="hover:bg-blue-500 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center">{i}</p>);
+                    if (i === day) {
+                        week[k] =  (<p className="bg-blue-200 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center">{i}</p>);
+                    } else {
+                        week[k] =  (<p className="hover:bg-blue-500 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center">{i}</p>);
+                    }
 
                 }
 
@@ -264,41 +290,55 @@ class DatePicker extends React.Component {
 
 
         return(
-                visible ? (
-                    <div className="modal-content w-64">
-                        <div className="flex flex-col">
+                 (
+                        <div className="modal-content w-64">
 
-                            <div className="flex flex-row pt-1 text-xl items-center justify-center bg-gray-400">
 
-                                <LeftOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("-")}/>
-                                <p className="w-2/3 text-center font-bold"> {this.months[month - 1]} </p>
-                                <RightOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("+")}/>
+
+                                <p className="text-center  mb-5 text-gray-100 opacity-25 text-4xl"> {year} </p>
+
+
+                            <div className="flex flex-row justify-center items-center ">
+                                <p className="mr-12 text-gray-100 opacity-25 text-6xl fade-left"> {year - 1} </p>
+                                <LeftOutlined className="focus:outline-none text-6xl text-gray-100 opacity-25 mr-5 cursor-pointer" onClick={() => this.setState({year: year - 1})} />
+                            <div className="flex flex-col bg-white ">
+
+                                <div className="flex flex-row pt-1 text-xl items-center justify-center bg-gray-400">
+
+                                    <LeftOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("-")}/>
+                                    <p className="w-2/3 text-center font-bold"> {this.months[month - 1]} </p>
+                                    <RightOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("+")}/>
+
+                                </div>
+
+                                <div className="flex flex-row items-center  bg-gray-400 ">
+
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> M </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> D </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> M </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> D </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> F </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> S </p>
+                                    <p className="w-1/7 ml-2 mr-2 text-center"> S </p>
+
+
+
+
+                                </div>
+
+                                {weeks}
 
                             </div>
 
-                            <div className="flex flex-row items-center  bg-gray-400 ">
-
-                                <p className="w-1/7 ml-2 mr-2 text-center"> M </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> D </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> M </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> D </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> F </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> S </p>
-                                <p className="w-1/7 ml-2 mr-2 text-center"> S </p>
-
-
-
-
-                            </div>
-
-                            {weeks}
+                                <RightOutlined className="focus:outline-none text-6xl text-gray-100 opacity-25 ml-5" onClick={() => this.setState({year: year + 1})} />
+                                <p className="ml-12 opacity-25 text-6xl fade-right"> {year + 1} </p>
 
                         </div>
+
+
+
                     </div>)
 
-                    :
-
-                    null
 
         )
     }
