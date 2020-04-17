@@ -3,26 +3,26 @@
 
 .theme-dark {
     /*bg-colors*/
-    --color-bg-primary: black;
+    --color-bg-primary: #2b2b2b;
     --color-bg-header: theme('colors.gray.800');
     --color-bg-btn-primary: theme('colors.blue.600');
     --color-bg-menu-primary: theme('colors.blue.800');
     --color-bg-menu-secondary: theme('colors.blue.900');
     --color-bg-tooltip: theme('colors.gray.400');
-    --color-bg-input: theme('colors.gray.600');
+    --color-bg-input: #0d293e;
 
     /*text-colors*/
     --color-text-tooltip: black;
     --color-text-primary: theme('colors.gray.100');
 
     /*border-colors*/
-    --color-border-primary: theme('colors.gray.600');
+    --color-border-primary: #4d4d4d;
 
     /*menu-colors*/
     --color-menu-active-border: theme('colors.blue.500');
     --color-menu-active: var(--color-menu-active-border);
 
     color: var(--color-text-primary);
-    background: black;
+    background: #2b2b2b;
     border-color: var(--color-border-primary);
 }
