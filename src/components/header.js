@@ -16,6 +16,7 @@ import SETextDark from "../static/images/SE_Text-dark.png";
 
 import UniTextDark from "../static/images/Uni_Text-dark.png";
 import Menu from "./Menu";
+import ToolTip from "./tooltip";
 import {isLoggedIn, logout} from "../services/auth";
 import UserOutlined from "@ant-design/icons/es/icons/UserOutlined";
 
@@ -109,25 +110,32 @@ class Header_Class extends React.Component{
                         {({setTheme}) => (
                             <div className="flex flex-row justify-end items-center h-full">
                                 {isLoggedIn() ?
-                                        <div className={"mr-2 tooltip-left"}>
 
-                                            <UserOutlined className="mr-3 text-2xl " onClick={() => logout(() => navigate("/about"))}/>
-                                            <span className={"hidden lg:block tooltip-left-text" }>
-                                                logout
-                                        </span>
-                                    </div>
+                                    <ToolTip
+                                        position="left"
+                                        text="logout"
+                                    >
+                                        <UserOutlined className="mr-3 text-2xl " onClick={() => logout(() => navigate("/about"))}/>
+                                    </ToolTip>
+
                                     : null}
-                                <div className={"mr-2 tooltip-left"}><BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
-                                    <span className={"hidden lg:block tooltip-left-text" }>
-                                        {theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode') }
-                                    </span>
-                                </div>
-                                <div className={"mr-4 cursor-pointer tooltip-left" } onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
-                                    {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
-                                    <span className={"mr-2 hidden lg:block tooltip-left-text" }>
-                                    {t('tooltip.language')}
-                                </span>
-                                </div>
+
+                                    <ToolTip
+                                        position="left"
+                                        text={theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode')}
+                                    >
+                                        <BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                    </ToolTip>
+
+                                    <ToolTip
+                                        position="left"
+                                        text={t('tooltip.language')}
+                                    >
+                                        <p className="cursor-pointer" onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
+                                            {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
+                                        </p>
+                                    </ToolTip>
+
                             </div>
                         )}
                     </ContextConsumer>)}

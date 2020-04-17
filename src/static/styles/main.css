@@ -119,29 +119,39 @@
     transform: translateY(-50%);
 }
 
-
-.tooltip-left {
+.tooltip {
     position: relative;
     display: inline-block;
 }
 
 
-.tooltip-left .tooltip-left-text {
+.tooltip .tooltip-text {
     visibility: hidden;
-    width: 150px;
+    width: 160px;
     text-align: center;
     border-radius: 2px;
     padding: 5px 0;
     position: absolute;
     z-index: 1;
-    top: -5px;
-    right: 110%;
     background-color: var(--color-bg-tooltip);
     color: var(--color-text-tooltip);
 }
 
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
 
-.tooltip-left .tooltip-left-text::after {
+
+
+.tooltip-left .tooltip-text-left {
+
+    top: -5px;
+    right: 110%;
+
+}
+
+
+.tooltip-left .tooltip-text-left::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -152,6 +162,27 @@
 
 }
 
-.tooltip-left:hover .tooltip-left-text {
-    visibility: visible;
+
+
+
+.tooltip-top .tooltip-text-top {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -80px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
+
+
+.tooltip-top .tooltip-text-top::after {
+
+
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: var(--color-bg-tooltip);
+
+}
+
+
