@@ -14,7 +14,7 @@ export default ({ theme, content, current}) => {
         const id = "/" + x.id;
         const active = current === id;
         const classNameActive = " lg:border-b-3 lg:dark:bg-menu-active border-menu-active";
-        const className = "lg:hover:border-b-3 hover:bg-menu-active hover:border-menu-active block p-3 pl-4 pr-4";
+        const className = "lg:hover:border-b-3 lg:focus:border-b-3 focus:outline-none hover:bg-menu-active focus:bg-menu-active border-menu-active block p-3 pl-4 pr-4";
         return(
             <Link to={id}
                   style={{

@@ -2,9 +2,10 @@ import React from "react";
 import {ContextProviderComponent} from "./Context";
 import ContextConsumer from "./Context";
 import Header from "./header";
+import Footer from "./footer"
 import "../static/styles/main.css"
 
-export default ({ children, ...props }) => (
+const Layout = ({ children, ...props }) => (
     <ContextProviderComponent>
         <ContextConsumer>
             {({ data }) => (
@@ -12,5 +13,9 @@ export default ({ children, ...props }) => (
             )}
         </ContextConsumer>
         {children}
+        <Footer/>
     </ContextProviderComponent>
-)
+);
+
+
+export default Layout;

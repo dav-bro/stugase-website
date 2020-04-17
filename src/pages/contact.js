@@ -1,6 +1,5 @@
 import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import {LinkOutlined} from '@ant-design/icons';
 import Card from "../components/Card"
 
 import roomPlan from '../static/images/room.jpg';
@@ -11,6 +10,7 @@ import ContextConsumer from "../components/Context";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 import {ReCAPTCHA} from "react-google-recaptcha";
 import "../static/styles/main.css"
+import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -175,7 +175,7 @@ class Form extends React.Component {
                 case "textarea":
                     input = (
                         <textarea
-                            className={"h-48 shadow appearance-none border border-primary rounded w-full py-2 px-3 bg-input leading-tight"}
+                            className={"h-48 shadow appearance-none border rounded w-full py-2 px-3 bg-input leading-tight"}
                             id={id}
                             placeholder={placeholder}/>
                     );
@@ -190,7 +190,7 @@ class Form extends React.Component {
                 case "text":
                     input = (
                         <input
-                            className="bg-input border-primary shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
+                            className="bg-input  shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
                             id={id}
                             type={type}
                             placeholder={placeholder}/>

@@ -41,4 +41,5 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
     pathPrefix: "/stugase-website",
+
 };

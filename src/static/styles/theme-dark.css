@@ -24,4 +24,5 @@
 
     color: var(--color-text-primary);
     background: black;
+    border-color: var(--color-border-primary);
 }

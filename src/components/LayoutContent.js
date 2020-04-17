@@ -54,7 +54,7 @@ class LayoutContent extends React.Component{
                             </div>
 
 
-                            <div className="w-24/24 lg:w-12/24 xl:w-14/24 border-l border-primary border-r shadow h-screen">
+                            <div className="w-24/24 lg:w-12/24 xl:w-14/24 border-l border-primary border-b-0 border-r shadow h-screen">
                                 {mainContent}
                             </div>
 
