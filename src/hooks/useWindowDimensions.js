@@ -22,7 +22,7 @@ function getWindowDimensions() {
 }
 
 export default function useWindowDimensions() {
-    // if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
         useEffect(() => {
@@ -35,9 +35,9 @@ export default function useWindowDimensions() {
         }, []);
 
         return windowDimensions;
-   /* } else {
+    } else {
         return {
             breakpoint: null
         }
-    }*/
+    }
 }
