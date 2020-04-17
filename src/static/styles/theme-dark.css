@@ -17,6 +17,7 @@
 
     /*border-colors*/
     --color-border-primary: #4d4d4d;
+    --color-border-accent: #c5c5c5;
 
     /*menu-colors*/
     --color-menu-active-border: theme('colors.blue.500');

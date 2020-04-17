@@ -9,7 +9,7 @@ const setUser = user =>
     window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
 
 export const handleLogin = ({ username, password }) => {
-    if (username === `${process.env.USER_NAME}` && password === `${process.env.USER_PASSWORD}`) {
+    if (username === `${process.env.GATSBY_USER_NAME}` && password === `${process.env.GATSBY_USER_PASSWORD}`) {
         return setUser({
             username: `john`,
             name: `Johnny`,

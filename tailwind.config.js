@@ -16,6 +16,7 @@ module.exports = {
       },
       borderColor: {
         primary: 'var(--color-border-primary)',
+        accent: 'var(--color-border-accent)',
         'menu-active': 'var(--color-menu-active-border)',
       },
       borderWidth: {
