@@ -175,7 +175,7 @@ class Form extends React.Component {
                 case "textarea":
                     input = (
                         <textarea
-                            className={"h-48 shadow appearance-none border border-primary rounded w-full py-2 px-3 bg-input leading-tight"}
+                            className={"h-48 shadow appearance-none border rounded w-full py-2 px-3 bg-input leading-tight"}
                             id={id}
                             placeholder={placeholder}/>
                     );
@@ -190,7 +190,7 @@ class Form extends React.Component {
                 case "text":
                     input = (
                         <input
-                            className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
+                            className="bg-input  shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
                             id={id}
                             type={type}
                             placeholder={placeholder}/>
