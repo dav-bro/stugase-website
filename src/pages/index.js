@@ -1,5 +1,9 @@
-import About from "./about";
 import React from "react";
 
+import { navigate } from "gatsby"
 
-export default () => (<About uri={"/about"} />);
+export default () => {
+    if (typeof window !== 'undefined')
+        navigate("/about");
+    return null;
+};

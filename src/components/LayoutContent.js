@@ -1,9 +1,10 @@
 import React from "react";
 import Title from "./title";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 import ContextConsumer from "./Context";
+import "../static/styles/main.css";
+import withHooks from "../hooks/withHooks";
 
-const justMiddleContent = [ "sm", "md" ];
+// const justMiddleContent = [ "sm", "md" ];
 
 
 class LayoutContent extends React.Component{
@@ -33,9 +34,6 @@ class LayoutContent extends React.Component{
             }
         });
 
-        if (justMiddleContent.some(x => x === this.props.breakpoint)) {
-            mainContent.push(leftContent, rightContent);
-        }
 
 
         return(
@@ -80,15 +78,8 @@ class LayoutContent extends React.Component{
 
 }
 
-function LayoutWithHook(Component) {
-    return function WrappedComponent(props) {
-        const windowDimensions = useWindowDimensions();
-        const breakpoint = windowDimensions ? windowDimensions.breakpoint : "xxl";
-        return <Component {...props} breakpoint={breakpoint} />;
-    }
-}
 
-LayoutContent = LayoutWithHook(LayoutContent);
+LayoutContent = withHooks(LayoutContent);
 
 
 export default LayoutContent;

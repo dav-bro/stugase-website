@@ -1,59 +1,53 @@
 import React from "react";
 import {Link} from "gatsby";
-import { useTranslation } from 'react-i18next';
-import useWindowDimensions from "../hooks/useWindowDimensions";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
+import "../static/styles/main.css";
+import {useTranslation} from "react-i18next";
+
+
+
+
+
 
 export default ({ theme, content, current}) => {
 
-    const { t } = useTranslation();
 
-    const { breakpoint } = useWindowDimensions();
+        const { t } = useTranslation();
 
-    const menuItems = content.map(x => {
-        const id = "/" + x.id;
-        const active = current === id;
-        const classNameActive = " lg:border-b-3 lg:dark:bg-menu-active border-menu-active";
-        const className = "lg:hover:border-b-3 lg:focus:border-b-3 focus:outline-none hover:bg-menu-active focus:bg-menu-active border-menu-active block p-3 pl-4 pr-4";
-        return(
-            <Link to={id}
-                  style={{
-                      textDecoration: `none`,
-                  }}
-                  className={className + (active ? classNameActive : "")}
-            >
-                {t(x.title)}
-            </Link>
-        )
-    });
+        const menuItems = content.map(x => {
+            const id = "/" + x.id;
+            const active = current === id;
+            const classNameActive = " lg:border-b-3 lg:dark:bg-menu-active border-menu-active";
+            const className = "lg:hover:border-b-3 lg:focus:border-b-3 focus:outline-none hover:bg-menu-active focus:bg-menu-active border-menu-active block p-3 pl-4 pr-4";
+            return (
+                <Link to={id}
+                      style={{
+                          textDecoration: `none`,
+                      }}
+                      className={className + (active ? classNameActive : "")}
+                >
+                    {t(x.title)}
+                </Link>
+            )
+        });
 
-    let menu;
 
-    switch (breakpoint) {
-        case "xl":
-        case "lg":
-            menu = (
-                <div className={"h-full  md:flex md:flex-row menu"}>
+
+
+        return (
+            <>
+                <div className="hidden h-full  lg:flex md:flex-row menu">
                     {menuItems}
                 </div>
-                );
-            break;
-        default:
-            menu = (
-                    <MenuList theme={theme} current={current}>
-                        {menuItems}
-                    </MenuList>
-            )
-
-    }
-
-
-    return (
-       menu
-    );
+                <MenuList theme={theme} current={current}>
+                    {menuItems}
+                </MenuList>
+            </>
+        );
 
 
 }
+
 
 class MenuList extends React.Component {
 
@@ -74,7 +68,7 @@ class MenuList extends React.Component {
         }
 
         return(
-            <div>
+            <div className="block lg:hidden">
                 {expanded ? <div className="bg-disabled" onClick={() => this.setState({expanded: !expanded})}/> : null}
                 <div className="flex flex-col items-center justify-center" onClick={() => this.setState({expanded: !expanded})}>
                             <ul className={" border rounded text-center whitespace-no-wrap z-50 bg-primary border-primary"}>
