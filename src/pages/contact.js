@@ -12,6 +12,7 @@ import {ReCAPTCHA} from "react-google-recaptcha";
 import "../static/styles/main.css"
 import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
 import CommentOutlined from "@ant-design/icons/es/icons/CommentOutlined";
+import SendOutlined from "@ant-design/icons/es/icons/SendOutlined";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -139,15 +140,34 @@ class ContactClass extends React.Component {
 
                         <div key="right-content" className="h-full">
 
-                            <div className="fixed bottom-0 right-0 w-5/24 pl-2 pr-2 h-12 bg-transparent">
+                            <div className="fixed bottom-0 right-0 w-5/24 pl-2 pr-2  bg-transparent">
 
-                                <div className="flex justify-between items-center bg-gray-500 w-full h-full  rounded-t">
+                                <div className="flex justify-between items-center bg-gray-300 w-full border-t border-r border-l  border-primary rounded-t h-12 cursor-pointer ">
 
-                                    <CommentOutlined className="text-2xl"/>
+                                    <CommentOutlined className="text-2xl ml-3"/>
 
                                     <p className="text-2xl">Chat</p>
 
-                                    <p className="text-2xl">(0)</p>
+                                    <p className="text-2xl mr-3">(0)</p>
+
+                                </div>
+                                <div className="bg-blue-400 h-64">
+                                    chat...
+
+                                </div>
+                                <div className=" bg-gray-300 w-full border-t border-r border-l  border-primary ">
+
+                                    <form >
+
+                                        <div className="flex justify-between items-center h-8">
+
+                                            <input type="text " placeholder="schreibe eine Nachricht..." className="w-full h-full mr-4"/>
+                                            <button type="submit" className="mr-3 text-2xl mb-2" >
+                                                <SendOutlined />
+                                            </button>
+                                        </div>
+
+                                    </form>
 
                                 </div>
 
