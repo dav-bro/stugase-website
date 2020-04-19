@@ -140,38 +140,7 @@ class ContactClass extends React.Component {
 
                         <div key="right-content" className="h-full">
 
-                            <div className="fixed bottom-0 right-0 w-5/24 pl-2 pr-2  bg-transparent">
-
-                                <div className="flex justify-between items-center bg-gray-300 w-full border-t border-r border-l  border-primary rounded-t h-12 cursor-pointer ">
-
-                                    <CommentOutlined className="text-2xl ml-3"/>
-
-                                    <p className="text-2xl">Chat</p>
-
-                                    <p className="text-2xl mr-3">(0)</p>
-
-                                </div>
-                                <div className="bg-blue-400 h-64">
-                                    chat...
-
-                                </div>
-                                <div className=" bg-gray-300 w-full border-t border-r border-l  border-primary ">
-
-                                    <form >
-
-                                        <div className="flex justify-between items-center h-8">
-
-                                            <input type="text " placeholder="schreibe eine Nachricht..." className="w-full h-full mr-4"/>
-                                            <button type="submit" className="mr-3 text-2xl mb-2" >
-                                                <SendOutlined />
-                                            </button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-
-                            </div>
+                           <Chat/>
 
                         </div>
 
@@ -187,6 +156,131 @@ class ContactClass extends React.Component {
 
 }
 
+
+
+class Chat extends React.Component {
+
+
+
+    state={
+        expanded: false,
+        messages: [
+            {
+                author: 0,
+                time: "10:07",
+                message: "Hallo"
+            },
+            {
+                author: 1,
+                time: "10:08",
+                message: "hi"
+            },
+            {
+                author: 1,
+                time: "10:08",
+                message: "ein ganz langer Text mit hoffentlich 2 Zeilen."
+            },
+            {
+                author: 0,
+                time: "10:08",
+                message: "ein ganz langer Text mit hoffentlich 2 Zeilen."
+            },
+            {
+                author: 1,
+                time: "10:08",
+                message: "ein ganz langer Text mit hoffentlich 2 Zeilen."
+            }
+        ]
+    }
+
+
+
+    render() {
+
+        const { expanded, messages } = this.state;
+
+        let chatMessages = messages.map(x => {
+            let position = x.author === 0 ? "left" : "right";
+            switch (x.author) {
+                case 0:
+                    return (
+                        <div className=" ">
+                            <div className="float-left mr-4 mt-1">
+                                <div className="rounded-lg p-1 pl-2 pr-2 message-left" >
+                                    {x.message}
+                                </div>
+                                <p className="text-xs text-gray-500 float-right">{x.time}</p>
+                            </div>
+                        </div>
+                    );
+                case 1:
+                    return (
+                        <div >
+                            <div className="float-right ml-4 mt-1">
+                                <div className="rounded-lg p-1 pl-2 pr-2 message-right" >
+                                    {x.message}
+                                </div>
+                                <p className="text-xs text-gray-600 float-left">{x.time}</p>
+                            </div>
+                        </div>
+                    );
+            }
+
+        });
+
+        return(
+            <div className="fixed bottom-0 right-0 w-5/24 pl-2 pr-2 ">
+
+                <div className="flex justify-between items-center bg-accent w-full border-t border-r border-l  border-primary rounded-t h-12 cursor-pointer "
+                     onClick={() => this.setState({expanded: !expanded})}>
+
+                    <CommentOutlined className="text-2xl ml-3"/>
+
+                    <p className="text-2xl">Chat</p>
+
+                    <p className="text-2xl mr-3">(0)</p>
+
+                </div>
+                {expanded ? (
+                    <div className="bg-primary">
+                        <div className="overflow-hidden">
+                            <div className="flex flex-col border border-primary border-collapse h-64 p-1 message-wrapper overflow-auto">
+
+                                {chatMessages}
+
+                            </div>
+                        </div>
+                        <div className=" w-full  border-r border-l  border-primary ">
+
+                            <form onSubmit={(event) => this.handleSubmit(event)}>
+
+                                <div className="flex justify-between items-center h-8">
+
+                                    <input type="text " placeholder="schreibe eine Nachricht..." className="focus:outline-none pl-2 w-full h-full bg-primary"/>
+                                    <button type="submit" className="text-2xl mb-2" >
+                                        <SendOutlined />
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>)
+                    : null}
+
+            </div>
+        )
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+
+    }
+
+
+}
 
 
 class Form extends React.Component {

@@ -2,12 +2,14 @@
 .theme-light {
     /*bg-colors*/
     --color-bg-primary: white;
-    --color-bg-header: theme('colors.gray.300');
+    --color-bg-accent: theme('colors.gray.300');
     --color-bg-btn-primary: theme('colors.blue.600');
     --color-bg-menu-primary: white;
     --color-bg-menu-secondary: theme('colors.gray.100');
     --color-bg-tooltip: theme('colors.gray.800');
     --color-bg-input: white;
+    --color-chat-yours: theme('colors.gray.200');
+    --color-chat-theirs: theme('colors.blue.200');
 
     /*text-colors*/
     --color-text-tooltip: white;

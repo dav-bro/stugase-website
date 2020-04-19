@@ -7,12 +7,14 @@ module.exports = {
     extend: {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
-        header: 'var(--color-bg-header)',
+        accent: 'var(--color-bg-accent)',
         input: 'var(--color-bg-input)',
         'btn-primary': 'var(--color-bg-btn-primary)',
         'menu-primary': 'var(--color-bg-menu-primary)',
         'menu-secondary': 'var(--color-bg-menu-secondary)',
         'menu-active': 'var(--color-menu-active)',
+        'chat-yours': 'var(--color-chat-yours)',
+        'chat-theirs': 'var(--color-chat-theirs)',
       },
       borderColor: {
         primary: 'var(--color-border-primary)',

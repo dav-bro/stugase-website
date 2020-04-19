@@ -95,6 +95,43 @@
     /*color: @primary-6;*/
 }
 
+
+.message-left {
+    position: relative;
+    background: var(--color-chat-theirs);
+    /*height: 100px;
+    width:170px;*/
+    margin-left:10px;
+    border-radius:2px;
+}
+
+.message-left:after{
+    content:'';
+    position:absolute;
+    border:10px solid transparent;
+    border-top:10px solid var(--color-chat-theirs);
+    top:0px;
+    left:-10px;
+}
+
+.message-right {
+    position: relative;
+    background: var(--color-chat-yours);
+    /*height: 100px;
+    width:170px;*/
+    margin-right:10px;
+    border-radius:2px;
+}
+
+.message-right:after{
+    content:'';
+    position:absolute;
+    border:10px solid transparent;
+    border-top:10px solid var(--color-chat-yours);
+    top:0px;
+    right:-10px;
+}
+
 .modal-content {
     margin: 12% auto;
     /*background: white;*/
