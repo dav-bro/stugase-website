@@ -124,7 +124,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text={theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode')}
                                     >
-                                        <BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                        <BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl focus:outline-none" onClick={() => setTheme()}/>
                                     </ToolTip>
 
                                     <ToolTip

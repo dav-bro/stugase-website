@@ -24,6 +24,19 @@ module.exports = {
       borderWidth: {
         '3': '3px',
       },
+      inset: {
+        '0': 0,
+        auto: 'auto',
+        '1/2': '50%',
+      },
+      maxHeight: {
+        '0'  : '0',
+        '12' : '3rem'
+      },
+      transitionProperty: {
+        'max-height': 'max-height',
+        'spacing': 'margin, padding',
+      },
       width: {
         '1/24'  : '4.1666667%',
         '2/24'  : '8.3333333%',

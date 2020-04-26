@@ -12,8 +12,10 @@ const Layout = ({ children, ...props }) => (
                 <Header {...props} theme={data.theme} />
             )}
         </ContextConsumer>
-        {children}
-        <Footer/>
+        <div className="flex flex-col h-full">
+            {children}
+            <Footer/>
+        </div>
     </ContextProviderComponent>
 );
 
