@@ -70,9 +70,9 @@ class LayoutContent extends React.Component{
                                     <div className="block lg:hidden">
                                         <div className="fixed right-0 top-0 h-full w-0 bg-primary z-10 side-nav-left" style={{width: rightExpanded ? "100%" : 0}}>
                                             <div
-                                                className=" transform -translate-x-8  absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3 z-20 bg-primary"
+                                                className={" transform   absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3 z-20 bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
                                                 onClick={() => this.setState({rightExpanded: !rightExpanded})}>
-                                                <LeftOutlined className="hover:rotate-180 duration-700 transform m-2 "/>
+                                                <LeftOutlined className={" duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } />
                                             </div>
                                                 {rightContent}
                                           {/*  <div className=" left-0 top-1/2 p-2 border shadow pr-4 pl-4 pt-6 pb-6 z-20 bg-primary" onClick={() => this.setState({rightExpanded: !rightExpanded})}>

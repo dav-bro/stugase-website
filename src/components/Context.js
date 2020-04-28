@@ -9,7 +9,8 @@ const defaultContextValue = {
     data: {
         // set your initial data shape here
         theme: "light",
-        locale: locales[0]
+        locale: locales[0],
+        mqtt: null
     },
     set: () => {},
     setTheme: () => {},

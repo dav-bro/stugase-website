@@ -14,6 +14,10 @@ import "../static/styles/main.css"
 import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
 import CommentOutlined from "@ant-design/icons/es/icons/CommentOutlined";
 import SendOutlined from "@ant-design/icons/es/icons/SendOutlined";
+import {isLoggedIn} from "../services/auth";
+
+import Button  from "../components/button";
+import ReloadOutlined from "@ant-design/icons/es/icons/ReloadOutlined";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -21,12 +25,7 @@ const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/"
 const mqttUrl = "wss://m20.cloudmqtt.com";
 
 
-const options={
-        port: 39860,
-        clientId:"StugA-Chat_" + Math.random().toString(16).substr(2, 8),
-        username:"jrhikesy",
-        password:"LhELPlShfq2s",
-};
+
 
 
 
@@ -174,11 +173,97 @@ class ContactClass extends React.Component {
 
 class Chat extends React.Component {
 
-    mqtt = null;
+
+    mqttLoginForm=(
+        <div className="bg-menu-secondary w-full h-full">
+
+            <div className="flex flex-col w-full border-t">
+                <form
+                    method="post"
+                    onSubmit={(event) => this.handleMQTTAdminLogin(event)}>
+
+
+                    <div className="flex w-full mb-3 mt-3">
+
+
+                        <div className="w-full pr-2 ">
+
+                            <input
+                                className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
+                                id={"mqtt-username"}
+                                name={"mqtt-username"}
+                                type={"text"}
+                                placeholder={"username"}
+                            />
+
+                        </div>
+                    </div>
+
+                    <div className="flex w-full mb-3 mt-3">
+
+                        <div className="w-full pr-2 ">
+
+                            <input
+                                className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
+                                id={"mqtt-password"}
+                                name={"mqtt-password"}
+                                type={"password"}
+                                placeholder={"password"}/>
+
+
+                        </div>
+                    </div>
+
+                    <div className="flex w-full mb-3 mt-3">
+                        <div className="w-0 sm:w-1/3 invisible sm:visible text-right pt-2 pr-4 font-bold">
+
+
+
+                        </div>
+                        <div className="w-full pr-2 sm:w-2/3">
+
+                            <input type={"submit"} value={"login"}
+                                   className="float-right bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center pl-4 pr-4"
+
+                            />
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+
+
+
+        </div>
+    )
 
     componentDidMount() {
 
+        let { mqtt } = this.state;
+        let renderContent;
+        if (isLoggedIn()) {
+            if (!mqtt) {
 
+                renderContent = this.mqttLoginForm;
+
+            }
+        } else {
+            /*messages = [
+                {
+                    author: 0,
+                    time: new Date().toLocaleTimeString(),
+                    message: "Es ist zurzeit kein StugA-Mitglied Online. Die Zeiten für unsere Sprechzeiten findest du links in der Infobox SPRECHZEITEN. In dieser Zeit sollte der CHat besetzt sein. Ansonsten nimm doch per E-Mail kontakt mit uns auf."
+                }
+            ]*/
+        }
+
+
+        this.setState({renderContent: renderContent});
 
         /* let con = async ({ target }) => {
              const mqtt = await connectMQTT({
@@ -220,7 +305,9 @@ class Chat extends React.Component {
     }
 
     state={
+        mqtt: null,
         expanded: false,
+        renderContent: "loading...",
         messages: [
             {
                 author: 0,
@@ -254,81 +341,19 @@ class Chat extends React.Component {
 
     render() {
 
-        const { expanded, messages } = this.state;
+        let { expanded, renderContent, mqtt } = this.state;
 
         let chatMessages;
 
-        if (!this.mqtt) {
-
-            chatMessages = (
-                <div className="bg-menu-secondary w-full h-full">
-
-                    <div className="flex flex-col w-full border-t">
-                        <form
-                            method="post"
-                            onSubmit={event => {
-
-                            }}>
-                            <div className="flex w-full mb-3 mt-3">
-
-
-                                <div className="w-full pr-2 ">
-
-                                    <input
-                                        className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
-                                        id={"mqtt-username"}
-                                        name={"mqtt-username"}
-                                        type={"text"}
-                                        placeholder={"username"}
-                                        onChange={this.handleUpdate}
-                                    />
-
-                                </div>
-                            </div>
-
-                            <div className="flex w-full mb-3 mt-3">
-
-                                <div className="w-full pr-2 ">
-
-                                    <input
-                                        className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
-                                        id={"mqtt-password"}
-                                        name={"mqtt-password"}
-                                        type={"password"}
-                                        placeholder={"password"}
-                                        onChange={this.handleUpdate}/>
-
-
-                                </div>
-                            </div>
-
-                            <div className="flex w-full mb-3 mt-3">
-                                <div className="w-0 sm:w-1/3 invisible sm:visible text-right pt-2 pr-4 font-bold">
 
 
 
-                                </div>
-                                <div className="w-full pr-2 sm:w-2/3">
-
-                                    <input type={"submit"} value={"login"} className="float-right bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center pl-4 pr-4"/>
+           /*
 
 
 
-                                </div>
 
-
-                            </div>
-
-                        </form>
-                    </div>
-
-
-
-                </div>
-            )
-
-        } else {
-            chatMessages = messages.map(x => {
+           chatMessages = messages.map(x => {
                 let position = x.author === 0 ? "left" : "right";
 
 
@@ -359,8 +384,8 @@ class Chat extends React.Component {
                 }
 
             });
-        }
 
+*/
 
         return(
             <div className="w-full absolute z-40 bottom-0 right-0 lg:pl-2 lg:pr-2 ">
@@ -380,7 +405,7 @@ class Chat extends React.Component {
                         <div className="overflow-hidden">
                             <div className={"flex flex-col border border-primary border-collapse transform duration-100  p-1 message-wrapper overflow-auto " + (expanded ? "h-64" : "h-0")}>
 
-                                {chatMessages}
+                                {renderContent}
 
                             </div>
                         </div>
@@ -413,6 +438,73 @@ class Chat extends React.Component {
     }
 
 
+    handleMQTTAdminLogin(e) {
+
+        e.preventDefault();
+
+        /* let con = async ({ target }) => {
+          const mqtt = await connectMQTT({
+              server: {host: "stpush.startsupport.com", port: 443}
+          });
+
+          console.log(mqtt);
+      }
+      con();*/
+
+        const options={
+            port: 39860,
+            clientId:"StugA-Chat_" + Math.random().toString(16).substr(2, 8),
+            username: e.target["mqtt-username"].value,
+            password: e.target["mqtt-password"].value,
+        };
+
+
+         let client = MQTT.connect(mqttUrl, options);
+
+
+         this.setState({renderContent: "connecting to Server..."});
+
+
+         console.log("connecting to mqtt... with options: ", options);
+
+         console.log("form: ", e.target);
+
+
+
+         // client.subscribe("#");
+
+
+
+         client.on('connect', function(m) {
+             console.log("connected", m);
+             client.publish("chat/status", "online");
+             this.setState({mqtt: client, renderContent: "connected!"})
+         }.bind(this));
+
+         client.on('error', function(e) {
+             console.log("connection error", e);
+             let renderContent = (
+                 <div>
+                     <p className="font-bold"> CONNECTION FAILED:   </p>
+                     <p className="italic"> cause: </p>
+                     <p className="text-red-700">{e.message}</p>
+                     <Button type="danger"  onClick={() => {
+                         this.setState({renderContent: this.mqttLoginForm})
+                     }}>
+                         <ReloadOutlined className="mr-4"/>
+                         retry
+                     </Button>
+                 </div>
+             );
+             this.setState({mqtt: null, renderContent: renderContent})
+         }.bind(this));
+
+         client.on('message', (m) => {
+
+             console.log(m);
+
+         })
+    }
 }
 
 
@@ -563,10 +655,10 @@ class Collapse extends React.Component {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-    return <button className="bg-btn-primary text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
+    return <Button  onClick={() => window.open(props.link)}>
                <LinkOutlined />
                 <p className="ml-2">{t('contact.find-us.link-button')}</p>
-           </button>;
+           </Button>;
 }
 
 const Contact = withTranslation()(ContactClass);

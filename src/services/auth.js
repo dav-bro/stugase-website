@@ -1,3 +1,6 @@
+import React from "react";
+import ContextConsumer from "../components/Context";
+
 export const isBrowser = () => typeof window !== "undefined"
 
 export const getUser = () =>
@@ -9,6 +12,15 @@ const setUser = user =>
     window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
 
 export const handleLogin = ({ username, password }) => {
+
+   /* return(
+        <ContextConsumer>
+            {({loginMqtt}) => (
+                loginMqtt(username, password)
+            )}
+        </ContextConsumer>
+    )*/
+
     if (username === `${process.env.GATSBY_USER_NAME}` && password === `${process.env.GATSBY_USER_PASSWORD}`) {
         return setUser({
             username: `john`,

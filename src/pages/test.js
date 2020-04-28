@@ -1,5 +1,6 @@
 import React from "react";
 import LayoutContent from "../components/LayoutContent";
+import Button from "../components/button";
 
 
 export default () => {
@@ -25,7 +26,13 @@ export default () => {
            {/* <TestCollapse/>
             <TestCollapse/>*/}
 
-                test
+            <Button type="primary" className="ml-5 mb-5">
+                primary
+            </Button>
+
+            <Button type="danger" className="ml-5 mb-5" onClick={() => console.log("testtt button")}>
+                danger
+            </Button>
 
         </div>
 
