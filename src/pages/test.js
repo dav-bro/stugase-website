@@ -1,7 +1,7 @@
 import React from "react";
 import LayoutContent from "../components/LayoutContent";
 import Button from "../components/button";
-
+import Chat from "../components/chat";
 
 export default () => {
 
@@ -36,7 +36,7 @@ export default () => {
 
         </div>
 
-
+        <Chat/>
 
         </div>
     )

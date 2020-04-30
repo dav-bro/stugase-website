@@ -6,10 +6,8 @@ export default ({type, onClick, className, noStyle, children, ...props}) => {
 
     if(!noStyle) {
 
-console.log(className);
-
         switch(type) {
-            case "danger":
+            case "error":
                 className += "  focus:outline-none bg-red-500 text-white p-2 rounded-sm flex flex-row justify-center items-center ";
                 break;
             case "primary":

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
 import Card from "../components/Card";
-import MQTT from "mqtt";
+import MQTT from "paho-mqtt";
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
@@ -14,10 +14,13 @@ import "../static/styles/main.css"
 import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
 import CommentOutlined from "@ant-design/icons/es/icons/CommentOutlined";
 import SendOutlined from "@ant-design/icons/es/icons/SendOutlined";
-import {isLoggedIn} from "../services/auth";
+import {getUser, isLoggedIn, isMqttAdmin} from "../services/auth";
+import {connectMqtt} from "../services/connectMqtt";
 
 import Button  from "../components/button";
 import ReloadOutlined from "@ant-design/icons/es/icons/ReloadOutlined";
+import CheckCircleOutlined from "@ant-design/icons/es/icons/CheckCircleOutlined";
+import LoadingOutlined from "@ant-design/icons/es/icons/LoadingOutlined";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -80,6 +83,8 @@ class ContactClass extends React.Component {
             <ContextConsumer>
                 {({ data }) => {
                     let theme = data.theme;
+                    let mqtt = data.mqtt;
+
                     return (
                     <LayoutContent theme={theme} title={t('contact.header.title')} text={t('contact.header.text')}>
                         <div key="main-content" className="">
@@ -174,140 +179,19 @@ class ContactClass extends React.Component {
 class Chat extends React.Component {
 
 
-    mqttLoginForm=(
-        <div className="bg-menu-secondary w-full h-full">
-
-            <div className="flex flex-col w-full border-t">
-                <form
-                    method="post"
-                    onSubmit={(event) => this.handleMQTTAdminLogin(event)}>
 
 
-                    <div className="flex w-full mb-3 mt-3">
-
-
-                        <div className="w-full pr-2 ">
-
-                            <input
-                                className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
-                                id={"mqtt-username"}
-                                name={"mqtt-username"}
-                                type={"text"}
-                                placeholder={"username"}
-                            />
-
-                        </div>
-                    </div>
-
-                    <div className="flex w-full mb-3 mt-3">
-
-                        <div className="w-full pr-2 ">
-
-                            <input
-                                className="bg-input border-primaryd shadow appearance-none border rounded w-full py-2 px-3 leading-tight  "
-                                id={"mqtt-password"}
-                                name={"mqtt-password"}
-                                type={"password"}
-                                placeholder={"password"}/>
-
-
-                        </div>
-                    </div>
-
-                    <div className="flex w-full mb-3 mt-3">
-                        <div className="w-0 sm:w-1/3 invisible sm:visible text-right pt-2 pr-4 font-bold">
-
-
-
-                        </div>
-                        <div className="w-full pr-2 sm:w-2/3">
-
-                            <input type={"submit"} value={"login"}
-                                   className="float-right bg-blue-600 text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center pl-4 pr-4"
-
-                            />
-
-
-
-                        </div>
-
-
-                    </div>
-
-                </form>
-            </div>
-
-
-
-        </div>
-    )
-
-    componentDidMount() {
-
-        let { mqtt } = this.state;
-        let renderContent;
-        if (isLoggedIn()) {
-            if (!mqtt) {
-
-                renderContent = this.mqttLoginForm;
-
-            }
-        } else {
-            /*messages = [
-                {
-                    author: 0,
-                    time: new Date().toLocaleTimeString(),
-                    message: "Es ist zurzeit kein StugA-Mitglied Online. Die Zeiten für unsere Sprechzeiten findest du links in der Infobox SPRECHZEITEN. In dieser Zeit sollte der CHat besetzt sein. Ansonsten nimm doch per E-Mail kontakt mit uns auf."
-                }
-            ]*/
-        }
-
-
-        this.setState({renderContent: renderContent});
-
-        /* let con = async ({ target }) => {
-             const mqtt = await connectMQTT({
-                 server: {host: "stpush.startsupport.com", port: 443}
-             });
-
-             console.log(mqtt);
-         }
-         con();*/
-
-       /* this.mqtt = MQTT.connect(mqttUrl, options);
-
-        const client = this.mqtt;
-
-
-
-        console.log("connecting to mqtt...");
-
-        client.publish("test", "test");
-
-        client.subscribe("#");
-
-
-
-        client.on('connect', function(m) {
-            console.log("connected", m);
-        });
-
-        client.on('error', function(e) {
-            console.log("connection error", e);
-        })
-
-        client.on('message', (m) => {
-
-            console.log(m);
-
-        })*/
-
-    }
 
     state={
         mqtt: null,
         expanded: false,
         renderContent: "loading...",
+        renderState: 0,
+        user: {
+            me: "",
+            other: ""
+        },
+        onlineUsers: [],
         messages: [
             {
                 author: 0,
@@ -338,54 +222,155 @@ class Chat extends React.Component {
     }
 
 
+    componentDidMount() {
+
+
+    }
+
 
     render() {
 
-        let { expanded, renderContent, mqtt } = this.state;
+        let { expanded, messages, renderContent, renderState, onlineUsers, user } = this.state;
 
-        let chatMessages;
+        // let chatMessages;
+
+            switch (renderState + (10 * isLoggedIn() ? 0 : 10)) {
+                case 0:
+                case 1:
+                case 101:
+                    renderContent = this.renderChooseUser(renderState === 1 || renderState === 102);
+                    break;
+                case 2:
+
+                    break;
+                default:
+                    let time = new Date().getSeconds();
+                    renderContent = (
+                        <div className="h-full w-full flex items-center justify-center ">
+                            <LoadingOutlined className="text-2xl font-bold"/>
+                            <p className="text-2xl font-bold ml-3">loading...</p>
+                        </div>
+                    )
+                    break;
+            }
 
 
 
 
-           /*
+            /*
 
+             <ContextConsumer>
+            {({loginMqtt, data}) => {
+                let mqtt = data.mqtt;
 
+            if (renderState === 2){
+                    let subscription = !isLoggedIn() ? ("chat/admin/user/" + user.other) : ("chat/user/" + user.other);
+                    mqtt.subscribe(subscription);
+                    mqtt.onMessageArrived = (msg) => {
+                        console.log("chat message arrived: ", msg.payloadString);
+                        if (msg.topic.includes(subscription)){
 
+                            let message = JSON.parse(msg.payloadString);
 
-           chatMessages = messages.map(x => {
-                let position = x.author === 0 ? "left" : "right";
+                            messages.push({
+                                author: 0,
+                                time: message.time,
+                                message: message.message
+                            });
+                            this.setState({messages: messages});
+                        }
 
+                    };
 
+                    return messages.map(x => {
 
-                switch (x.author) {
-                    case 0:
+                            switch (x.author) {
+                                case 0:
+                                    return (
+                                        <div className=" ">
+                                            <div className="float-left mr-4 mt-1">
+                                                <div className="rounded-lg p-1 pl-2 pr-2 message-left" >
+                                                    {x.message}
+                                                </div>
+                                                <p className="text-xs text-gray-500 float-right">{x.time}</p>
+                                            </div>
+                                        </div>
+                                    );
+                                case 1:
+                                    return (
+                                        <div >
+                                            <div className="float-right ml-4 mt-1">
+                                                <div className="rounded-lg p-1 pl-2 pr-2 message-right" >
+                                                    {x.message}
+                                                </div>
+                                                <p className="text-xs text-gray-600 float-left">{x.time}</p>
+                                            </div>
+                                        </div>
+                                    );
+                            }
+
+                        });
+                } else {
+                    if (isLoggedIn()) {
                         return (
-                            <div className=" ">
-                                <div className="float-left mr-4 mt-1">
-                                    <div className="rounded-lg p-1 pl-2 pr-2 message-left" >
-                                        {x.message}
-                                    </div>
-                                    <p className="text-xs text-gray-500 float-right">{x.time}</p>
-                                </div>
-                            </div>
-                        );
-                    case 1:
-                        return (
-                            <div >
-                                <div className="float-right ml-4 mt-1">
-                                    <div className="rounded-lg p-1 pl-2 pr-2 message-right" >
-                                        {x.message}
-                                    </div>
-                                    <p className="text-xs text-gray-600 float-left">{x.time}</p>
-                                </div>
-                            </div>
-                        );
+                            null
+                        )
+                    } else {
+
+                        console.log("mqttttt: ", mqtt);
+
+                        if (mqtt && mqtt.isConnected()) {
+                            mqtt.subscribe("chat/admin/user/#");
+                            mqtt.onMessageArrived = (msg) => {
+                                let topic = msg.topic;
+                                if (topic.includes("chat/admin/user/") && msg.payloadString !== "offline") {
+                                    console.log("users++");
+                                    let user = topic.substr(16, topic.length - 1);
+                                    console.log("users++ ", user);
+                                    if (!onlineUsers.includes(user)) {
+                                        onlineUsers.push(user);
+                                        this.setState({onlineUsers: onlineUsers});
+                                    }
+
+
+                                }
+
+                                // mqtt.unsubscribe("chat/admin/user/#");
+                            };
+
+                            let chatUsers = onlineUsers.map((x) => (
+                                    <ul>
+                                        <li className="mt-1 mb-1 bg-menu-secondary">
+                                            <div className="flex justify-between items-center">
+                                                <p>{x}</p>
+                                                <Button className="float-right" onCLick={() => this.setState()}>start chat</Button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                )
+                            );
+
+                            return (
+                                <>
+                                    <p className="text-xl "> {onlineUsers.length} users online</p>
+                                    {chatUsers}
+                                </>
+                            )
+                        } else {
+
+
+                            return (<p>not connected</p>)
+                        }
+
+
+                    }
                 }
+            }}
+        </ContextConsumer>);
 
-            });
 
 */
+
 
         return(
             <div className="w-full absolute z-40 bottom-0 right-0 lg:pl-2 lg:pr-2 ">
@@ -403,7 +388,7 @@ class Chat extends React.Component {
 
                     <div className={"bg-primary  transform duration-100 " + (!expanded ? " h-0" : "")}>
                         <div className="overflow-hidden">
-                            <div className={"flex flex-col border border-primary border-collapse transform duration-100  p-1 message-wrapper overflow-auto " + (expanded ? "h-64" : "h-0")}>
+                            <div className={"flex flex-col-reverse border border-primary border-collapse transform duration-100  p-1 message-wrapper overflow-auto " + (expanded ? "h-64" : "h-0")}>
 
                                 {renderContent}
 
@@ -411,7 +396,7 @@ class Chat extends React.Component {
                         </div>
                         <div className=" w-full  border-r border-l  border-primary ">
 
-                            <form onSubmit={(event) => this.handleSubmit(event)}>
+                            <form onSubmit={(event) => this.handleCHatMessageSubmit(event)}>
 
                                 <div className="flex justify-between items-center h-8">
 
@@ -430,81 +415,150 @@ class Chat extends React.Component {
         )
     }
 
+    renderChooseUser(loading) {
+        return (
+            <div className="p-3 w-full">
 
-    handleSubmit(e) {
+                <form
+                    method="post"
+                    onSubmit={e => this.handleSetUserNameSubmit(e)}
+                >
+
+                    <div className="flex flex-col w-full mb-3 ">
+
+
+                        <div className="w-full text-left pt-2 pr-4 font-bold mb-2">
+
+                            <label htmlFor={"user-name"}>Benutzername</label>
+
+                        </div>
+                        <div className="w-full pr-2 ">
+
+                            <input
+                                className={"bg-input shadow appearance-none border rounded w-full py-2 px-3 leading-tight "}
+                                id={"mqtt-username"}
+                                name={"mqtt-username"}
+                                type={"text"}
+                                placeholder={"username"}
+                                onChange={this.handleUpdate}
+                            />
+
+                        </div>
+                    </div>
+
+                    <Button className="w-full text-left">
+                        {
+                            !loading ?
+                                (
+                                    <>
+                                        <CheckCircleOutlined className=""/>
+                                        <p className="ml-4"> {isLoggedIn() ? "als Online setzen" : "chatten"} </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <LoadingOutlined className=""/>
+                                        <p className="ml-4"> verbinde </p>
+                                    </>
+                                )
+                        }
+                    </Button>
+
+                </form>
+
+            </div>
+        )
+    }
+
+
+    handleSetUserNameSubmit(e) {
         e.preventDefault();
+
+        this.increaseRenderState();
+
+        let username = e.target["mqtt-username"].value;
+
+        let credentials = isLoggedIn() ? getUser() : {};
+
+        let willTopic = "chat/" + (isLoggedIn() ? "admin/" : "") + "user/" + username + "/status";
+
+        let will = new MQTT.Message("");
+        will.destinationName = willTopic;
+        will.qos = 2;
+        will.retained = true;
+
+        connectMqtt(credentials, will).then((mqtt) => {
+            mqtt.publish(willTopic, "online", 2, true);
+            this.setState({renderState: this.state.renderState + 1, mqtt: mqtt});
+
+        }).catch(e => console.log(e));
+
+/*
+
+        if (isLoggedIn())
+            this.handleMQTTAdminLogin(username, mqtt, loginMqtt);
+        else
+            this.handleMQTTLogin(e, mqtt, loginMqtt);;
+*/
 
 
     }
 
+    increaseRenderState() {
+        this.setState(state => ({
+            renderState: state.renderState + 1
+        }))
+    }
 
-    handleMQTTAdminLogin(e) {
 
-        e.preventDefault();
+    handleMQTTAdminLogin(username, mqtt, loginMqtt) {
 
-        /* let con = async ({ target }) => {
-          const mqtt = await connectMQTT({
-              server: {host: "stpush.startsupport.com", port: 443}
-          });
 
-          console.log(mqtt);
-      }
-      con();*/
 
-        const options={
-            port: 39860,
-            clientId:"StugA-Chat_" + Math.random().toString(16).substr(2, 8),
-            username: e.target["mqtt-username"].value,
-            password: e.target["mqtt-password"].value,
+    }
+
+    handleCHatMessageSubmit(event) {
+
+    }
+
+    handleMQTTLogin(e, mqtt, loginMqtt) {
+
+        this.setState({renderState: 1});
+
+        let username = null;
+
+        const connected = () => {
+            console.log("connected mqtt admin");
+
+            let topic = "chat/" + (isLoggedIn() ? "admin/" : "") + "user/" + username;
+
+            mqtt.publish("chat/admin/user/" + username, "online", 2, true);
+            this.setState({renderState: 2, user: username});
         };
 
 
-         let client = MQTT.connect(mqttUrl, options);
+        // console.log("usser: ", e.target["mqtt-username"].value);
+
+        isMqttAdmin(mqtt).then(() =>{
+            connected();
+        }).catch(() => {
+            let user = getUser();
+            console.log(user);
+            mqtt = loginMqtt(user.username, user.password);
+
+            mqtt.onConnected = () => connected();
+
+        });
 
 
-         this.setState({renderContent: "connecting to Server..."});
 
-
-         console.log("connecting to mqtt... with options: ", options);
-
-         console.log("form: ", e.target);
-
-
-
-         // client.subscribe("#");
-
-
-
-         client.on('connect', function(m) {
-             console.log("connected", m);
-             client.publish("chat/status", "online");
-             this.setState({mqtt: client, renderContent: "connected!"})
-         }.bind(this));
-
-         client.on('error', function(e) {
-             console.log("connection error", e);
-             let renderContent = (
-                 <div>
-                     <p className="font-bold"> CONNECTION FAILED:   </p>
-                     <p className="italic"> cause: </p>
-                     <p className="text-red-700">{e.message}</p>
-                     <Button type="danger"  onClick={() => {
-                         this.setState({renderContent: this.mqttLoginForm})
-                     }}>
-                         <ReloadOutlined className="mr-4"/>
-                         retry
-                     </Button>
-                 </div>
-             );
-             this.setState({mqtt: null, renderContent: renderContent})
-         }.bind(this));
-
-         client.on('message', (m) => {
-
-             console.log(m);
-
-         })
     }
+}
+
+
+const runningChat = ({}) => {
+
+
+
 }
 
 
@@ -592,64 +646,38 @@ class Form extends React.Component {
 }
 
 
-class Collapse extends React.Component {
-
-    collapse = {
-        scrollHeight: "100%"
-    };
-
-    state = {
-        collapsed: !this.props.defaultCollapsed,
-        height: null
-    };
-
-    componentDidMount() {
-        this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions);
-    }
-
-    updateDimensions() {
-        if (this.collapse) {
-            this.setState({height: this.collapse.scrollHeight});
-        }
-    }
-
-    render() {
-
-        const { title, extra, children } = this.props;
 
 
-        return (
-            <div className="border-collapse">
-                <div className=" w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => this.setState(s => ({collapsed: !s.collapsed}))}>
+/**
+ * Diese Funktion hat Michi gemacht
+ * @param title
+ * @param extra
+ * @param children
+ * @returns {*}
+ * @constructor
+ */
+const Collapse = ({ title, extra, children }) =>  {
 
-                    <span className={"image-wrapper"}>
-                        <RightOutlined   rotate={this.state.collapsed ? 0 : 90} className="image-center-vertical"/>
-                    </span>
+    const [open, setOpen] = useState(false);
 
-
-                    <div className="text-sm sm:text-lg relative ml-6 w-full">
-                        <p className=" text-center-vertical float-left"> {title} </p>
-                        <p className={" float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
-                    </div>
-
-                </div>
-
-
-                <div className="w-full h-full border-b border-primary collapse-content transform duration-100" style={{height: this.state.collapsed ? "0" : this.state.height + "px"}}
-                     ref={ (el) => {this.collapse = el ? el : {scrollHeight: "100%"} } }
-                >
-                        {children}
+    return (
+        <div className="border-collapse">
+            <div className="w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => setOpen(!open)}>
+                <span className="image-wrapper">
+                    <RightOutlined rotate={ open ? 0 : 90 } className="image-center-vertical"/>
+                </span>
+                <div className="text-sm sm:text-lg relative ml-6 w-full">
+                    <p className="text-center-vertical float-left">{ title }</p>
+                    <p className="float-right text-center-vertical mr-6 overflow-hidden">{ extra }</p>
                 </div>
             </div>
-        );
-    }
-
-}
+            <div className="w-full h-full border-b border-primary overflow-auto transition-all duration-500 h-auto"
+                 style={{ maxHeight: open ? "1000px" : "0" }}>
+                { children }
+            </div>
+        </div>
+    )
+};
 
 
 

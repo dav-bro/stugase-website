@@ -1,5 +1,7 @@
 import React from "react";
 import ContextConsumer from "../components/Context";
+import { navigate } from "gatsby"
+import {connectMqtt} from "../services/connectMqtt";
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -9,27 +11,64 @@ export const getUser = () =>
         : {}
 
 const setUser = user =>
-    window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+    window.localStorage.setItem("gatsbyUser", (user))
 
-export const handleLogin = ({ username, password }) => {
+export const handleLogin = async (credentials) => {
 
-   /* return(
-        <ContextConsumer>
-            {({loginMqtt}) => (
-                loginMqtt(username, password)
-            )}
-        </ContextConsumer>
-    )*/
+    return new Promise((resolve, reject) => {
 
-    if (username === `${process.env.GATSBY_USER_NAME}` && password === `${process.env.GATSBY_USER_PASSWORD}`) {
-        return setUser({
-            username: `john`,
-            name: `Johnny`,
-            email: `johnny@example.org`,
-        })
-    }
+        connectMqtt(credentials).then((mqtt) => {
+            mqtt.publish("user", JSON.stringify(credentials), 2, true);
+            mqtt.subscribe("user");
 
-    return false
+            mqtt.onMessageArrived = (msg) => {
+
+                if (msg.topic === "user") {
+                    // console.log("message arrived: ", msg.payloadString, msg.topic);
+                    setUser(msg.payloadString);
+                    mqtt.disconnect();
+                    resolve();
+                }
+            }
+        }).catch(e => reject(e));
+
+
+    })
+
+
+
+
+}
+
+
+export const isMqttAdmin = async (mqtt) => {
+
+
+    return new Promise((resolve, reject) => {
+        if (!mqtt)
+            reject();
+
+            mqtt.subscribe("user");
+
+            mqtt.onMessageArrived = (msg) => {
+
+                console.log("message in auth arrived", msg);
+
+                if (msg.topic === "user") {
+                    resolve();
+                    mqtt.unsubscribe("user");
+                }
+            };
+        setTimeout(() => (
+            reject("error")
+        ), 1000)
+
+    })
+
+
+
+
+
 }
 
 export const isLoggedIn = () => {
@@ -39,6 +78,6 @@ export const isLoggedIn = () => {
 }
 
 export const logout = callback => {
-    setUser({})
+    setUser("{}");
     callback()
 }

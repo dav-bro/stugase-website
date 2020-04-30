@@ -1,7 +1,19 @@
-// Context.js
+// import MQTT from "mqtt"
 import React from "react"
 import "../utils/i18n"
+// import connectMqtt from "../services/connectMqtt";
+import MQTT from "paho-mqtt"
 
+
+
+
+const defaultMqttOptions={
+    url: "m20.cloudmqtt.com",
+    port: 39860,
+    clientId:"StugA-Chat_" + Math.random().toString(16).substr(2, 8),
+    username: "user",
+    password: "{6pU|N+dRW9#t73S",
+};
 
 const locales = ["de", "en"];
 
@@ -14,6 +26,7 @@ const defaultContextValue = {
     },
     set: () => {},
     setTheme: () => {},
+    loginMqtt: () => {}
 };
 
 const { Provider, Consumer } = React.createContext(defaultContextValue);
@@ -29,10 +42,12 @@ class ContextProviderComponent extends React.Component {
 
         this.setData = this.setData.bind(this);
         this.setTheme = this.setTheme.bind(this);
+        this.loginMqtt = this.loginMqtt.bind(this);
         this.state = {
             ...defaultContextValue,
             set: this.setData,
             setTheme: this.setTheme,
+            loginMqtt: this.loginMqtt
         }
     }
 
@@ -41,6 +56,7 @@ class ContextProviderComponent extends React.Component {
         // i18next.init();
         let d = document.documentElement;
         d.classList.add("theme-light");
+        // this.loginMqtt();
     }
 
     setData(newData) {
@@ -78,6 +94,57 @@ class ContextProviderComponent extends React.Component {
         }));
         console.log(this.state)
     }
+
+    loginMqtt(username, password) {
+
+        console.log("connecting mqtt:: ");
+
+
+        if (this.state.mqtt)
+            this.state.mqtt.disconnect();
+
+
+        let client = new MQTT.Client(defaultMqttOptions.url, defaultMqttOptions.port, "", defaultMqttOptions.clientId);
+
+        client.connect({
+            userName: username ? username : defaultMqttOptions.username,
+            password: password ? password : defaultMqttOptions.password,
+            useSSL: true,
+            onSuccess: () => {
+                console.log("connected! ", client);
+                this.setState(state => ({
+                    data: {
+                        ...state.data,
+                        mqtt: client
+                    },
+                }));
+            }
+        })
+
+        return client;
+
+        // connectMqtt();
+
+/*
+
+            let mqtt = MQTT.connectMqtt(mqttUrl, options);
+
+
+            mqtt.on('connectMqtt', (m) => {
+                console.log("connected: ", m);
+                this.setState(state => ({
+                    data: {
+                        ...state.data,
+                        mqtt: mqtt
+                    },
+                }));
+            })
+*/
+
+
+
+    }
+
 
     render() {
         return <Provider value={this.state}>{this.props.children}</Provider>

@@ -5,6 +5,7 @@ import Header from "./header";
 import Footer from "./footer"
 import "../static/styles/main.css"
 
+
 const Layout = ({ children, ...props }) => (
     <ContextProviderComponent>
         <ContextConsumer>
