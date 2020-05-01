@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
 import Card from "../components/Card";
-import MQTT from "paho-mqtt";
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
@@ -10,17 +9,11 @@ import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 import {ReCAPTCHA} from "react-google-recaptcha";
+import Chat from "../components/chat";
 import "../static/styles/main.css"
 import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
-import CommentOutlined from "@ant-design/icons/es/icons/CommentOutlined";
-import SendOutlined from "@ant-design/icons/es/icons/SendOutlined";
-import {getUser, isLoggedIn, isMqttAdmin} from "../services/auth";
-import {connectMqtt} from "../services/connectMqtt";
 
 import Button  from "../components/button";
-import ReloadOutlined from "@ant-design/icons/es/icons/ReloadOutlined";
-import CheckCircleOutlined from "@ant-design/icons/es/icons/CheckCircleOutlined";
-import LoadingOutlined from "@ant-design/icons/es/icons/LoadingOutlined";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -176,6 +169,7 @@ class ContactClass extends React.Component {
 
 
 
+/*
 class Chat extends React.Component {
 
 
@@ -257,7 +251,7 @@ class Chat extends React.Component {
 
 
 
-            /*
+            /!*
 
              <ContextConsumer>
             {({loginMqtt, data}) => {
@@ -369,7 +363,7 @@ class Chat extends React.Component {
         </ContextConsumer>);
 
 
-*/
+*!/
 
 
         return(
@@ -492,13 +486,13 @@ class Chat extends React.Component {
 
         }).catch(e => console.log(e));
 
-/*
+/!*
 
         if (isLoggedIn())
             this.handleMQTTAdminLogin(username, mqtt, loginMqtt);
         else
             this.handleMQTTLogin(e, mqtt, loginMqtt);;
-*/
+*!/
 
 
     }
@@ -553,13 +547,10 @@ class Chat extends React.Component {
 
     }
 }
-
-
-const runningChat = ({}) => {
+*/
 
 
 
-}
 
 
 class Form extends React.Component {

@@ -9,7 +9,7 @@ import MQTT from "paho-mqtt";
 
 
 
-const chooseUser = ({ loading, renderState, setRenderState, setMqtt }) => {
+const chooseUser = ({ loading, renderState, setRenderState, setMqtt, setOwnUser }) => {
 
     const handleSetUserNameSubmit = (e) => {
         e.preventDefault();
@@ -29,8 +29,9 @@ const chooseUser = ({ loading, renderState, setRenderState, setMqtt }) => {
 
         connectMqtt(credentials, will).then((mqtt) => {
             mqtt.publish(willTopic, "online", 2, true);
-            setRenderState(renderState + 1);
             setMqtt(mqtt);
+            setRenderState(renderState + 2);
+            setOwnUser(username);
 
 
         }).catch(e => console.log(e));

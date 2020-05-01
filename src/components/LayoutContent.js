@@ -68,9 +68,9 @@ class LayoutContent extends React.Component{
                                 {mainContent}
 
                                     <div className="block lg:hidden">
-                                        <div className="fixed right-0 top-0 h-full w-0 bg-primary z-10 side-nav-left" style={{width: rightExpanded ? "100%" : 0}}>
+                                        <div className="fixed right-0 top-0 h-full transform transition-all duration-300 bg-primary z-10" style={{width: rightExpanded ? "100%" : 0}}>
                                             <div
-                                                className={" transform   absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3 z-20 bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
+                                                className={" transform   absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3  bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
                                                 onClick={() => this.setState({rightExpanded: !rightExpanded})}>
                                                 <LeftOutlined className={" duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } />
                                             </div>

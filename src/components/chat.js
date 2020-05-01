@@ -6,6 +6,7 @@ import DisplayOnlineUsers from "./displayOnlineUsers";
 import ChooseUser from "./chooseUser";
 import {isLoggedIn} from "../services/auth";
 import LoadingOutlined from "@ant-design/icons/es/icons/LoadingOutlined";
+import getMqttPrefix from "../services/getMqttPrefix";
 
 export default ({}) => {
 
@@ -16,29 +17,71 @@ export default ({}) => {
 
     const [ mqtt, setMqtt ] = useState(null);
 
+    let  header = "chat";
+
+    let chatHint = "not connected";
+
+    const [ ownUser, setOwnUser ] = useState(null);
+
+    const [ ownMessages, setOwnMessages ] = useState([]);
+
+    const [ otherUser, setOtherUser ] = useState(null);
 
     const [ renderState, setRenderState ] = useState(0);
 
 
 
+    const switchRenderState = renderState + (isLoggedIn() ? 0 : 100);
 
-    switch (renderState + (isLoggedIn() ? 0 : 100)) {
-        case 0:
-        case 1:
+    switch (switchRenderState) {
         case 101:
         case 102:
-            renderContent = <ChooseUser loading={(renderState === 1 || renderState === 102)}
+            header = "chat mit " + otherUser;
+        case 0:
+        case 1:
+
+            renderContent = <ChooseUser loading={(switchRenderState === 1 || switchRenderState === 102)}
                                         renderState={renderState}
                                         setRenderState={setRenderState}
+
+                                        setOwnUser={setOwnUser}
+
                                         setMqtt={setMqtt}
             />;
             break;
         case 2:
 
+
+            header = "angemeldet als " + ownUser;
+
+            chatHint = "chatte als " + ownUser;
+
+            renderContent = (
+              <DisplayOnlineUsers renderState={renderState} setRenderState={setRenderState}
+                                  setOtherUser={setOtherUser}
+                                  mqtt={mqtt}
+                                  setMqtt={setMqtt}
+              />
+            )
+
             break;
 
         case 100:
-            renderContent = (<DisplayOnlineUsers/>);
+            renderContent = (<DisplayOnlineUsers renderState={renderState} setRenderState={setRenderState}
+                                                 setOtherUser={setOtherUser}
+
+            />);
+            break;
+
+        case 3:
+        case 103:
+
+            header = "chat mit " + otherUser;
+
+            chatHint = "chatte als " + ownUser;
+
+            renderContent = (<RunningChat mqtt={mqtt} ownUser={ownUser} otherUser={otherUser} ownMessages={ownMessages}/>);
+
             break;
         default:
             renderContent = (
@@ -51,6 +94,32 @@ export default ({}) => {
     }
 
 
+    const handleChatMessageSubmit = (e) => {
+        e.preventDefault();
+
+        let msg = e.target["chat-text"].value;
+        const date = new Date();
+
+        e.target["chat-text"].value = "";
+
+        let sendMessage = {
+            author: 0,
+            time: date.getHours() + ":" + date.getMinutes(),
+            exactTime: date.getTime(),
+            message: msg
+        };
+
+        setOwnMessages(ownMessages.concat(sendMessage));
+
+        console.log("publishing message: ", sendMessage, " to: ", getMqttPrefix(true) + ownUser + "/messages");
+
+        mqtt.publish(getMqttPrefix(true) + ownUser + "/messages", JSON.stringify(sendMessage), 2, false);
+
+
+
+    }
+
+
     return(
         <div className="w-full absolute z-40 bottom-0 right-0 lg:pl-2 lg:pr-2 ">
 
@@ -59,7 +128,7 @@ export default ({}) => {
 
                 <CommentOutlined className="text-2xl ml-3"/>
 
-                <p className="text-2xl">Chat</p>
+                <p className="text-2xl">{header}</p>
 
                 <p className="text-2xl mr-3">(0)</p>
 
@@ -75,12 +144,15 @@ export default ({}) => {
                 </div>
                 <div className=" w-full  border-r border-l  border-primary ">
 
-                    <form onSubmit={(event) => this.handleCHatMessageSubmit(event)}>
+                    <form onSubmit={(event) => handleChatMessageSubmit(event)} >
 
                         <div className="flex justify-between items-center h-8">
 
-                            <input type="text " placeholder="schreibe eine Nachricht..." className="focus:outline-none pl-2 w-full h-full bg-primary"/>
-                            <button type="submit" className="text-2xl mb-2" >
+                            <input type="text " placeholder={chatHint}
+                                   id="chat-text"
+                                   name="chat-text"
+                                   className="focus:outline-none pl-2 w-full h-full bg-primary" disabled={!(renderState === 3 || renderState === 103)}/>
+                            <button type="submit" className="text-2xl mb-2 focus:outline-none" disabled={!(renderState === 3 || renderState === 103)}>
                                 <SendOutlined />
                             </button>
                         </div>
@@ -92,5 +164,6 @@ export default ({}) => {
 
         </div>
     )
+
 
 }
