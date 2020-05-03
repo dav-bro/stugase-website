@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from "gatsby";
-import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import "../static/styles/main.css";
 import {useTranslation} from "react-i18next";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 
 
@@ -63,7 +63,7 @@ class MenuList extends React.Component {
         if (!expanded) {
             children = (<div className="pr-4 flex flex-row items-center justify-center border-primary">
                             {children.find(x => x.props.to === current)}
-                            <MenuOutlined className="text-xl" />
+                            <FontAwesomeIcon icon="bars" className="text-xl" />
                         </div>)
         }
 

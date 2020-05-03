@@ -8,6 +8,16 @@
 @import "theme-light.css";
 
 
+.arrow-top-left::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 10%;
+    margin-left: -5px;
+    border: 0.5rem solid transparent;
+    border-bottom-color: white;
+}
+
 .between-line {
     width: 100%;
     padding-left: 5rem;

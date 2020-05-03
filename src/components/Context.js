@@ -1,6 +1,22 @@
 // Context.js
 import React from "react"
 import "../utils/i18n"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
+import {faGlassCheers} from "@fortawesome/free-solid-svg-icons/faGlassCheers";
+import {faCalendarCheck} from "@fortawesome/free-solid-svg-icons/faCalendarCheck";
+import {faQuestion} from "@fortawesome/free-solid-svg-icons/faQuestion";
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
+import {faPlusCircle} from "@fortawesome/free-solid-svg-icons/faPlusCircle";
+import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
+import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
+import {faAdjust} from "@fortawesome/free-solid-svg-icons/faAdjust";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
+
+
+
+library.add(faGlassCheers, faUsers, faCalendarCheck, faQuestion, faTimesCircle, faPlusCircle, faGithub, faUserCircle, faAdjust, faBars);
+
 
 
 const locales = ["de", "en"];

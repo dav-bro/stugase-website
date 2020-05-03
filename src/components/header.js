@@ -1,7 +1,6 @@
 import React from "react";
 import {withTranslation} from "react-i18next";
 import ContextConsumer from "./Context";
-import BulbTwoTone from "@ant-design/icons/lib/icons/BulbTwoTone";
 import i18next from "i18next";
 import { navigate } from "gatsby";
 
@@ -18,7 +17,7 @@ import UniTextDark from "../static/images/Uni_Text-dark.png";
 import Menu from "./Menu";
 import ToolTip from "./tooltip";
 import {isLoggedIn, logout} from "../services/auth";
-import UserOutlined from "@ant-design/icons/es/icons/UserOutlined";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 
 
@@ -115,7 +114,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text="logout"
                                     >
-                                        <UserOutlined className="mr-3 text-2xl " onClick={() => logout(() => navigate("/about"))}/>
+                                        <FontAwesomeIcon icon="user-circle"  className="mr-3 text-2xl " onClick={() => logout(() => navigate("/about"))}/>
                                     </ToolTip>
 
                                     : null}
@@ -124,7 +123,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text={theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode')}
                                     >
-                                        <BulbTwoTone  twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                        <FontAwesomeIcon icon="adjust" twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
                                     </ToolTip>
 
                                     <ToolTip
