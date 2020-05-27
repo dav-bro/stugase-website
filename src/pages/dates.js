@@ -10,6 +10,7 @@ import CalendarOutlined from "@ant-design/icons/es/icons/CalendarOutlined";
 import PlusCircleOutlined from "@ant-design/icons/es/icons/PlusCircleOutlined";
 import CloseCircleOutlined from "@ant-design/icons/es/icons/CloseCircleOutlined";
 import {isLoggedIn} from "../services/auth";
+import AddDate from "../components/addDate";
 
 class DatesClass extends React.Component {
 
@@ -25,7 +26,7 @@ class DatesClass extends React.Component {
 
 
                                     <DateRowClass type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
-                            {isLoggedIn() ? <DateRowClass type="add" /> : null }
+                            {isLoggedIn() ? <AddDate type="add" /> : null }
 
 
                             {/*<PlusCircleOutlined className="fixed bottom-0 right-0 mr-4 mb-4 shadow-all  rounded-full text-4xl" />*/}
