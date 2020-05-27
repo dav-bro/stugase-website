@@ -196,3 +196,9 @@
 }
 
 
+[placeholder]:empty:before{
+    content: attr(placeholder);
+    color: white;
+}
+
+

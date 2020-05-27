@@ -3,14 +3,9 @@ import {withTranslation} from "react-i18next";
 // import {CalendarOutlined, TeamOutlined} from '@ant-design/icons';
 import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
-import LeftOutlined from "@ant-design/icons/es/icons/LeftOutlined";
-import RightOutlined from "@ant-design/icons/es/icons/RightOutlined";
-import TeamOutlined from "@ant-design/icons/es/icons/TeamOutlined";
-import CalendarOutlined from "@ant-design/icons/es/icons/CalendarOutlined";
-import PlusCircleOutlined from "@ant-design/icons/es/icons/PlusCircleOutlined";
-import CloseCircleOutlined from "@ant-design/icons/es/icons/CloseCircleOutlined";
 import {isLoggedIn} from "../services/auth";
 import AddDate from "../components/addDate";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 class DatesClass extends React.Component {
 
@@ -74,14 +69,14 @@ class DateRowClass extends React.Component {
 
         switch (type) {
             case 'add':
-                leftIcon = <PlusCircleOutlined className="focus:outline-none text-3xl" />;
+                leftIcon = <FontAwesomeIcon icon="plus-circle" className="focus:outline-none text-3xl" />;
                 text = "Neuer Termin";
                 handleClick = () => this.handleClick();
                 classNamePrefix = " bg-btn-primary text-white cursor-pointer";
                 break;
             default:
-                leftIcon = (<TeamOutlined className="text-3xl" />);
-                rightIcon = (<CalendarOutlined className="text-3xl float-right " />);
+                leftIcon = (<FontAwesomeIcon icon="users" className="text-3xl" />);
+                rightIcon = (<FontAwesomeIcon icon="calendar" className="text-3xl float-right " />);
                 text = type;
                 rightText = date + ", " + time;
 
@@ -103,7 +98,7 @@ class DateRowClass extends React.Component {
                 {datepicker ?
                     <div className="bg-disabled cursor-default">
                         <div className="text-transparent text-center  hover:text-gray-100 opacity-25 fixed left-0 h-48 top-0 w-full">
-                            <CloseCircleOutlined className="focus:outline-none mt-6 text-5xl cursor-pointer" onClick={() => this.handleClick()}/>
+                            <FontAwesomeIcon icon="times-circle" className="focus:outline-none mt-6 text-5xl cursor-pointer" onClick={() => this.handleClick()}/>
                         </div>
                         <DatePicker />
                     </div>
@@ -183,7 +178,7 @@ class DatePicker extends React.Component {
         let c = parseInt((((month) < 3 ? year - 1 : year) + "").substr(0, 2));
 
 
-        function gauss(number) {
+        const gauss = (number) => {
             return Math.floor(number);
         }
         
@@ -195,11 +190,6 @@ class DatePicker extends React.Component {
             }
             return x;
         }
-
-        function getDayByDate() {
-
-        }
-
 
 
         let dayOne = (1 + gauss(2.6 * getMonth(month) - 0.2) + y + gauss(y/4) + gauss(c/4) - 2 * c) % 7;
@@ -301,14 +291,14 @@ class DatePicker extends React.Component {
 
                             <div className="flex flex-row justify-center items-center ">
                                 <p className="mr-12 text-gray-100 opacity-25 text-6xl fade-left"> {year - 1} </p>
-                                <LeftOutlined className="focus:outline-none text-6xl text-gray-100 opacity-25 mr-5 cursor-pointer" onClick={() => this.setState({year: year - 1})} />
+                                <FontAwesomeIcon icon="chevron-left" className="focus:outline-none text-6xl text-gray-100 opacity-25 mr-5 cursor-pointer" onClick={() => this.setState({year: year - 1})} />
                             <div className="flex flex-col bg-white ">
 
                                 <div className="flex flex-row pt-1 text-xl items-center justify-center bg-gray-400">
 
-                                    <LeftOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("-")}/>
+                                    <FontAwesomeIcon icon="chevron-left" className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("-")}/>
                                     <p className="w-2/3 text-center font-bold"> {this.months[month - 1]} </p>
-                                    <RightOutlined className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("+")}/>
+                                    <FontAwesomeIcon icon="chevron-right" className="focus:outline-none w-1/6 text-2xl text-black cursor-pointer" onClick={() => this.handleMonthChange("+")}/>
 
                                 </div>
 
@@ -331,7 +321,7 @@ class DatePicker extends React.Component {
 
                             </div>
 
-                                <RightOutlined className="focus:outline-none text-6xl text-gray-100 opacity-25 ml-5" onClick={() => this.setState({year: year + 1})} />
+                                <FontAwesomeIcon icon="chevron-right" className="focus:outline-none text-6xl text-gray-100 opacity-25 ml-5" onClick={() => this.setState({year: year + 1})} />
                                 <p className="ml-12 opacity-25 text-6xl fade-right"> {year + 1} </p>
 
                         </div>

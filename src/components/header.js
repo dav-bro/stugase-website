@@ -114,7 +114,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text="logout"
                                     >
-                                        <FontAwesomeIcon icon="user-circle"  className="mr-3 text-2xl " onClick={() => logout(() => navigate("/about"))}/>
+                                        <FontAwesomeIcon icon="user-circle"  className="mr-3 text-2xl cursor-pointer" onClick={() => logout(() => navigate("/about"))}/>
                                     </ToolTip>
 
                                     : null}
@@ -123,7 +123,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text={theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode')}
                                     >
-                                        <FontAwesomeIcon icon="adjust" twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+                                        <FontAwesomeIcon icon="adjust" className="mr-3 text-2xl cursor-pointer" onClick={() => setTheme()}/>
                                     </ToolTip>
 
                                     <ToolTip

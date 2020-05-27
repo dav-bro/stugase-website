@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
+import TimePicker from "./timePicker";
+import DatePicker from "./datePicker";
+import Modal from "./modal";
 
 export default () => {
+
+
+    const [ datePicker, setDatePicker ] = useState(false);
 
 
     const [ expanded, setExpanded ] = useState(false);
@@ -13,12 +19,12 @@ export default () => {
 
     const [ date, setDate ] = useState("");
 
-    const [ time, setTime ] = useState("");
+    const [ time, setTime ] = useState({hour: 0, minute: 0});
 
     const [ selectType, setSelectType ] = useState(false);
 
 
-    const liClass = "flex flex-row border-b p-2  border-white hover:opacity-50";
+    const liClass = "flex flex-row border-b py-2 px-3 border-white hover:opacity-50";
 
     const _setType = (type) => {
         setSelectType(false);
@@ -30,9 +36,9 @@ export default () => {
     };
 
     return (
-        <div className={"mx-1 flex flex-row border border-accent items-center mb-3 cursor-pointer "} align="top" onClick={!expanded ?  () => setExpanded(!expanded) : null}>
+        <div className={"mx-1 flex flex-row-reverse border border-accent items-center mb-3 "} align="top" onClick={!expanded ?  () => setExpanded(!expanded) : null}>
 
-            <div className={" py-2 bg-blue-500 text-white overflow-hidden h-12 transition-all duration-300 flex flex-row items-center " + (!expanded ? " w-full px-2" : "w-0")} align="top" >
+            <div className={"cursor-pointer py-2 bg-blue-500 text-white overflow-hidden h-12 transition-all duration-300 flex flex-row items-center " + (!expanded ? " w-full px-2" : "w-0")} align="top" >
                 <div className="flex w-2/24">
                     <FontAwesomeIcon icon="plus-circle" className="focus:outline-none text-3xl" />
 
@@ -47,34 +53,40 @@ export default () => {
             <div className={" py-2 bg-green-500 flex text-white flex-row  transition-all duration-300 items-center " + (expanded ? " w-full px-2" : "w-0 overflow-hidden")} align="top" >
                 <div className="flex w-2/24">
                     <div className="relative ">
-                        <FontAwesomeIcon icon={type} className="text-3xl mr-2" onClick={() => setSelectType(!selectType)}/>
-                        <ul className={"absolute text-white bg-green-500  shadow-all border-collapse  mt-2 arrow-top-left transition-all duration-500 h-auto " + (selectType ? " max-h-64 border border-white" : " max-h-0 overflow-hidden ") } >
+                        <FontAwesomeIcon icon={type} fixedWidth  className="text-3xl mr-2" onClick={() => setSelectType(!selectType)}/>
+                        <ul className={"absolute text-white bg-green-500 mt-2 -translate-x-2 transform   shadow-all border-collapse  mt-2  transition-all duration-500 h-auto " + (selectType ? " max-h-64 " : " max-h-0 overflow-hidden ") } >
                             <li className={liClass} onClick={() => _setType("users")}>
-                                <FontAwesomeIcon icon="users" className="text-3xl mr-2"/>
+                                <FontAwesomeIcon icon="users" fixedWidth className="text-3xl mr-2"/>
                                 <p className="float-right">Sitzung</p>
                             </li>
                             <li className={liClass} onClick={() => _setType("glass-cheers")}>
-                                <FontAwesomeIcon icon="glass-cheers" className="text-3xl mr-2"/>
+                                <FontAwesomeIcon icon="glass-cheers" fixedWidth  className="text-3xl mr-2"/>
                                 <p className="float-right">Suffen</p>
                             </li>
                             <li className={liClass} onClick={() => _setType("calendar-check")}>
-                                <FontAwesomeIcon icon="calendar-check" className="text-3xl mr-2"/>
-                                <p className="float-right">sonstiges</p>
+                                <FontAwesomeIcon icon="calendar-check" fixedWidth className="text-3xl mr-2"/>
+                                <p className="float-right">Sonstiges</p>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div className="w-14/24 is-left">
-                    {title ? title : (<div className="flex items-center "> Titel </div>)}
+                    <div contentEditable placeholder="Titel" className="flex items-center focus:outline-none" onInput={(data) => setTitel(data.target.textContent)}>{}</div>
                 </div>
-                <div className="w-3/24 text-right">
-                    {date ? date : (<div className="flex items-center "> Datum</div>)}
+                <div className="w-3/24 ">
+                    {<div className="cursor-pointer" onClick={() => setDatePicker(true)}>
+                        <p>{date ? date : "Datum"}</p>
+                    </div>}
+                    <Modal enabled={datePicker} setEnabled={setDatePicker}><DatePicker setDate={setDate}/> </Modal>
+
                 </div>
-                <div className="w-3/24 text-right">
-                    {time ? time : (<div className="flex items-center "> Zeit</div>)}
+                <div className="w-3/24 ">
+
+                    <TimePicker/>
+
                 </div>
                 <div className="w-2/24" >
-                    {title && date && time ? "check" : <FontAwesomeIcon icon="times-circle" className="focus:outline-none text-3xl float-right" onClick={() => setExpanded(!expanded)}/>}
+                    <FontAwesomeIcon icon={title && date && time && type !== "question" ? "check" :"times-circle"} className="focus:outline-none text-3xl float-right" onClick={() => setExpanded(!expanded)}/>
                 </div>
 
             </div>
