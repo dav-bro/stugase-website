@@ -4,12 +4,14 @@
 .theme-dark {
     /*bg-colors*/
     --color-bg-primary: #2b2b2b;
-    --color-bg-header: theme('colors.gray.800');
+    --color-bg-accent: theme('colors.gray.800');
     --color-bg-btn-primary: theme('colors.blue.600');
     --color-bg-menu-primary: theme('colors.blue.800');
     --color-bg-menu-secondary: theme('colors.blue.900');
     --color-bg-tooltip: theme('colors.gray.400');
     --color-bg-input: #0d293e;
+    --color-chat-yours: #3c3f41;
+    --color-chat-theirs: #0d293e;
 
     /*text-colors*/
     --color-text-tooltip: black;

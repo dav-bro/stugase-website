@@ -1,6 +1,6 @@
+
 import React, {useState} from "react";
-import TimePicker from "../components/simpleTimePicker";
-import Modal from "../components/modal";
+
 
 export default () => {
 
@@ -17,6 +17,8 @@ export default () => {
     const [enabled, setEnabled ] = useState(false);
 
     return(
+    <div className="flex-grow">
+
         <div className="w-full mt-24">
             <h1 className="text-4xl border-1 between-line mb-10"><span className="between-line-span">Test Flex widths by n/24</span></h1>
 
@@ -28,16 +30,43 @@ export default () => {
             <div className="m-16">
                 <button onClick={() => setEnabled(true)}> click</button>
 
-                <Modal enabled={enabled} setEnabled={setEnabled}>
-                    <div className="w-40 h-40 bg-white^modal-content">
-                        test
-                    </div>
-                </Modal>
-            </div>
-
         </div>
     )
+
+
+
+
 }
 
 
 
+class TestCollapse extends React.Component {
+
+
+    state={
+        expanded: false
+    }
+
+
+    render() {
+
+        const { expanded } = this.state;
+
+        return(
+            <div className="w-full ">
+                <div className="w-full h-12 bg-gray-300 cursor-pointer" onClick={() => this.setState({expanded: !expanded})}>
+
+                </div>
+
+                <div className={"overflow-hidden w-full bg-red-100 transform duration-700 origin-top  " + (expanded ? " max-h-12" : " max-h-0") }>
+                    <div className="absolute">
+                        test
+                    </div>
+
+                </div>
+
+            </div>
+        )
+    }
+
+}

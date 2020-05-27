@@ -10,7 +10,10 @@ class MembersClass extends React.Component {
            <LayoutContent title={t('members.title')}>
 
                <div key="main-content">
-
+                    main
+               </div>
+               <div key="right-content">
+                    right
                </div>
 
            </LayoutContent>
