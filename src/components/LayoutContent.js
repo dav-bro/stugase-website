@@ -3,7 +3,7 @@ import Title from "./title";
 import ContextConsumer from "./Context";
 import "../static/styles/main.css";
 import withHooks from "../hooks/withHooks";
-import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // const justMiddleContent = [ "sm", "md" ];
 
@@ -69,10 +69,12 @@ class LayoutContent extends React.Component{
                                     <div className="block lg:hidden">
                                         <div className="fixed right-0 top-0 h-full transform transition-all duration-300 bg-primary z-10" style={{width: rightExpanded ? "100%" : 0}}>
                                             <div
-                                                className={" transform   absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3  bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
-                                                onClick={() => this.setState({rightExpanded: !rightExpanded})}>
-                                                <LeftOutlined className={" duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } /> //@todo replace with fa
-                                            </div>
+                                                className={" transform   absolute lg:hidden left-0 h-10 w-8 top-1/2  border shadow  bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
+                                                onClick={() => this.setState({rightExpanded: !rightExpanded})}
+                                                onKeyDown={null}
+                                                role="button"
+                                            >
+                                                <FontAwesomeIcon icon="chevron-left" className={" image-center-vertical  duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } />                                            </div>
                                                 {rightContent}
                                           {/*  <div className=" left-0 top-1/2 p-2 border shadow pr-4 pl-4 pt-6 pb-6 z-20 bg-primary" onClick={() => this.setState({rightExpanded: !rightExpanded})}>
                                                 <RightOutlined className="image-center-vertical m-2 "/>

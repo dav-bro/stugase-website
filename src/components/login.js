@@ -3,9 +3,7 @@ import { navigate } from "gatsby"
 import { handleLogin, isLoggedIn, logout } from "../services/auth"
 import ContextConsumer from "../components/Context";
 import  Button  from "./button";
-import RedoOutlined from "@ant-design/icons/lib/icons/RedoOutlined";
-import LoadingOutlined from "@ant-design/icons/lib/icons/LoadingOutlined";
-import LoginOutlined from "@ant-design/icons/lib/icons/LoginOutlined";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Login extends React.Component {
     state = {
@@ -106,17 +104,20 @@ class Login extends React.Component {
                                 <Button type={status === "error" ? "error" : "primary"} className="float-right ">
                                     {status === "error" ? (
                                         <>
-                                            <RedoOutlined />
+
+                                            <FontAwesomeIcon icon="redo" className=""/>
+
                                             <p className="ml-4">retry</p>
                                         </>
                                     ) : status === "connecting" ? (
                                         <>
-                                            <LoadingOutlined />
+
+                                            <FontAwesomeIcon icon="spinner" className="fa-spin"/>
                                             <p className="ml-4">logging in</p>
                                         </>
                                         ) : (
                                         <>
-                                            <LoginOutlined/>
+                                            <FontAwesomeIcon icon="sign-in-alt" className=""/>
                                             <p className="ml-4">login</p>
                                         </>
                                         )}

@@ -13,7 +13,7 @@ import "../static/styles/main.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 import Button  from "../components/button";
-import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
+import Collapse from "../components/collapse";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
@@ -641,36 +641,7 @@ class Form extends React.Component {
 
 
 
-/**
- * Diese Funktion hat Michi gemacht
- * @param title
- * @param extra
- * @param children
- * @returns {*}
- * @constructor
- */
-const Collapse = ({ title, extra, children }) =>  {
 
-    const [open, setOpen] = useState(false);
-
-    return (
-        <div className="border-collapse">
-            <div className="w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => setOpen(!open)}>
-                <span className="image-wrapper">
-                    <RightOutlined rotate={ open ? 0 : 90 } className="image-center-vertical"/>
-                </span>
-                <div className="text-sm sm:text-lg relative ml-6 w-full">
-                    <p className="text-center-vertical float-left">{ title }</p>
-                    <p className="float-right text-center-vertical mr-6 overflow-hidden">{ extra }</p>
-                </div>
-            </div>
-            <div className="w-full h-full border-b border-primary overflow-auto transition-all duration-500 h-auto"
-                 style={{ maxHeight: open ? "1000px" : "0" }}>
-                { children }
-            </div>
-        </div>
-    )
-};
 
 
 

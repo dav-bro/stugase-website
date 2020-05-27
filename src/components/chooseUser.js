@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {getUser, isLoggedIn} from "../services/auth";
-import CheckCircleOutlined from "@ant-design/icons/es/icons/CheckCircleOutlined";
-import LoadingOutlined from "@ant-design/icons/es/icons/LoadingOutlined";
 import Button from "./button";
 import {connectMqtt} from "../services/connectMqtt";
 import MQTT from "paho-mqtt";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 
@@ -73,12 +72,12 @@ const chooseUser = ({ loading, renderState, setRenderState, setMqtt, setOwnUser 
                         !loading ?
                             (
                                 <>
-                                    <CheckCircleOutlined className=""/>
+                                    <FontAwesomeIcon icon="check-circle" className=""/>
                                     <p className="ml-4"> {isLoggedIn() ? "als Online setzen" : "chatten"} </p>
                                 </>
                             ) : (
                                 <>
-                                    <LoadingOutlined className=""/>
+                                    <FontAwesomeIcon icon="spinner" className="fa-spin"/>
                                     <p className="ml-4"> verbinde </p>
                                 </>
                             )

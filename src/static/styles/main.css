@@ -92,9 +92,9 @@ div[role="group"][tabindex] {
 .image-center-vertical {
     position: absolute;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    /*-webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);*/
+    --transform-translate-y: -50%;
     left: 0;
     right: 0;
     margin: auto;

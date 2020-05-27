@@ -11,14 +11,15 @@ import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
 import { faGlassCheers, faUsers, faCalendarCheck,
     faQuestion, faTimesCircle, faPlusCircle,
     faUserCircle, faAdjust, faBars, faCommentAlt, faChevronRight,
-    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
+    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck, faCommentDots, faCheckCircle, faPaperPlane, faSpinner, faRedo, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 
 library.add(faGlassCheers, faUsers, faCalendarCheck,
     faQuestion, faTimesCircle, faPlusCircle, faGithub,
     faUserCircle, faAdjust, faBars, faCommentAlt, faChevronRight,
-    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck);
+    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck,
+    faCommentDots, faCheckCircle, faPaperPlane, faSpinner, faRedo, faSignInAlt);
 
 
 

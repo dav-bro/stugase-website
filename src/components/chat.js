@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CommentOutlined from "@ant-design/icons/es/icons/CommentOutlined";
-import SendOutlined from "@ant-design/icons/es/icons/SendOutlined";
 import RunningChat from "./runningChat";
 import DisplayOnlineUsers from "./displayOnlineUsers";
 import ChooseUser from "./chooseUser";
 import {isLoggedIn} from "../services/auth";
-import LoadingOutlined from "@ant-design/icons/es/icons/LoadingOutlined";
 import getMqttPrefix from "../services/getMqttPrefix";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default ({}) => {
 
@@ -86,7 +84,7 @@ export default ({}) => {
         default:
             renderContent = (
                 <div className="h-full w-full flex items-center justify-center ">
-                    <LoadingOutlined className="text-2xl font-bold"/>
+                    <FontAwesomeIcon icon="spinner" className="fa-spin"/>
                     <p className="text-2xl font-bold ml-3">loading...</p>
                 </div>
             )
@@ -126,7 +124,7 @@ export default ({}) => {
             <div className="flex justify-between items-center bg-accent w-full border-t border-r border-l border-primary rounded-t h-12 cursor-pointer "
                  onClick={() => setExpanded(!expanded)}>
 
-                <CommentOutlined className="text-2xl ml-3"/>
+                <FontAwesomeIcon icon="comment-dots" className="text-3xl"/>
 
                 <p className="text-2xl">{header}</p>
 
@@ -153,7 +151,8 @@ export default ({}) => {
                                    name="chat-text"
                                    className="focus:outline-none pl-2 w-full h-full bg-primary" disabled={!(renderState === 3 || renderState === 103)}/>
                             <button type="submit" className="text-2xl mb-2 focus:outline-none" disabled={!(renderState === 3 || renderState === 103)}>
-                                <SendOutlined />
+
+                                <FontAwesomeIcon icon="paper-plane" className=""/>
                             </button>
                         </div>
 
