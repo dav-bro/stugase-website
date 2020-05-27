@@ -107,8 +107,12 @@ const TimePickerClock24 = ({ setHours, setRenderState }) => {
 
 
     const handleClick = (ind) => {
-        setHours(ind);
-        setRenderState(1);
+
+        setTimeout( () => {
+            setHours(ind);
+        }, 300);
+
+        setRenderState(2);
     };
 
     const drawCircle = (part, maxParts, position, r, bgColor) => {

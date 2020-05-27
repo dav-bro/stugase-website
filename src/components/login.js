@@ -3,6 +3,9 @@ import { navigate } from "gatsby"
 import { handleLogin, isLoggedIn, logout } from "../services/auth"
 import ContextConsumer from "../components/Context";
 import  Button  from "./button";
+import RedoOutlined from "@ant-design/icons/lib/icons/RedoOutlined";
+import LoadingOutlined from "@ant-design/icons/lib/icons/LoadingOutlined";
+import LoginOutlined from "@ant-design/icons/lib/icons/LoginOutlined";
 
 class Login extends React.Component {
     state = {

@@ -29,13 +29,12 @@ module.exports = {
         auto: 'auto',
         '1/2': '50%',
       },
-      maxHeight: {
-        '0'  : '0',
-        '12' : '3rem'
-      },
       transitionProperty: {
         'max-height': 'max-height',
         'spacing': 'margin, padding',
+      },
+      textColor: {
+        primary: 'var(--color-text-primary)'
       },
       width: {
         '1/24'  : '4.1666667%',
@@ -74,8 +73,9 @@ module.exports = {
 
       },
       maxHeight: {
+        0: '0',
+        12 : '3rem',
         64: '16rem',
-        0: '0'
 
       },
       scale: {

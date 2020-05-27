@@ -1,5 +1,6 @@
 
 import React, {useState} from "react";
+import TimePicker from "../components/timePicker";
 
 
 export default () => {
@@ -27,10 +28,14 @@ export default () => {
                 <TimePicker maximum={24} onChange={(data) => console.log(data)} /> <p className="mx-2">:</p>  <TimePicker maximum={59} onChange={(data) => console.log(data)} />
             </div>*/}
 
-            <div className="m-16">
-                <button onClick={() => setEnabled(true)}> click</button>
 
         </div>
+
+        <div className="w-1/3">
+            <TimePicker/>
+        </div>
+
+    </div>
     )
 
 
@@ -39,34 +44,3 @@ export default () => {
 }
 
 
-
-class TestCollapse extends React.Component {
-
-
-    state={
-        expanded: false
-    }
-
-
-    render() {
-
-        const { expanded } = this.state;
-
-        return(
-            <div className="w-full ">
-                <div className="w-full h-12 bg-gray-300 cursor-pointer" onClick={() => this.setState({expanded: !expanded})}>
-
-                </div>
-
-                <div className={"overflow-hidden w-full bg-red-100 transform duration-700 origin-top  " + (expanded ? " max-h-12" : " max-h-0") }>
-                    <div className="absolute">
-                        test
-                    </div>
-
-                </div>
-
-            </div>
-        )
-    }
-
-}

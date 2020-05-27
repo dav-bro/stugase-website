@@ -3,8 +3,7 @@ import Title from "./title";
 import ContextConsumer from "./Context";
 import "../static/styles/main.css";
 import withHooks from "../hooks/withHooks";
-import RightOutlined from "@ant-design/icons/es/icons/RightOutlined";
-import LeftOutlined from "@ant-design/icons/es/icons/LeftOutlined";
+import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
 
 // const justMiddleContent = [ "sm", "md" ];
 
@@ -25,7 +24,7 @@ class LayoutContent extends React.Component{
         let mainContent = this.props.children;
         let rightContent = null;
 
-        const { rightExpanded, leftExpanded } = this.state;
+        const { rightExpanded } = this.state;
 
 
 
@@ -72,7 +71,7 @@ class LayoutContent extends React.Component{
                                             <div
                                                 className={" transform   absolute lg:hidden left-0 w-8 top-1/2  border shadow pr-3 pt-3 pb-3  bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
                                                 onClick={() => this.setState({rightExpanded: !rightExpanded})}>
-                                                <LeftOutlined className={" duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } />
+                                                <LeftOutlined className={" duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } /> //@todo replace with fa
                                             </div>
                                                 {rightContent}
                                           {/*  <div className=" left-0 top-1/2 p-2 border shadow pr-4 pl-4 pt-6 pb-6 z-20 bg-primary" onClick={() => this.setState({rightExpanded: !rightExpanded})}>

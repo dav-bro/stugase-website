@@ -8,6 +8,7 @@ export default () => {
 
 
     const [ datePicker, setDatePicker ] = useState(false);
+    const [ timePicker, setTimePicker ] = useState(false);
 
 
     const [ expanded, setExpanded ] = useState(false);
@@ -77,12 +78,12 @@ export default () => {
                     {<div className="cursor-pointer" onClick={() => setDatePicker(true)}>
                         <p>{date ? date : "Datum"}</p>
                     </div>}
-                    <Modal enabled={datePicker} setEnabled={setDatePicker}><DatePicker setDate={setDate}/> </Modal>
+                    <Modal enabled={datePicker} setEnabled={setDatePicker}><DatePicker setDate={setDate} setDatePicker={setDatePicker}/> </Modal>
 
                 </div>
                 <div className="w-3/24 ">
+                   <TimePicker setTimePicker={setTimePicker}/>
 
-                    <TimePicker/>
 
                 </div>
                 <div className="w-2/24" >

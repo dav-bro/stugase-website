@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
-const TimePickerClock60 = ({ setMinutes }) => {
+const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
 
     let initProps = [];
 
@@ -89,7 +89,8 @@ const TimePickerClock60 = ({ setMinutes }) => {
     };
 
     const handleClick = (ind) => {
-        setMinutes(ind * 15)
+        setMinutes(ind * 15);
+        setRenderState(0);
     };
 
 
