@@ -1,22 +1,24 @@
 // import MQTT from "mqtt"
 import React from "react"
 import "../utils/i18n"
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
-import {faGlassCheers} from "@fortawesome/free-solid-svg-icons/faGlassCheers";
-import {faCalendarCheck} from "@fortawesome/free-solid-svg-icons/faCalendarCheck";
-import {faQuestion} from "@fortawesome/free-solid-svg-icons/faQuestion";
-import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons/faPlusCircle";
-import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
-import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
-import {faAdjust} from "@fortawesome/free-solid-svg-icons/faAdjust";
-import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import connectMqtt from "../services/connectMqtt";
-import MQTT from "paho-mqtt
+import MQTT from "paho-mqtt"
 
-library.add(faGlassCheers, faUsers, faCalendarCheck, faQuestion, faTimesCircle, faPlusCircle, faGithub, faUserCircle, faAdjust, faBars);
+import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
+
+import { faGlassCheers, faUsers, faCalendarCheck,
+    faQuestion, faTimesCircle, faPlusCircle,
+    faUserCircle, faAdjust, faBars, faCommentAlt, faChevronRight,
+    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
+
+
+
+library.add(faGlassCheers, faUsers, faCalendarCheck,
+    faQuestion, faTimesCircle, faPlusCircle, faGithub,
+    faUserCircle, faAdjust, faBars, faCommentAlt, faChevronRight,
+    faChevronLeft, faExternalLinkAlt, faCalendar, faChevronUp, faChevronDown, faCheck);
 
 
 

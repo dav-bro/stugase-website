@@ -7,11 +7,10 @@ import campusPlan from '../static/images/campus.jpg';
 import {Link} from "gatsby";
 import LayoutContent from "../components/LayoutContent";
 import ContextConsumer from "../components/Context";
-import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 import {ReCAPTCHA} from "react-google-recaptcha";
 import Chat from "../components/chat";
 import "../static/styles/main.css"
-import LinkOutlined from "@ant-design/icons/es/icons/LinkOutlined";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 import Button  from "../components/button";
 
@@ -158,6 +157,8 @@ class ContactClass extends React.Component {
                     </LayoutContent>
                 )}}
             </ContextConsumer>
+
+                                    <FontAwesomeIcon icon="comment-alt" className="text-2xl"/>
 
 
 
@@ -649,6 +650,21 @@ class Form extends React.Component {
  */
 const Collapse = ({ title, extra, children }) =>  {
 
+        const { title, extra, children } = this.props;
+
+        return (
+            <div className="border-collapse">
+                <div className=" w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => this.setState(s => ({collapsed: !s.collapsed}))}>
+
+                    <span className={"image-wrapper"}>
+                        <FontAwesomeIcon icon="chevron-right"  rotate={this.state.collapsed ? 0 : 90} className="image-center-vertical"/>
+                    </span>
+
+
+                    <div className="text-sm sm:text-lg relative ml-6 w-full">
+                        <p className=" text-center-vertical float-left"> {title} </p>
+                        <p className={" float-right text-center-vertical mr-6 overflow-hidden"}> {extra} </p>
+                    </div>
     const [open, setOpen] = useState(false);
 
     return (
@@ -674,10 +690,10 @@ const Collapse = ({ title, extra, children }) =>  {
 
 function LinkButton(props) {
     const { t } = useTranslation();
-    return <Button  onClick={() => window.open(props.link)}>
-               <LinkOutlined />
+    return <button className="bg-btn-primary text-white p-2 -ml-3 rounded-sm flex flex-row justify-center items-center" onClick={() => window.open(props.link)}>
+               <FontAwesomeIcon icon="external-link-alt"/>
                 <p className="ml-2">{t('contact.find-us.link-button')}</p>
-           </Button>;
+           </button>;
 }
 
 const Contact = withTranslation()(ContactClass);

@@ -261,8 +261,9 @@ div[role="group"][tabindex] {
 }
 
 
-
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(180deg);}
+[placeholder]:empty:before{
+    content: attr(placeholder);
+    color: white;
 }
+
+

@@ -1,7 +1,6 @@
-import React from "react";
-import LayoutContent from "../components/LayoutContent";
-import Button from "../components/button";
-import Chat from "../components/chat";
+
+import React, {useState} from "react";
+
 
 export default () => {
 
@@ -15,28 +14,21 @@ export default () => {
        )
     }
 
+    const [enabled, setEnabled ] = useState(false);
+
     return(
     <div className="flex-grow">
 
         <div className="w-full mt-24">
             <h1 className="text-4xl border-1 between-line mb-10"><span className="between-line-span">Test Flex widths by n/24</span></h1>
 
-            {childs}
+           {/* {childs}
+            <div className="flex flex-row items-center">
+                <TimePicker maximum={24} onChange={(data) => console.log(data)} /> <p className="mx-2">:</p>  <TimePicker maximum={59} onChange={(data) => console.log(data)} />
+            </div>*/}
 
-           {/* <TestCollapse/>
-            <TestCollapse/>*/}
-
-            <Button type="primary" className="ml-5 mb-5">
-                primary
-            </Button>
-
-            <Button type="danger" className="ml-5 mb-5" onClick={() => console.log("testtt button")}>
-                danger
-            </Button>
-
-        </div>
-
-        <Chat/>
+            <div className="m-16">
+                <button onClick={() => setEnabled(true)}> click</button>
 
         </div>
     )
