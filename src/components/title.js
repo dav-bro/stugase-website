@@ -8,7 +8,7 @@ export default function Title(props) {
     theme = theme ? theme : "light";
     return(
 
-        <div className="flex page-head bg-header">
+        <div className="flex page-head bg-accent">
 
             <div className="w-0 lg:w-6/24 xl:w-5/24 ">
 

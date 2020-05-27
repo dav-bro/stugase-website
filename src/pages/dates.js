@@ -21,7 +21,7 @@ class DatesClass extends React.Component {
                     <LayoutContent theme={data.theme} title={t('dates.header.title')} text={t('dates.header.text')}>
                         <div key="main-content" className="">
 
-                            <h2 className="text-xl border-1 between-line"><span className="between-line-span">April</span></h2>
+                            <h2 className="text-xl border-1 border-accent between-line"><span className="between-line-span">April</span></h2>
 
 
                                     <DateRowClass type="StugA-Sitzung" date="02.03.2020" time="14:00"/>
@@ -121,7 +121,7 @@ class DateRowClass extends React.Component {
 }
 
 const DateRow = ({leftIcon, rightIcon, rightText, text, classNamePrefix, handleClick}) => (
-    <div className={"ml-1 mr-1 p-2 flex flex-row border items-center mb-3 " + classNamePrefix} align="top" onClick={handleClick}>
+    <div className={"ml-1 mr-1 p-2 flex flex-row border border-accent items-center mb-3 " + classNamePrefix} align="top" onClick={handleClick}>
         <div className="flex w-2/24">
             {leftIcon}
         </div>

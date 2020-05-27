@@ -7,19 +7,35 @@ module.exports = {
     extend: {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
-        header: 'var(--color-bg-header)',
+        accent: 'var(--color-bg-accent)',
         input: 'var(--color-bg-input)',
         'btn-primary': 'var(--color-bg-btn-primary)',
         'menu-primary': 'var(--color-bg-menu-primary)',
         'menu-secondary': 'var(--color-bg-menu-secondary)',
         'menu-active': 'var(--color-menu-active)',
+        'chat-yours': 'var(--color-chat-yours)',
+        'chat-theirs': 'var(--color-chat-theirs)',
       },
       borderColor: {
         primary: 'var(--color-border-primary)',
+        accent: 'var(--color-border-accent)',
         'menu-active': 'var(--color-menu-active-border)',
       },
       borderWidth: {
         '3': '3px',
+      },
+      inset: {
+        '0': 0,
+        auto: 'auto',
+        '1/2': '50%',
+      },
+      maxHeight: {
+        '0'  : '0',
+        '12' : '3rem'
+      },
+      transitionProperty: {
+        'max-height': 'max-height',
+        'spacing': 'margin, padding',
       },
       width: {
         '1/24'  : '4.1666667%',
