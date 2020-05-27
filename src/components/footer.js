@@ -3,7 +3,7 @@ import ToolTip from "./tooltip";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 export default () => (
-    <div className="flex justify-center bottom-0 w-full bg-header h-16 border-t border-primary shadow shadow-all z-10 text center ">
+    <div className="flex justify-center bottom-0 w-full bg-accent h-16 border-t border-primary shadow shadow-all  text center  flex-shrink-0">
 
         <ToolTip
             position="top"

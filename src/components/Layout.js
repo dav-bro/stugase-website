@@ -5,6 +5,7 @@ import Header from "./header";
 import Footer from "./footer"
 import "../static/styles/main.css"
 
+
 const Layout = ({ children, ...props }) => (
     <ContextProviderComponent>
         <ContextConsumer>
@@ -12,8 +13,10 @@ const Layout = ({ children, ...props }) => (
                 <Header {...props} theme={data.theme} />
             )}
         </ContextConsumer>
-        {children}
-        <Footer/>
+        <div className="flex flex-col h-full">
+            {children}
+            <Footer/>
+        </div>
     </ContextProviderComponent>
 );
 

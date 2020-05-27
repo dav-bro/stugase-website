@@ -124,6 +124,7 @@ class Header_Class extends React.Component{
                                         text={theme === "light" ? t('tooltip.dark-mode') : t('tooltip.light-mode')}
                                     >
                                         <FontAwesomeIcon icon="adjust" twoToneColor={theme === "dark" ? "white" : "black"} className="mr-3 text-2xl " onClick={() => setTheme()}/>
+
                                     </ToolTip>
 
                                     <ToolTip
