@@ -1,17 +1,14 @@
-import React from "react";
-import ContextConsumer from "../components/Context";
-import { navigate } from "gatsby"
 import {connectMqtt} from "../services/connectMqtt";
 
-export const isBrowser = () => typeof window !== "undefined"
+export const isBrowser = () => typeof window !== "undefined";
 
 export const getUser = () =>
     isBrowser() && window.localStorage.getItem("gatsbyUser")
         ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-        : {}
+        : {};
 
 const setUser = user =>
-    window.localStorage.setItem("gatsbyUser", (user))
+    window.localStorage.setItem("gatsbyUser", (user));
 
 export const handleLogin = async (credentials) => {
 
@@ -38,7 +35,7 @@ export const handleLogin = async (credentials) => {
 
 
 
-}
+};
 
 
 export const isMqttAdmin = async (mqtt) => {
@@ -69,15 +66,15 @@ export const isMqttAdmin = async (mqtt) => {
 
 
 
-}
+};
 
 export const isLoggedIn = () => {
-    const user = getUser()
+    const user = getUser();
 
     return !!user.username
-}
+};
 
 export const logout = callback => {
     setUser("{}");
     callback()
-}
+};

@@ -21,8 +21,8 @@ const Modal = ({ enabled, setEnabled, children }) => {
             (
                 <div className={"bg-disabled"}>
                         <div className="flex flex-col h-full justify-between items-center">
-
-                            <div className="h-20 w-full flex  justify-center" onMouseOver={() => setClose(true)} onMouseLeave={() => setClose(false)}>
+                            {/* eslint jsx-a11y/no-noninteractive-element-interactions: "off", jsx-a11y/no-static-element-interactions: "off" */}
+                            <div className="h-20 w-full flex  justify-center" onMouseOver={() => setClose(true)} onFocus={() => setClose(true)} onMouseLeave={() => setClose(false)}>
                                 <FontAwesomeIcon icon="times-circle" className={"overflow-hidden duration-300 transition-all text-6xl cursor-pointer " + (close ? "h-20" : innerEnabled ? "h-20 md:h-0" : "h-0")}
                                 onClick={() => {
                                     setInnerEnabled(false);

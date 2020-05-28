@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {getUser, isLoggedIn} from "../services/auth";
 import Button from "./button";
 import {connectMqtt} from "../services/connectMqtt";

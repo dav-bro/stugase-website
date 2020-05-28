@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 import TimePicker from "./timePicker";
 import DatePicker from "./datePicker";
@@ -36,6 +36,7 @@ export default () => {
     };
 
     return (
+        {/* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off" */},
         <div className={"mx-1 flex flex-row-reverse border border-accent items-center mb-3 "} align="top" onClick={!expanded ?  () => setExpanded(!expanded) : null}>
 
             <div className={"cursor-pointer py-2 bg-blue-500 text-white overflow-hidden h-12 transition-all duration-300 flex flex-row items-center " + (!expanded ? " w-full px-2" : "w-0")} align="top" >
@@ -55,14 +56,17 @@ export default () => {
                     <div className="relative ">
                         <FontAwesomeIcon icon={type} fixedWidth  className="text-3xl cursor-pointer mr-2" onClick={() => setSelectType(!selectType)}/>
                         <ul className={"absolute cursor-pointer text-white bg-green-500 mt-2 -translate-x-2 transform  overflow-hidden shadow-all border-collapse  mt-2  transition-all duration-500 h-auto " + (selectType ? " max-h-64 " : " max-h-0 overflow-hidden ") } >
+                            {/* eslint jsx-a11y/no-noninteractive-element-interactions: "off" */}
                             <li className={liClass} onClick={() => _setType("users")}>
                                 <FontAwesomeIcon icon="users" fixedWidth className="text-3xl mr-2"/>
                                 <p className="float-right">Sitzung</p>
                             </li>
+                            {/* eslint jsx-a11y/no-noninteractive-element-interactions: "off" */}
                             <li className={liClass} onClick={() => _setType("glass-cheers")}>
                                 <FontAwesomeIcon icon="glass-cheers" fixedWidth  className="text-3xl mr-2"/>
                                 <p className="float-right">Suffen</p>
                             </li>
+                            {/* eslint jsx-a11y/no-noninteractive-element-interactions: "off" */}
                             <li className={liClass} onClick={() => _setType("calendar-check")}>
                                 <FontAwesomeIcon icon="calendar-check" fixedWidth className="text-3xl mr-2"/>
                                 <p className="float-right">Sonstiges</p>
@@ -81,7 +85,7 @@ export default () => {
 
                 </div>
                 <div className="w-3/24 ">
-                   <TimePicker />
+                   <TimePicker setTime={setTime}/>
 
 
                 </div>

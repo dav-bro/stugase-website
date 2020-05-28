@@ -1,6 +1,6 @@
 import React from "react";
 import {withTranslation} from "react-i18next";
-import ContextConsumer from "./Context";
+import ContextConsumer from "./context";
 import i18next from "i18next";
 import { navigate } from "gatsby";
 
@@ -14,7 +14,7 @@ import UniText from "../static/images/Uni_Text.png";
 import SETextDark from "../static/images/SE_Text-dark.png";
 
 import UniTextDark from "../static/images/Uni_Text-dark.png";
-import Menu from "./Menu";
+import Menu from "./menu";
 import ToolTip from "./tooltip";
 import {isLoggedIn, logout} from "../services/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
@@ -91,6 +91,7 @@ class Header_Class extends React.Component{
 
                 <div className="w-11/24 lg:w-4/24 xl:w-5/24">
                     <div className="flex flex-row items-center">
+                        {/* eslint jsx-a11y/click-events-have-key-events: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */}
                         <img alt="das ist ein Bild" className="logo-se" src={SELogo} onClick={() => navigate("/app/login")}/>
                         <img alt="das ist ein Bild" className="hidden sm:flex logo-se" src={theme === "dark" ? SETextDark : SEText }/>
                         <img alt="das ist ein Bild" className="ml-1 sm:ml-4 xl:ml-2 logo-uni" src={UniLogo}/>
@@ -132,6 +133,7 @@ class Header_Class extends React.Component{
                                         position="left"
                                         text={t('tooltip.language')}
                                     >
+                                        {/* eslint jsx-a11y/click-events-have-key-events: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */}
                                         <p className="cursor-pointer" onClick={() => i18next.changeLanguage(Constants.languages.filter(x => x !==i18next.language)[0])}>
                                             {Constants.languages.filter(x => x !==i18next.language).map(x => x.toUpperCase())}
                                         </p>

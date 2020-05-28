@@ -1,6 +1,6 @@
 import React from "react";
-import {ContextProviderComponent} from "./Context";
-import ContextConsumer from "./Context";
+import {ContextProviderComponent} from "./context";
+import ContextConsumer from "./context";
 import Header from "./header";
 import Footer from "./footer"
 import "../static/styles/main.css"

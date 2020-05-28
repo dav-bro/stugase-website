@@ -20,9 +20,9 @@ const months = [
 
 const DatePicker = ({ setDatePicker, setDate }) => {
 
-    const [ day, setDay ] = useState(1);
+    // const [ day, setDay ] = useState(1);
 
-    const [ expanded, setExpanded ] = useState(false);
+    // const [ expanded, setExpanded ] = useState(false);
 
     const [ month, setMonth ] = useState(1);
 
@@ -47,7 +47,7 @@ const DatePicker = ({ setDatePicker, setDate }) => {
         setMonth(date.getMonth() + 1);
         setYear(date.getFullYear());
 
-        setExpanded(true);
+        // setExpanded(true);
 
     }, []);
 
@@ -58,7 +58,7 @@ const DatePicker = ({ setDatePicker, setDate }) => {
 
     const gauss = (number) => {
         return Math.floor(number);
-    }
+    };
 
     function getMonth(x) {
         if (x < 3) {
@@ -137,30 +137,43 @@ const DatePicker = ({ setDatePicker, setDate }) => {
         let week = [];
         for (let k = 0; k < 7; k++){
             if (i > monthDays) {
-                week[k] =  (<p className=" w-1/7 ml-2 mr-2 mb-2 text-gray-500 text-center cursor-default" onClick={() => setMonth(month + 1)}>{i - monthDays}</p>);
+                 week[k] =  (
+                    /* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */
+                    <p className=" w-1/7 ml-2 mr-2 mb-2 text-gray-500 text-center cursor-default" onClick={() => setMonth(month + 1)}>{i - monthDays}</p>
+                );
             } else if (i <= 0) {
 
-                week[k] =  (<p className="  w-1/7 ml-2 mr-2 mb-2 text-gray-500 text-center cursor-default" onClick={() => setMonth(month - 1)}>{preMonthDays + i}</p>);
+                week[k] =  (
+                    /* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */
+                    <p className="  w-1/7 ml-2 mr-2 mb-2 text-gray-500 text-center cursor-default" onClick={() => setMonth(month - 1)}>{preMonthDays + i}</p>
+                );
 
             } else {
                 if (i === currentDay && month === currentMonth && year === currentYear) {
-                    week[k] =  (<p className="bg-blue-200 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center cursor-pointer"
+                    week[k] =  (
+                        /* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */
+                            <p className="bg-blue-200 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center cursor-pointer"
                                    onClick={(e) => {
                                        setDate(e.target.textContent + "." + month + "." + year);
-                                       setExpanded(false);
+                                       // setExpanded(false);
                                        setTimeout(() =>(
                                            setDatePicker(false)
                                        ), 200);
                                    }}>{i}</p>);
                 } else {
-                    week[k] =  (<p className="hover:bg-blue-500 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center cursor-pointer"
+                    week[k] =  (
+                        /* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off", jsx-a11y/no-noninteractive-element-interactions: "off" */
+                        <p className="hover:bg-blue-500 rounded w-1/7 pl-1 pr-1 ml-1 mr-1 mb-2 text-center cursor-pointer"
                                    onClick={(e) => {
                                        setDate(e.target.textContent + "." + month + "." + year);
-                                       setExpanded(false);
+                                       // setExpanded(false);
                                        setTimeout(() =>(
                                            setDatePicker(false)
                                        ), 200);
-                                   }}>{i}</p>);
+                                   }}>
+                            {i}
+                        </p>
+                    );
                 }
 
             }
@@ -183,7 +196,7 @@ const DatePicker = ({ setDatePicker, setDate }) => {
         }
 
         setMonth(_month);
-    }
+    };
 
     return(
 

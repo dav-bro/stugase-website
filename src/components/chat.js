@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RunningChat from "./runningChat";
 import DisplayOnlineUsers from "./displayOnlineUsers";
 import ChooseUser from "./chooseUser";
@@ -6,7 +6,7 @@ import {isLoggedIn} from "../services/auth";
 import getMqttPrefix from "../services/getMqttPrefix";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export default ({}) => {
+export default () => {
 
 
     let renderContent;
@@ -35,6 +35,7 @@ export default ({}) => {
         case 101:
         case 102:
             header = "chat mit " + otherUser;
+        /* falls through */
         case 0:
         case 1:
 
@@ -60,7 +61,7 @@ export default ({}) => {
                                   mqtt={mqtt}
                                   setMqtt={setMqtt}
               />
-            )
+            );
 
             break;
 
@@ -87,7 +88,7 @@ export default ({}) => {
                     <FontAwesomeIcon icon="spinner" className="fa-spin"/>
                     <p className="text-2xl font-bold ml-3">loading...</p>
                 </div>
-            )
+            );
             break;
     }
 
@@ -115,12 +116,12 @@ export default ({}) => {
 
 
 
-    }
+    };
 
 
     return(
         <div className="w-full absolute z-40 bottom-0 right-0 lg:pl-2 lg:pr-2 ">
-
+            {/* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off" */}
             <div className="flex justify-between items-center bg-accent w-full border-t border-r border-l border-primary rounded-t h-12 cursor-pointer "
                  onClick={() => setExpanded(!expanded)}>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-import LayoutContent from "../components/LayoutContent";
+import LayoutContent from "../components/layoutContent";
 
 class MembersClass extends React.Component {
 

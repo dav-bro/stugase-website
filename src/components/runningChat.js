@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "./button";
 import getMqttPrefix from "../services/getMqttPrefix";
 
 
-export default ({ mqtt, ownUser, otherUser, ownMessages }) => {
+export default ({ mqtt, otherUser, ownMessages }) => {
 
 
     const subscription = getMqttPrefix() + otherUser + "/messages";
@@ -40,6 +39,7 @@ export default ({ mqtt, ownUser, otherUser, ownMessages }) => {
     return (messages.map(x => {
 
         switch (x.author) {
+            default:
             case 0:
                 return (
                     <div className=" ">

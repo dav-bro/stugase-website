@@ -1,10 +1,10 @@
-
-import React, {useState} from "react";
+import React from "react";
 import TimePicker from "../components/timePicker";
 
 
 export default () => {
 
+    // noinspection JSMismatchedCollectionQueryUpdate
     let childs = [];
 
     for (let i = 1; i <= 24; i++) {
@@ -15,7 +15,6 @@ export default () => {
        )
     }
 
-    const [enabled, setEnabled ] = useState(false);
 
     return(
     <div className="flex-grow">

@@ -1,10 +1,10 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
 import logo from "../static/images/SE_Logo_Text.png"
-import LayoutContent from "../components/LayoutContent";
-import ContextConsumer from "../components/Context";
+import LayoutContent from "../components/layoutContent";
+import ContextConsumer from "../components/context";
 import "../static/styles/theme-light.css"
-import Card from "../components/Card";
+import Card from "../components/card";
 
 
 class AboutClass extends React.Component {

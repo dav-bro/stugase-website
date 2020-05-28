@@ -1,7 +1,7 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { handleLogin, isLoggedIn, logout } from "../services/auth"
-import ContextConsumer from "../components/Context";
+import { handleLogin } from "../services/auth"
+import ContextConsumer from "./context";
 import  Button  from "./button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -10,20 +10,20 @@ class Login extends React.Component {
         username: ``,
         password: ``,
         status: ""
-    }
+    };
 
     handleUpdate = event => {
         this.setState({
             [event.target.name]: event.target.value,
         })
-    }
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.setState({status: "connecting"});
 
-        handleLogin({username: this.state.username, password: this.state.password}).then(() => navigate("/app/profile")).catch((m) => this.setState({status: "error"}));
-    }
+        handleLogin({username: this.state.username, password: this.state.password}).then(() => navigate("/app/profile")).catch(() => this.setState({status: "error"}));
+    };
 
     render() {
 
@@ -45,7 +45,7 @@ class Login extends React.Component {
 
                     <div className="flex flex-col w-full border-t">
                         <ContextConsumer>
-                            {({loginMqtt}) => (
+                            {({}) => (
                         <form
                             method="post"
                             onSubmit={event => {

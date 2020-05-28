@@ -1,8 +1,7 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-// import {CalendarOutlined, TeamOutlined} from '@ant-design/icons';
-import LayoutContent from "../components/LayoutContent";
-import ContextConsumer from "../components/Context";
+import LayoutContent from "../components/layoutContent";
+import ContextConsumer from "../components/context";
 import {isLoggedIn} from "../services/auth";
 import AddDate from "../components/addDate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
@@ -53,13 +52,13 @@ class DateRowClass extends React.Component {
 
     render(){
 
-        let { t, type, date, time } = this.props;
+        let { type, date, time } = this.props;
         const  { datepicker } = this.state;
 
 
-        let leftIcon = null;
+        let leftIcon;
         let rightIcon = null;
-        let text = null;
+        let text;
         let rightText = null;
 
         // let onAdd = null;
@@ -109,7 +108,7 @@ class DateRowClass extends React.Component {
         );
     }
 
-    handleClick(e) {
+    handleClick() {
         // console.log(e.target);
         this.setState({datepicker: !this.state.datepicker});
     }
@@ -117,6 +116,7 @@ class DateRowClass extends React.Component {
 }
 
 const DateRow = ({leftIcon, rightIcon, rightText, text, classNamePrefix, handleClick}) => (
+    /* eslint jsx-a11y/click-events-have-key-events: "off", jsx-a11y/no-static-element-interactions: "off" */
     <div className={"ml-1 mr-1 p-2 flex flex-row border border-accent items-center mb-3 " + classNamePrefix} align="top" onClick={handleClick}>
         <div className="flex w-2/24">
             {leftIcon}
@@ -171,7 +171,6 @@ class DatePicker extends React.Component {
 
     render() {
 
-        const { visible } = this.props;
         const { month, year, day } = this.state;
 
         let y = parseInt((((month) < 3 ? year - 1 : year) + "").substr(2, 4));
@@ -180,7 +179,7 @@ class DatePicker extends React.Component {
 
         const gauss = (number) => {
             return Math.floor(number);
-        }
+        };
         
         function getMonth(x) {
             if (x < 3) {

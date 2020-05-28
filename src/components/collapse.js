@@ -15,6 +15,7 @@ const Collapse = ({ title, extra, children }) =>  {
 
     return (
         <div className="border-collapse">
+            {/* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off" */}
             <div className="w-full border-b border-primary  flex h-10 collapse-header cursor-pointer" onClick={() => setOpen(!open)}>
                 <span className="image-wrapper">
                     <FontAwesomeIcon icon="chevron-right" className={"transform image-center-vertical transition-all duration-300 " + (open ? "rotate-90" : "")}/>

@@ -69,6 +69,7 @@ class MenuList extends React.Component {
 
         return(
             <div className="block lg:hidden">
+                {/* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off" */}
                 {expanded ? <div className="bg-disabled" onClick={() => this.setState({expanded: !expanded})}/> : null}
                 <div className="flex flex-col items-center justify-center" onClick={() => this.setState({expanded: !expanded})}>
                             <ul className={" border rounded text-center whitespace-no-wrap z-50 bg-primary border-primary"}>

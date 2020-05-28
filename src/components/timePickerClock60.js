@@ -5,8 +5,6 @@ const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
 
     let initProps = [];
 
-    const max = 60;
-
     for ( let i = 0; i <= 3; i++ ) {
         initProps.push(
             {
@@ -105,11 +103,11 @@ const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
 
         return             <circle  cx={center + calculatedLength * x} cy={center + calculatedLength * y + 2}
                                     r={r} fill={bgColor} className="  cursor-pointer"
-                                    onMouseOver={() => handleHover(part)} onClick={() => handleClick(part)}/>
+                                    onMouseOver={() => handleHover(part)} onFocus={() => handleHover(part)} onClick={() => handleClick(part)}/>
 
     };
 
-    const getText = (part, maxParts, position, text, textAttributes) => {
+    const getText = (part, maxParts, position, text) => {
 
         let x = getX(part/maxParts);
         let y = getY(part/maxParts);
@@ -122,7 +120,6 @@ const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
                                  className={"transform translate-y-2 transition-all duration-300 cursor-pointer " + properties[part].textSize} fill={properties[part].textColor} textAnchor="middle"
                                  onClick={() => handleClick(part)}>{text}</text>
     };
-
 
     let hoverCircles = [];
 
@@ -144,6 +141,8 @@ const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
 
 
 
+
+
         let texts = [];
         let circles = [];
 
@@ -155,13 +154,14 @@ const TimePickerClock60 = ({ setMinutes, setRenderState }) => {
         }
         setTexts(texts);
         setCircles(circles);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [properties]);
 
 
     useEffect(() => {
-
         handleHover(0);
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

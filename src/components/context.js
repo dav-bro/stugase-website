@@ -135,7 +135,7 @@ class ContextProviderComponent extends React.Component {
                     },
                 }));
             }
-        })
+        });
 
         return client;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {withTranslation} from "react-i18next";
-import LayoutContent from "../components/LayoutContent";
-import ContextConsumer from "../components/Context";
+import LayoutContent from "../components/layoutContent";
+import ContextConsumer from "../components/context";
 
 class ImportantSitesClass extends React.Component {
 

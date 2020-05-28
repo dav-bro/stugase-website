@@ -1,5 +1,5 @@
 import React from "react";
-import ContextConsumer from "./Context";
+import ContextConsumer from "./context";
 
 export default ({ children, header, footer}) => {
 
@@ -7,7 +7,7 @@ export default ({ children, header, footer}) => {
 
     return(
         <ContextConsumer>
-            {({ data }) => (
+            {({  }) => (
 
             <div className={"max-w-sm  overflow-hidden border border-primary shadow-lg mt-3 card"} >
 

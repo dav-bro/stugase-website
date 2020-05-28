@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "./title";
-import ContextConsumer from "./Context";
+import ContextConsumer from "./context";
 import "../static/styles/main.css";
 import withHooks from "../hooks/withHooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -15,7 +15,7 @@ class LayoutContent extends React.Component{
     state={
         rightExpanded: false,
         leftExpanded: false
-    }
+    };
 
 
     render() {
@@ -68,11 +68,10 @@ class LayoutContent extends React.Component{
 
                                     <div className="block lg:hidden">
                                         <div className="fixed right-0 top-0 h-full transform transition-all duration-300 bg-primary z-10" style={{width: rightExpanded ? "100%" : 0}}>
+                                            {/* eslint jsx-a11y/click-events-have-key-events: "off",  jsx-a11y/no-static-element-interactions: "off" */}
                                             <div
                                                 className={" transform   absolute lg:hidden left-0 h-10 w-8 top-1/2  border shadow  bg-primary" + (rightExpanded ? " " : " -translate-x-8") }
                                                 onClick={() => this.setState({rightExpanded: !rightExpanded})}
-                                                onKeyDown={null}
-                                                role="button"
                                             >
                                                 <FontAwesomeIcon icon="chevron-left" className={" image-center-vertical  duration-700 transform m-2 " + (rightExpanded ? " rotate-180 " : "") } />                                            </div>
                                                 {rightContent}

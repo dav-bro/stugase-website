@@ -87,10 +87,8 @@ const TimePickerClock24 = ({ setHours, setRenderState }) => {
 
         let newProps = [...initProps];
 
-        let upperHalf = ind < 12;
-
         function activeRing(i) {
-            return ind - 12 >= 0 && i - 12 >= 0 || ind - 12 < 0 && i - 12 < 0;
+            return ( ind - 12 >= 0 && i - 12 >= 0 ) || ( ind - 12 < 0 && i - 12 < 0 );
         }
 
         for (let i = 0; i < max; i++) {
@@ -126,11 +124,11 @@ const TimePickerClock24 = ({ setHours, setRenderState }) => {
 
         return             <circle  cx={center + calculatedLength * x} cy={center + calculatedLength * y + 2}
                                     r={r} fill={bgColor} className="  cursor-pointer"
-                                     onMouseOver={() => handleHover(part-1)} onClick={() => handleClick(part)}/>
+                                     onMouseOver={() => handleHover(part-1)} onFocus={() => handleHover(part-1)} onClick={() => handleClick(part)}/>
 
     };
 
-    const getText = (part, maxParts, position, text, textAttributes) => {
+    const getText = (part, maxParts, position, text) => {
 
         let x = getX(part/maxParts);
         let y = getY(part/maxParts);
@@ -179,13 +177,14 @@ const TimePickerClock24 = ({ setHours, setRenderState }) => {
         }
         setTexts(texts);
         setCircles(circles);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [properties]);
 
 
     useEffect(() => {
-
         handleHover(max - 1);
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

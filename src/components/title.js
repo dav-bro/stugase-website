@@ -4,8 +4,6 @@ import {useTranslation} from "react-i18next";
 
 export default function Title(props) {
     const { t } = useTranslation();
-    let { theme } = props;
-    theme = theme ? theme : "light";
     return(
 
         <div className="flex page-head bg-accent">

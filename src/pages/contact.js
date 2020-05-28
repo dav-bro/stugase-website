@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Trans, useTranslation, withTranslation} from "react-i18next";
-import Card from "../components/Card";
+import Card from "../components/card";
 
 import roomPlan from '../static/images/room.jpg';
 import campusPlan from '../static/images/campus.jpg';
 import {Link} from "gatsby";
-import LayoutContent from "../components/LayoutContent";
-import ContextConsumer from "../components/Context";
+import LayoutContent from "../components/layoutContent";
+import ContextConsumer from "../components/context";
 import {ReCAPTCHA} from "react-google-recaptcha";
 import Chat from "../components/chat";
 import "../static/styles/main.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
-
-import Button  from "../components/button";
 import Collapse from "../components/collapse";
 
 const floorPlanLink = "https://oracle-web.zfn.uni-bremen.de/web/p_ebenen_ansicht?haus=IW&raum=1310&pi_anz=0";
 const campusPlanLink = "https://www.uni-bremen.de/universitaet/campus/lageplan/";
 
-const mqttUrl = "wss://m20.cloudmqtt.com";
 
 
 
@@ -76,7 +73,6 @@ class ContactClass extends React.Component {
             <ContextConsumer>
                 {({ data }) => {
                     let theme = data.theme;
-                    let mqtt = data.mqtt;
 
                     return (
                     <LayoutContent theme={theme} title={t('contact.header.title')} text={t('contact.header.text')}>

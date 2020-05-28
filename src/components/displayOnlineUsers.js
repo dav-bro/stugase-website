@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {connectMqtt} from "../services/connectMqtt";
 import Button from "./button";
 import {isLoggedIn} from "../services/auth";
 
 
 
-const DisplayOnlineUsers = ({renderState, setRenderState, setOtherUser, mqtt, setMqtt}) => {
+const DisplayOnlineUsers = ({renderState, setRenderState, setOtherUser, mqtt}) => {
 
 
     const [ _mqtt, _setMqtt ] = useState(null);
@@ -46,7 +46,6 @@ const DisplayOnlineUsers = ({renderState, setRenderState, setOtherUser, mqtt, se
 
 
     useEffect(() => {
-
         if (!(mqtt && mqtt.isConnected())) {
             connectMqtt({}).then((client) => {
                 _setMqtt(client);
@@ -59,6 +58,7 @@ const DisplayOnlineUsers = ({renderState, setRenderState, setOtherUser, mqtt, se
             mqtt.subscribe("chat/user/#")
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
